@@ -4,9 +4,9 @@ import { Check } from 'lucide-react'
 /* ---------- Left illustration ---------- */
 function BuildIllustration() {
   return (
-    <div className="relative w-full h-[420px] flex items-center justify-center">
+    <div className="relative w-full h-105 flex items-center justify-center">
       {/* Bg circle */}
-      <div className="absolute w-[300px] h-[300px] rounded-full bg-purple-50 opacity-70 animate-blob" />
+      <div className="absolute w-75 h-75 rounded-full bg-purple-50 opacity-70 animate-blob" />
 
       {/* Main interface card */}
       <motion.div
@@ -53,7 +53,7 @@ function BuildIllustration() {
         </div>
         <div className="mt-4 flex items-center justify-between">
           <span className="text-[10px] text-gray-400">Build Progress</span>
-          <span className="text-[11px] font-bold text-[#4361EE]">92%</span>
+          <span className="text-[11px] font-bold text-primary">92%</span>
         </div>
         <div className="mt-1.5 h-1.5 bg-gray-100 rounded-full overflow-hidden">
           <motion.div
@@ -73,7 +73,7 @@ function BuildIllustration() {
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         className="absolute top-8 right-4 z-20 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2"
       >
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#4361EE] to-[#7B2FBE] flex items-center justify-center">
+        <div className="w-8 h-8 rounded-lg bg-linear-to-br from-primary to-[#7B2FBE] flex items-center justify-center">
           <svg viewBox="0 0 20 20" className="w-4 h-4 text-white" fill="currentColor">
             <rect x="3" y="5" width="14" height="11" rx="3.5" />
             <circle cx="7" cy="9" r="1.3" fill="white" fillOpacity="0.5" />
@@ -103,8 +103,8 @@ function BuildIllustration() {
       </motion.div>
 
       {/* Decorative dots */}
-      <div className="absolute top-20 left-2 w-5 h-5 rounded-full bg-[#4361EE] opacity-20 animate-pulse" />
-      <div className="absolute bottom-28 right-2 w-4 h-4 rounded-full bg-[#3DDBDB] opacity-30 animate-pulse" style={{ animationDelay: '0.8s' }} />
+      <div className="absolute top-20 left-2 w-5 h-5 rounded-full bg-primary opacity-20 animate-pulse" />
+      <div className="absolute bottom-28 right-2 w-4 h-4 rounded-full bg-teal opacity-30 animate-pulse" style={{ animationDelay: '0.8s' }} />
     </div>
   )
 }
@@ -148,9 +148,9 @@ export default function FeatureThree() {
               Build beautiful interface &amp; custom test framework in minutes.
             </h2>
             <p className="text-gray-500 mb-8 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at dictum risus, non
-              rhoncus arcu. Curabitur condimentum nunc. Curabitur vulputate tincidunt urna. Quisque
-              aliquam iaculis nunc, sodales condimentum nunc. Duis at dictum risus, nec lobortis.
+              We develop modern AI-powered platforms that combine intelligent automation,
+              responsive design, and seamless integration to create efficient and scalable
+              business solutions.
             </p>
 
             {/* Feature grid */}

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown } from 'lucide-react'
+import { useMsal } from '@azure/msal-react'
+import { loginRequest } from '../../authConfig'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -23,9 +25,14 @@ const navLinks = [
 ]
 
 export default function Header() {
+  const { instance } = useMsal()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+
+  const handleLogin = () => {
+    instance.loginRedirect({ ...loginRequest, prompt: 'login' }).catch(console.error)
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -117,12 +124,12 @@ export default function Header() {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center">
-            <a
-              href="http://crm.localhost:8002/login"
+            <button
+              onClick={handleLogin}
               className="btn-teal text-sm py-2.5 px-6 rounded-md shadow-md"
             >
               Log In
-            </a>
+            </button>
           </div>
 
           {/* Mobile toggle */}
@@ -158,12 +165,12 @@ export default function Header() {
                 </a>
               ))}
               <div className="pt-3 border-t border-blue-100">
-                <a
-                  href="http://crm.localhost:8002/login"
+                <button
+                  onClick={handleLogin}
                   className="btn-teal w-full justify-center rounded-md"
                 >
                   Log In
-                </a>
+                </button>
               </div>
             </div>
           </motion.div>

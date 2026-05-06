@@ -12,11 +12,11 @@ function IntegrationOrbit() {
   ]
 
   return (
-    <div className="relative w-full h-[380px] flex items-center justify-center">
+    <div className="relative w-full h-95 flex items-center justify-center">
       {/* Outer orbit ring */}
-      <div className="absolute w-[280px] h-[280px] rounded-full border border-white/20 animate-rotate-slow" />
+      <div className="absolute w-70 h-70 rounded-full border border-white/20 animate-rotate-slow" />
       {/* Middle orbit ring */}
-      <div className="absolute w-[190px] h-[190px] rounded-full border border-white/15"
+      <div className="absolute w-47.5 h-47.5 rounded-full border border-white/15"
         style={{ animation: 'rotate-slow 18s linear infinite reverse' }} />
 
       {/* Central chat bubble */}
@@ -83,14 +83,14 @@ export default function FeatureTwo() {
     <section className="py-20 lg:py-28 section-gradient relative overflow-hidden">
       {/* Bg blobs */}
       <div
-        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-10"
+        className="absolute top-0 right-0 w-125 h-125 rounded-full opacity-10"
         style={{
           background: 'radial-gradient(circle, #fff 0%, transparent 70%)',
           transform: 'translate(30%,-30%)',
         }}
       />
       <div
-        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-10"
+        className="absolute bottom-0 left-0 w-100 h-100 rounded-full opacity-10"
         style={{
           background: 'radial-gradient(circle, #3DDBDB 0%, transparent 70%)',
           transform: 'translate(-30%,30%)',
@@ -112,13 +112,13 @@ export default function FeatureTwo() {
               on your website using AI Chatbot
             </h2>
             <p className="text-white/70 mb-4 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ut accusam nisi. Natus
-              quam neque voluptatem corporis sint ipsum error quaerat praesentium iusto excepturi
-              possimus quasi esse exercitationem.
+              Our AI-powered chatbot systems help businesses improve customer satisfaction,
+              increase response efficiency, and deliver 24/7 support with seamless automation
+              and real-time interactions.
             </p>
             <p className="text-white/70 mb-8 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natus quam neque
-              adipisicing similique doloribus eiusmod incidunt adipisicing similique.
+              Engage your website visitors instantly, resolve queries automatically, and
+              build stronger customer relationships with intelligent conversational AI.
             </p>
             <a href="#contact" className="btn-orange">
               Read More

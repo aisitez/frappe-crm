@@ -215,8 +215,9 @@ export default function Hero() {
               custom={2}
               className="text-white/75 text-base sm:text-lg leading-relaxed mb-8 max-w-lg"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adipisci quae
-              nequis voluptatem corporis sint ipsum error ea quia obcaecati.
+              We help startups and enterprises automate workflows, improve customer
+              engagement, and accelerate growth using cutting-edge Artificial Intelligence
+              technologies.
             </motion.p>
 
             <motion.div

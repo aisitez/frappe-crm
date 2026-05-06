@@ -102,8 +102,9 @@ export default function Footer() {
               </span>
             </a>
             <p className="text-white/55 text-sm leading-relaxed mb-6">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natus quam neque
-              voluptatem doloribus quam, maximus accusam.
+              We deliver innovative AI-powered technologies that help businesses automate
+              operations, improve customer engagement, and accelerate digital transformation
+              with smart and scalable solutions.
             </p>
 
             {/* Social icons */}
@@ -190,7 +191,7 @@ export default function Footer() {
                 <span>3456 Melrose Ave, Suite 200<br />New York, NY 10001 USA</span>
               </li>
               <li>
-                <a href="tel:+12345678900" className="text-white/55 text-sm hover:text-white transition-colors flex gap-2 items-center">
+                <a href="https://wa.me/12345678900" target="_blank" rel="noopener noreferrer" className="text-white/55 text-sm hover:text-white transition-colors flex gap-2 items-center">
                   <svg viewBox="0 0 20 20" className="w-4 h-4 text-teal shrink-0" fill="currentColor">
                     <path d="M2 3a1 1 0 0 1 1-1h2.153a1 1 0 0 1 .986.836l.74 4.435a1 1 0 0 1-.54 1.06l-1.548.773a11.037 11.037 0 0 0 6.105 6.105l.774-1.548a1 1 0 0 1 1.059-.54l4.435.74a1 1 0 0 1 .836.986V17a1 1 0 0 1-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
@@ -198,7 +199,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@sentimentzaicrm.ai" className="text-white/55 text-sm hover:text-white transition-colors flex gap-2 items-center">
+                <a href="mailto:hello@sentimentzaicrm.ai" target="_blank" rel="noopener noreferrer" className="text-white/55 text-sm hover:text-white transition-colors flex gap-2 items-center">
                   <svg viewBox="0 0 20 20" className="w-4 h-4 text-teal shrink-0" fill="currentColor">
                     <path d="M2.003 5.884 10 9.882l7.997-3.998A2 2 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884z" />
                     <path d="m18 8.118-8 4-8-4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.118z" />

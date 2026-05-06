@@ -4,10 +4,10 @@ import { CheckCircle } from 'lucide-react'
 /* ---------- Left illustration ---------- */
 function AnalyticsIllustration() {
   return (
-    <div className="relative w-full h-[420px] flex items-center justify-center">
+    <div className="relative w-full h-105 flex items-center justify-center">
 
       {/* Large circle bg */}
-      <div className="absolute w-[320px] h-[320px] rounded-full bg-blue-50 opacity-60" />
+      <div className="absolute w-80 h-80 rounded-full bg-blue-50 opacity-60" />
 
       {/* Central dashboard card */}
       <motion.div
@@ -51,7 +51,7 @@ function AnalyticsIllustration() {
         transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
         className="absolute bottom-8 left-8 bg-white rounded-2xl shadow-xl p-4 z-20"
       >
-        <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#4361EE] to-[#7B2FBE] flex items-center justify-center mb-2">
+        <div className="w-12 h-12 mx-auto rounded-xl bg-linear-to-br from-primary to-[#7B2FBE] flex items-center justify-center mb-2">
           <svg viewBox="0 0 32 32" className="w-7 h-7 text-white" fill="currentColor">
             <rect x="6" y="8" width="20" height="16" rx="5" />
             <circle cx="12" cy="14" r="2" fill="white" fillOpacity="0.5" />
@@ -67,7 +67,7 @@ function AnalyticsIllustration() {
               key={i}
               animate={{ height: [4, 12, 4] }}
               transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
-              className="w-1 bg-[#3DDBDB] rounded-full"
+              className="w-1 bg-teal rounded-full"
               style={{ height: 4 }}
             />
           ))}
@@ -81,12 +81,12 @@ function AnalyticsIllustration() {
         className="absolute top-10 right-4 bg-white rounded-xl shadow-lg px-4 py-2.5 z-20"
       >
         <p className="text-[10px] text-gray-400">Automation Rate</p>
-        <p className="text-lg font-bold text-[#4361EE]">94.7%</p>
+        <p className="text-lg font-bold text-primary">94.7%</p>
       </motion.div>
 
       {/* Decorative circles */}
-      <div className="absolute top-16 left-4 w-6 h-6 rounded-full bg-[#3DDBDB] opacity-40 animate-pulse" />
-      <div className="absolute bottom-20 right-6 w-4 h-4 rounded-full bg-[#F97316] opacity-50 animate-pulse" style={{ animationDelay: '0.5s' }} />
+      <div className="absolute top-16 left-4 w-6 h-6 rounded-full bg-teal opacity-40 animate-pulse" />
+      <div className="absolute bottom-20 right-6 w-4 h-4 rounded-full bg-orange opacity-50 animate-pulse" style={{ animationDelay: '0.5s' }} />
       <div className="absolute top-1/2 left-2 w-3 h-3 rounded-full bg-[#7B2FBE] opacity-30 animate-pulse" style={{ animationDelay: '1s' }} />
     </div>
   )
@@ -122,13 +122,12 @@ export default function FeatureOne() {
               A Straight Forward Structure for Powerful Automation Results.
             </h2>
             <p className="text-gray-500 mb-5 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at dictum risus, non
-              rhoncus arcu. Quisque aliquam iaculis nunc, sodales condimentum nunc. Curabitur
-              vulputate tincidunt urna nec lobortis.
+              We deliver intelligent AI-powered automation solutions that help businesses
+              streamline operations, improve productivity, and accelerate digital transformation.
             </p>
             <p className="text-gray-500 mb-8 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius quam adipiscing
-              sit. Tincidunt nibh ipsum, porttitor quis.
+              Our advanced technologies are designed to simplify complex workflows and create
+              smarter business experiences.
             </p>
 
             {/* Checkpoints */}

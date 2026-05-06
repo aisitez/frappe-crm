@@ -1,0 +1,10 @@
+import frappe, os
+os.makedirs("/home/frappe/frappe-bench/crm.localhost/logs", exist_ok=True)
+os.chdir("/home/frappe/frappe-bench")
+frappe.init(site="crm.localhost", sites_path="/home/frappe/frappe-bench/sites")
+frappe.connect()
+frappe.set_user("Administrator")
+frappe.db.set_value("Social Login Key", "microsoft", "redirect_url", "http://crm.localhost:8002/msauth")
+frappe.db.commit()
+print("Redirect URL updated to http://crm.localhost:8002/msauth")
+frappe.destroy()

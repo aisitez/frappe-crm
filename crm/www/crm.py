@@ -14,8 +14,14 @@ no_cache = 1
 def get_context():
 	from crm.api import check_app_permission
 
-	if frappe.session.user == "Guest" or not check_app_permission():
+	if frappe.session.user == "Guest":
 		frappe.local.flags.redirect_location = "/login?redirect-to=/crm"
+		raise frappe.Redirect
+
+	if not check_app_permission():
+		# User is logged in but lacks CRM roles — redirect to login WITHOUT
+		# redirect-to=/crm so the login page doesn't bounce back here in a loop.
+		frappe.local.flags.redirect_location = "/login"
 		raise frappe.Redirect
 
 	frappe.db.commit()
