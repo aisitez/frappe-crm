@@ -1,0 +1,78 @@
+name: Build & Push to Azure Container Registry
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    tags:
+      - "*"
+
+env:
+  ACR_REGISTRY: sentimentaicrm.azurecr.io
+  IMAGE_NAME: frappe-crm
+
+jobs:
+  build-and-push:
+    name: Build & Push to ACR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Azure Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.ACR_REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Set build variables
+        run: |
+          # Point to your fork of frappe-crm
+          APPS_JSON='[{"url": "https://github.com/aisitez/frappe-crm", "branch": "main"}]'
+          echo "APPS_JSON_BASE64=$(echo $APPS_JSON | base64 -w 0)" >> $GITHUB_ENV
+          echo "FRAPPE_BRANCH=version-15" >> $GITHUB_ENV
+
+      - name: Set image tag
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "IMAGE_TAG=${{ github.ref_name }}" >> $GITHUB_ENV
+          else
+            echo "IMAGE_TAG=latest" >> $GITHUB_ENV
+          fi
+
+      - name: Checkout frappe_docker
+        uses: actions/checkout@v4
+        with:
+          repository: frappe/frappe_docker
+          path: frappe_docker
+
+      - name: Build and push to ACR
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          context: frappe_docker
+          file: frappe_docker/images/layered/Containerfile
+          platforms: linux/amd64
+          tags: |
+            ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+            ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          build-args: |
+            FRAPPE_BRANCH=${{ env.FRAPPE_BRANCH }}
+            APPS_JSON_BASE64=${{ env.APPS_JSON_BASE64 }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Verify image in ACR
+        run: |
+          echo "Image pushed successfully:"
+          echo "  ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
+          echo "  ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
