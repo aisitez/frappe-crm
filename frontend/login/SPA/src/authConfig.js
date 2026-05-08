@@ -13,11 +13,11 @@ import { LogLevel } from '@azure/msal-browser';
 
 export const msalConfig = {
     auth: {
-        clientId: '196167c0-9c9b-4d4c-9286-e66307cdf98f', // This is the ONLY mandatory field that you need to supply.
-        authority: 'https://sentimentz.ciamlogin.com/', // Replace the placeholder with your tenant subdomain 
-        redirectUri: 'http://localhost:3000/redirect', // Points to window.location.origin. You must register this URI on Microsoft Entra admin center/App Registration.
-        postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.
-        navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
+        clientId: 'a611bacf-83ed-454e-bfa1-449636df4305',
+        authority: 'https://login.microsoftonline.com/7f94f5fb-b4f9-4f9d-8d0c-dab7cdc1234f',
+        redirectUri: 'https://sentimentaicrm-app.eastus2.azurecontainer.io/mslogin',
+        postLogoutRedirectUri: '/',
+        navigateToLoginRequestUrl: false,
     },
     cache: {
         cacheLocation: 'sessionStorage', // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.

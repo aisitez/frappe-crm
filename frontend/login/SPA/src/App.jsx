@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { loginRequest } from './authConfig';
 import './styles/App.css';
 
-const CRM_URL = 'http://crm.localhost:8002';
+const CRM_URL = '';
 
 const MainContent = () => {
     const { instance } = useMsal();
@@ -35,25 +35,11 @@ const MainContent = () => {
                 scopes: ['openid', 'profile', 'email'],
                 account: activeAccount,
             });
-
-            const response = await fetch(
-                `${CRM_URL}/api/method/crm.api.ms_auth.login_with_token`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'X-Frappe-CSRF-Token': 'fetch',
-                    },
-                    body: `id_token=${encodeURIComponent(tokenResponse.idToken)}`,
-                }
+            // Use redirect endpoint: server sets session cookie then redirects to /crm
+            window.location.replace(
+                `${CRM_URL}/api/method/crm.api.ms_auth.login_with_token_redirect?id_token=` +
+                encodeURIComponent(tokenResponse.idToken)
             );
-
-            if (response.ok) {
-                window.location.href = `${CRM_URL}/crm/dashboard`;
-            } else {
-                window.location.href = `${CRM_URL}/login`;
-            }
         } catch (e) {
             console.error('Frappe login error:', e);
             window.location.href = `${CRM_URL}/login`;
