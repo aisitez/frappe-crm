@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SentimentAI CRM - Intelligent Customer Relationships</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0f0f1a;color:#fff;min-height:100vh}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 60px;position:fixed;top:0;width:100%;background:rgba(15,15,26,0.95);backdrop-filter:blur(10px);z-index:100;border-bottom:1px solid rgba(255,255,255,0.08)}
+.logo{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:700;color:#fff;text-decoration:none}
+.logo svg{width:36px;height:36px;flex-shrink:0}
+.nav-btn{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:10px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity 0.2s;display:inline-block}
+.nav-btn:hover{opacity:0.85}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 20px 80px;background:radial-gradient(ellipse at 50% 0%,rgba(99,102,241,0.15) 0%,transparent 70%)}
+.badge{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.4);color:#a5b4fc;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:500;margin-bottom:28px;display:inline-block}
+.hero h1{font-size:clamp(36px,6vw,72px);font-weight:800;line-height:1.1;margin-bottom:24px;background:linear-gradient(135deg,#fff 40%,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:18px;color:#94a3b8;max-width:600px;line-height:1.7;margin-bottom:48px}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;padding:16px 40px;border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 24px rgba(99,102,241,0.4);display:inline-block}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,102,241,0.5)}
+.btn-secondary{background:rgba(255,255,255,0.07);color:#fff;padding:16px 40px;border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.15);transition:background 0.2s;display:inline-block}
+.btn-secondary:hover{background:rgba(255,255,255,0.12)}
+.stats{display:flex;gap:48px;justify-content:center;flex-wrap:wrap;margin-top:72px;padding-top:48px;border-top:1px solid rgba(255,255,255,0.08)}
+.stat h3{font-size:36px;font-weight:800;background:linear-gradient(135deg,#6366f1,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat p{color:#64748b;font-size:14px;margin-top:4px}
+.features{padding:100px 60px;max-width:1200px;margin:0 auto}
+.section-label{text-align:center;color:#6366f1;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
+.section-title{text-align:center;font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:16px}
+.section-sub{text-align:center;color:#64748b;font-size:16px;margin-bottom:64px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px;transition:border-color 0.3s,transform 0.3s}
+.card:hover{border-color:rgba(99,102,241,0.4);transform:translateY(-4px)}
+.card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px}
+.card h3{font-size:20px;font-weight:700;margin-bottom:10px}
+.card p{color:#64748b;line-height:1.6;font-size:15px}
+.cta-section{padding:100px 20px;text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(99,102,241,0.12) 0%,transparent 70%)}
+.cta-section h2{font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:20px}
+.cta-section p{color:#64748b;font-size:18px;margin-bottom:48px;max-width:500px;margin-left:auto;margin-right:auto}
+footer{padding:32px;text-align:center;color:#334155;font-size:14px;border-top:1px solid rgba(255,255,255,0.06)}
+footer a{color:#6366f1;text-decoration:none}
+@media(max-width:768px){nav{padding:16px 20px}.logo span{display:none}.features{padding:60px 20px}.stats{gap:24px}.hero{padding:100px 16px 60px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="36" height="36" rx="10" fill="url(#logoGrad)"/>
+      <path d="M10 18l6 6 10-12" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <defs>
+        <linearGradient id="logoGrad" x1="0" y1="0" x2="36" y2="36">
+          <stop stop-color="#6366f1"/>
+          <stop offset="1" stop-color="#8b5cf6"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span>SentimentAI CRM</span>
+  </a>
+  <a href="/crm" class="nav-btn">Login</a>
+</nav>
+
+<section class="hero">
+  <span class="badge">&#x2728; AI-Powered CRM Platform</span>
+  <h1>Build Stronger Customer<br>Relationships with AI</h1>
+  <p>SentimentAI CRM helps your team manage leads, track conversations, and close deals faster — powered by intelligent automation and real-time insights.</p>
+  <div class="hero-btns">
+    <a href="/crm" class="btn-primary">Get Started Free</a>
+    <a href="/crm" class="btn-secondary">Sign In &rarr;</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><h3>10x</h3><p>Faster Lead Management</p></div>
+    <div class="stat"><h3>360&deg;</h3><p>Customer View</p></div>
+    <div class="stat"><h3>99.9%</h3><p>Uptime Guaranteed</p></div>
+  </div>
+</section>
+
+<section class="features">
+  <p class="section-label">Features</p>
+  <h2 class="section-title">Everything you need to grow</h2>
+  <p class="section-sub">A complete CRM toolkit built for modern sales teams</p>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon" style="background:rgba(99,102,241,0.15)">&#128202;</div>
+      <h3>Smart Pipeline</h3>
+      <p>Visualise your entire sales pipeline at a glance. Drag-and-drop deals through stages and never miss a follow-up.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(16,185,129,0.15)">&#129309;</div>
+      <h3>Lead Management</h3>
+      <p>Capture, qualify, and nurture leads automatically. AI scoring helps your team focus on the highest-value opportunities.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(245,158,11,0.15)">&#128231;</div>
+      <h3>Communication Hub</h3>
+      <p>Email, calls, and WhatsApp — all in one place. Every interaction is logged automatically with full context.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(239,68,68,0.15)">&#128200;</div>
+      <h3>Analytics &amp; Reports</h3>
+      <p>Real-time dashboards and custom reports give you the insights needed to make data-driven decisions.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(99,102,241,0.15)">&#128276;</div>
+      <h3>Task Automation</h3>
+      <p>Automate repetitive tasks, reminders, and follow-ups so your team can focus on building relationships.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(139,92,246,0.15)">&#128274;</div>
+      <h3>Secure &amp; Reliable</h3>
+      <p>Enterprise-grade security with role-based access control, audit logs, and 99.9% uptime SLA.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to get started?</h2>
+  <p>Join your team on SentimentAI CRM and start closing more deals today.</p>
+  <a href="/crm" class="btn-primary">Open CRM Dashboard &rarr;</a>
+</section>
+
+<footer>
+  &copy; 2026 SentimentAI CRM &nbsp;&middot;&nbsp; Built on Frappe CRM &nbsp;&middot;&nbsp; <a href="/crm">Login</a>
+</footer>
+
+</body>
+</html>
