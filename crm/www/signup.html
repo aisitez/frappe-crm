@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account - SentimentAI CRM</title>
+{% raw %}
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+.card {
+  width: 100%;
+  max-width: 480px;
+  padding: 40px 48px;
+  background: #ffffff;
+}
+.field { margin-bottom: 20px; }
+.field label {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 8px;
+}
+.field input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #e2e2e2;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #111;
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.field input::placeholder { color: #bbb; }
+.field input:focus { border-color: #aaa; background: #fff; }
+.password-wrap { position: relative; }
+.password-wrap input { padding-right: 48px; }
+.toggle-eye {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.btn-create {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 50px;
+  background: #e8e8e8;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+.btn-create:hover { background: #d8d8d8; }
+.btn-create:disabled { opacity: 0.6; cursor: not-allowed; }
+.signin-link {
+  text-align: center;
+  margin: 18px 0 16px;
+  font-size: 14px;
+  color: #555;
+}
+.signin-link a {
+  color: #111;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 16px;
+  color: #aaa;
+  font-size: 14px;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2e2e2;
+}
+.btn-ms {
+  width: 100%;
+  padding: 14px;
+  border: 1.5px solid #e2e2e2;
+  border-radius: 50px;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-ms:hover { background: #f5f5f5; }
+.error-msg {
+  background: #fff0f0;
+  border: 1px solid #ffcccc;
+  color: #cc0000;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  display: none;
+}
+.success-msg {
+  background: #f0fff4;
+  border: 1px solid #b2f5c8;
+  color: #166534;
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  display: none;
+}
+.success-msg .cred-box {
+  background: #d1fae5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-family: monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  word-break: break-all;
+}
+.success-msg .cred-label {
+  font-weight: 700;
+  color: #065f46;
+}
+.btn-goto {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 13px;
+  border: none;
+  border-radius: 50px;
+  background: #166534;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+</style>
+{% endraw %}
+</head>
+<body>
+<div class="card">
+  <div id="error-msg" class="error-msg"></div>
+  <div id="success-msg" class="success-msg"></div>
+
+  <div class="field">
+    <label for="full-name">Name</label>
+    <input type="text" id="full-name" placeholder="Enter Your Full Name" autocomplete="name" />
+  </div>
+
+  <div class="field">
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Enter Your Email" autocomplete="email" />
+  </div>
+
+  <div class="field">
+    <label for="password">Password</label>
+    <div class="password-wrap">
+      <input type="password" id="password" placeholder="Enter Your Password" autocomplete="new-password" />
+      <button class="toggle-eye" onclick="togglePassword()" type="button" id="eye-btn" aria-label="Toggle password">
+        <!-- Eye icon -->
+        <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <button class="btn-create" id="create-btn" onclick="createAccount()">Create Account</button>
+
+  <div class="signin-link">
+    Already have an account? <a href="/login">Sign in</a>
+  </div>
+
+  <div class="divider">or</div>
+
+  <a class="btn-ms" href="/mslogin">
+    <!-- Microsoft logo -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21">
+      <rect x="1" y="1" width="9" height="9" fill="#f25022"/>
+      <rect x="11" y="1" width="9" height="9" fill="#7fba00"/>
+      <rect x="1" y="11" width="9" height="9" fill="#00a4ef"/>
+      <rect x="11" y="11" width="9" height="9" fill="#ffb900"/>
+    </svg>
+    Continue with Microsoft
+  </a>
+</div>
+
+<script>
+function togglePassword() {
+  var input = document.getElementById('password');
+  var icon = document.getElementById('eye-icon');
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>';
+  } else {
+    input.type = 'password';
+    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
+  }
+}
+
+function showError(msg) {
+  var el = document.getElementById('error-msg');
+  el.textContent = msg;
+  el.style.display = 'block';
+  document.getElementById('success-msg').style.display = 'none';
+}
+
+function showSuccess(email, password) {
+  var el = document.getElementById('success-msg');
+  el.innerHTML =
+    '<strong>Account created successfully!</strong>' +
+    '<div class="cred-box">' +
+      '<span class="cred-label">Email&nbsp;&nbsp;&nbsp;:</span> ' + escHtml(email) + '<br>' +
+      '<span class="cred-label">Password:</span> ' + escHtml(password) +
+    '</div>' +
+    '<a class="btn-goto" href="/crm/leads/view/list">Go to CRM Dashboard &rarr;</a>';
+  el.style.display = 'block';
+  document.getElementById('error-msg').style.display = 'none';
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function createAccount() {
+  var name  = document.getElementById('full-name').value.trim();
+  var email = document.getElementById('email').value.trim();
+  var pwd   = document.getElementById('password').value;
+
+  if (!name)  { showError('Please enter your full name.'); return; }
+  if (!email) { showError('Please enter your email address.'); return; }
+  if (!pwd)   { showError('Please enter a password.'); return; }
+  if (pwd.length < 6) { showError('Password must be at least 6 characters.'); return; }
+
+  var btn = document.getElementById('create-btn');
+  btn.disabled = true;
+  btn.textContent = 'Creating account…';
+
+  var csrf = getCsrfToken();
+  fetch('/api/method/crm.api.user_signup.create_account', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Frappe-CSRF-Token': csrf,
+    },
+    body: JSON.stringify({ full_name: name, email: email, password: pwd }),
+    credentials: 'same-origin',
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.message && data.message.status === 'success') {
+      // Hide the form fields so only the credentials are shown
+      document.getElementById('full-name').closest('.field').style.display = 'none';
+      document.getElementById('email').closest('.field').style.display = 'none';
+      document.getElementById('password').closest('.field').style.display = 'none';
+      btn.style.display = 'none';
+      document.querySelector('.signin-link').style.display = 'none';
+      document.querySelector('.divider').style.display = 'none';
+      document.querySelector('.btn-ms').style.display = 'none';
+      showSuccess(email, pwd);
+    } else {
+      var msg = (data.exc_type === 'DuplicateEntryError' || (data.exception && data.exception.indexOf('Duplicate') !== -1))
+        ? 'An account with this email already exists.'
+        : (data.message && data.message.error) || data._error_message || 'Signup failed. Please try again.';
+      showError(msg);
+      btn.disabled = false;
+      btn.textContent = 'Create Account';
+    }
+  })
+  .catch(function() {
+    showError('Network error. Please try again.');
+    btn.disabled = false;
+    btn.textContent = 'Create Account';
+  });
+}
+
+function getCsrfToken() {
+  var m = document.cookie.match(/csrf_token=([^;]+)/);
+  return m ? decodeURIComponent(m[1]) : '';
+}
+
+// Allow Enter key to submit
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') createAccount();
+});
+</script>
+</body>
+</html>

@@ -15,7 +15,7 @@ def get_context():
 	from crm.api import check_app_permission
 
 	if frappe.session.user == "Guest":
-		frappe.local.flags.redirect_location = "/login?redirect-to=/crm"
+		frappe.local.flags.redirect_location = "/signup"
 		raise frappe.Redirect
 
 	if not check_app_permission():
@@ -64,4 +64,4 @@ def get_boot():
 
 
 def get_default_route():
-	return "/crm"
+	return "/crm/leads/view/list"

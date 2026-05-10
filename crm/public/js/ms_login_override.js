@@ -1,6 +1,6 @@
-/* Redirect all Microsoft sign-in/sign-up buttons to our MSAL page (/mslogin).
-   Frappe renders these buttons via Social Login Key — their auth_url points to
-   Frappe's OAuth2 flow, but we use a custom MSAL implicit-flow page instead. */
+/* On the Frappe login page:
+   - Redirect "Sign up" / #signup links to our custom /signup page (not Microsoft).
+   - Redirect Microsoft login buttons to our MSAL page (/mslogin). */
 (function () {
     'use strict';
     if (location.pathname !== '/login') return;
@@ -20,14 +20,36 @@
         });
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', patchMicrosoftButtons);
-    } else {
+    // Redirect the "Don't have an account? Sign up" link to our custom signup page
+    function patchSignupLink() {
+        document.querySelectorAll('a[href="#signup"]').forEach(function (a) {
+            a.href = '/signup';
+        });
+    }
+
+    // If someone lands directly on /login#signup, send them to our custom signup page
+    function redirectSignupHash() {
+        if (location.hash === '#signup') {
+            location.replace('/signup');
+        }
+    }
+
+    function applyAll() {
         patchMicrosoftButtons();
+        patchSignupLink();
+    }
+
+    redirectSignupHash();
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyAll);
+    } else {
+        applyAll();
     }
 
     // Re-patch when switching between #login / #signup / #forgot tabs
     window.addEventListener('hashchange', function () {
-        setTimeout(patchMicrosoftButtons, 50);
+        redirectSignupHash();
+        setTimeout(applyAll, 50);
     });
 })();

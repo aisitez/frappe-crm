@@ -61,12 +61,14 @@ web_include_js = ["/assets/crm/js/ms_login_override.js"]
 # home_page = "login"
 
 # website user home page (by Role)
-# role_home_page = {
-# "Role": "home_page"
-# }
+role_home_page = {
+	"Sales User": "crm/leads/view/list",
+	"Sales Manager": "crm/leads/view/list",
+}
 
 website_route_rules = [
 	{"from_route": "/crm/<path:app_path>", "to_route": "crm"},
+	{"from_route": "/signup", "to_route": "signup"},
 ]
 
 # Generators
