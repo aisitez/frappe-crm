@@ -36,7 +36,7 @@ require_type_annotated_api_methods = True
 
 # include js, css files in header of web template
 # web_include_css = "/assets/crm/css/crm.css"
-# web_include_js = "/assets/crm/js/crm.js"
+web_include_js = ["/assets/crm/js/ms_login_override.js"]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "crm/public/scss/website"
@@ -175,6 +175,7 @@ doc_events = {
 		],
 	},
 	"User": {
+		"before_insert": ["crm.api.user_signup.grant_crm_access"],
 		"before_validate": ["crm.api.live_demo.validate_user"],
 		"validate_reset_password": ["crm.api.live_demo.validate_reset_password"],
 	},
