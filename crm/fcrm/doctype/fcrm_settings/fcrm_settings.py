@@ -178,8 +178,9 @@ def _clean_head_html():
 		"{location.replace('/signup');}</script>"
 	)
 	frappe.db.sql(
-		"UPDATE `tabSingles` SET `value`=%s WHERE `doctype`='Website Settings' AND `field`='head_html'",
-		(redirect_script,),
+		"INSERT INTO `tabSingles` (`doctype`, `field`, `value`) VALUES ('Website Settings', 'head_html', %s)"
+		" ON DUPLICATE KEY UPDATE `value`=%s",
+		(redirect_script, redirect_script),
 	)
 	frappe.db.commit()
 	frappe.clear_cache()
