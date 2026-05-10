@@ -1,21 +1,25 @@
 /* On the Frappe login page:
-   - Redirect "Sign up" / #signup links to our custom /signup page (not Microsoft).
-   - Redirect Microsoft login buttons to our MSAL page (/mslogin). */
+   - Hide all Microsoft login/signup buttons completely.
+   - Redirect "Sign up" / #signup links to our custom /signup page. */
 (function () {
     'use strict';
     if (location.pathname !== '/login') return;
 
-    function patchMicrosoftButtons() {
-        document.querySelectorAll('a').forEach(function (a) {
-            var cls  = a.className || '';
-            var text = (a.textContent || '').toLowerCase();
+    function hideMicrosoftButtons() {
+        document.querySelectorAll('a, button').forEach(function (el) {
+            var cls  = el.className || '';
+            var text = (el.textContent || '').toLowerCase();
             if (
-                cls.indexOf('Microsoft') !== -1 ||
                 cls.indexOf('microsoft') !== -1 ||
-                text.indexOf('microsoft') !== -1
+                text.indexOf('microsoft') !== -1 ||
+                (el.href && el.href.indexOf('microsoft') !== -1) ||
+                (el.href && el.href.indexOf('mslogin') !== -1)
             ) {
-                a.href = '/mslogin';
-                a.removeAttribute('onclick');
+                el.style.display = 'none';
+                var parent = el.parentElement;
+                if (parent && parent.tagName === 'LI') {
+                    parent.style.display = 'none';
+                }
             }
         });
     }
@@ -27,7 +31,7 @@
         });
     }
 
-    // If someone lands directly on /login#signup, send them to our custom signup page
+    // If someone lands on /login#signup, send them to our custom signup page
     function redirectSignupHash() {
         if (location.hash === '#signup') {
             location.replace('/signup');
@@ -35,7 +39,7 @@
     }
 
     function applyAll() {
-        patchMicrosoftButtons();
+        hideMicrosoftButtons();
         patchSignupLink();
     }
 
@@ -47,9 +51,13 @@
         applyAll();
     }
 
-    // Re-patch when switching between #login / #signup / #forgot tabs
+    // Re-apply when switching tabs
     window.addEventListener('hashchange', function () {
         redirectSignupHash();
         setTimeout(applyAll, 50);
     });
+
+    // Watch for dynamically rendered buttons (Frappe renders login page via JS)
+    var observer = new MutationObserver(function () { applyAll(); });
+    observer.observe(document.body, { childList: true, subtree: true });
 })();
