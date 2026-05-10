@@ -155,6 +155,43 @@ def get_standard_dropdown_items():
 
 def after_migrate():
 	sync_table("dropdown_items", "standard_dropdown_items")
+	_set_default_brand()
+	_clean_head_html()
+
+
+def _clean_head_html():
+	"""Remove legacy MS OAuth injection script from Website Settings head_html.
+
+	Uses raw SQL to bypass all caching layers so the fix is always applied.
+	"""
+	result = frappe.db.sql(
+		"SELECT `value` FROM `tabSingles` WHERE `doctype`='Website Settings' AND `field`='head_html'",
+		as_dict=False,
+	)
+	current = (result[0][0] if result else "") or ""
+	legacy_markers = ("addToSignup", "ms-login-btn", "addToLogin", "ms-signup-btn", "mslogin")
+	if not any(m in current for m in legacy_markers):
+		return
+	redirect_script = (
+		"<!-- crm_signup_redirect -->\n"
+		"<script>if(location.pathname==='/login'&&location.hash==='#signup')"
+		"{location.replace('/signup');}</script>"
+	)
+	frappe.db.sql(
+		"UPDATE `tabSingles` SET `value`=%s WHERE `doctype`='Website Settings' AND `field`='head_html'",
+		(redirect_script,),
+	)
+	frappe.db.commit()
+	frappe.clear_cache()
+
+
+def _set_default_brand():
+	"""Set SentimentAI CRM as the brand name the first time (or if it was never configured)."""
+	settings = frappe.get_single("FCRM Settings")
+	if not settings.brand_name:
+		settings.brand_name = "SentimentAI CRM"
+		settings.save(ignore_permissions=True)
+		frappe.db.commit()
 
 
 def sync_table(key, hook):
