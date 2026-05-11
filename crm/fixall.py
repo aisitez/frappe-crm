@@ -12,10 +12,11 @@ import frappe
 def execute():
     _delete_ms_social_login_keys()
     _clear_head_html()
+    _set_brand_name()
     frappe.db.commit()
     frappe.clear_cache()
     _direct_mysql_clear_head_html()
-    print("DONE: MS Social Login Keys deleted, head_html cleaned, caches cleared.")
+    print("DONE: MS Social Login Keys deleted, head_html cleaned, brand set, caches cleared.")
 
 
 def _delete_ms_social_login_keys():
@@ -48,6 +49,22 @@ def _clear_head_html():
         " ON DUPLICATE KEY UPDATE `value`=''",
     )
     print("head_html cleared via Frappe DB (upsert to empty).")
+
+
+def _set_brand_name():
+    """Set SentimentAI as the app/brand name in Website Settings so all pages show correct branding."""
+    fields = {
+        "app_name": "SentimentAI",
+        "brand_name": "SentimentAI",
+        "website_name": "SentimentAI",
+    }
+    for field, value in fields.items():
+        frappe.db.sql(
+            "INSERT INTO `tabSingles` (`doctype`, `field`, `value`) VALUES ('Website Settings', %s, %s)"
+            " ON DUPLICATE KEY UPDATE `value`=%s",
+            (field, value, value),
+        )
+    print("Brand name set to SentimentAI in Website Settings.")
 
 
 def _direct_mysql_clear_head_html():
