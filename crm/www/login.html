@@ -151,7 +151,26 @@
 		{{ logo_section('Create a SentimentAI CRM Account') }}
 		<div class="login-content page-card">
 			{%- if not disable_signup -%}
-			{{ signup_form_template }}
+			<div class="page-card-body">
+				<div class="form-group">
+					<input type="text" id="crm_full_name" class="form-control"
+						placeholder="Full Name" required autocomplete="name">
+				</div>
+				<div class="form-group">
+					<input type="email" id="crm_email" class="form-control"
+						placeholder="your@email.com" required autocomplete="email">
+				</div>
+				<div class="form-group">
+					<input type="password" id="crm_password" class="form-control"
+						placeholder="Password (min 6 characters)" required autocomplete="new-password">
+				</div>
+			</div>
+			<div class="page-card-actions">
+				<button id="crm-signup-btn" class="btn btn-sm btn-primary btn-block" type="button">
+					Create Account
+				</button>
+				<p id="crm-signup-msg" style="color:red;text-align:center;margin-top:8px;display:none;"></p>
+			</div>
 			{%- else -%}
 			<div class='page-card-head mb-2'>
 				<span class='indicator gray'>{{_("Signup Disabled")}}</span>
@@ -229,6 +248,62 @@
 
 {% block script %}
 <script>{% include "templates/includes/login/login.js" %}</script>
+<script>
+(function () {
+	var btn = document.getElementById('crm-signup-btn');
+	if (!btn) return;
+	btn.addEventListener('click', function () {
+		var fullName = (document.getElementById('crm_full_name').value || '').trim();
+		var email = (document.getElementById('crm_email').value || '').trim();
+		var password = document.getElementById('crm_password').value || '';
+		var msgEl = document.getElementById('crm-signup-msg');
+
+		msgEl.style.display = 'none';
+
+		if (!fullName || !email || !password) {
+			msgEl.textContent = 'Please fill in all fields.';
+			msgEl.style.display = 'block';
+			return;
+		}
+		if (password.length < 6) {
+			msgEl.textContent = 'Password must be at least 6 characters.';
+			msgEl.style.display = 'block';
+			return;
+		}
+
+		btn.textContent = 'Creating account…';
+		btn.disabled = true;
+
+		fetch('/api/method/crm.api.user_signup.create_account', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ full_name: fullName, email: email, password: password })
+		})
+		.then(function (r) { return r.json(); })
+		.then(function (data) {
+			if (data.message && data.message.status === 'success') {
+				window.location.href = '/crm';
+			} else {
+				var err = 'Signup failed. Please try again.';
+				try {
+					var smsgs = JSON.parse(data._server_messages || '[]');
+					if (smsgs.length) err = JSON.parse(smsgs[0]).message || err;
+				} catch (ex) {}
+				msgEl.textContent = err;
+				msgEl.style.display = 'block';
+				btn.textContent = 'Create Account';
+				btn.disabled = false;
+			}
+		})
+		.catch(function (err) {
+			msgEl.textContent = 'Network error. Please try again.';
+			msgEl.style.display = 'block';
+			btn.textContent = 'Create Account';
+			btn.disabled = false;
+		});
+	});
+})();
+</script>
 {% endblock %}
 
 {% block sidebar %}{% endblock %}
