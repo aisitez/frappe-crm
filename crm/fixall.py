@@ -3,6 +3,9 @@
 Run once inside the container:
   bench --site crm.localhost execute crm.fixall.execute
 """
+import json
+import os
+import subprocess
 import frappe
 
 
@@ -11,6 +14,7 @@ def execute():
     _clear_head_html()
     frappe.db.commit()
     frappe.clear_cache()
+    _direct_mysql_clear_head_html()
     print("DONE: MS Social Login Keys deleted, head_html cleaned, caches cleared.")
 
 
@@ -38,17 +42,40 @@ def _delete_ms_social_login_keys():
 
 
 def _clear_head_html():
-    redirect_script = (
-        "<!-- crm_signup_redirect -->\n"
-        "<script>"
-        "if(location.pathname==='/login'&&location.hash==='#signup')"
-        "{location.replace('/signup');}"
-        "</script>"
-    )
     # Use UPSERT so this works whether or not the row already exists
     frappe.db.sql(
-        "INSERT INTO `tabSingles` (`doctype`, `field`, `value`) VALUES ('Website Settings', 'head_html', %s)"
-        " ON DUPLICATE KEY UPDATE `value`=%s",
-        (redirect_script, redirect_script),
+        "INSERT INTO `tabSingles` (`doctype`, `field`, `value`) VALUES ('Website Settings', 'head_html', '')"
+        " ON DUPLICATE KEY UPDATE `value`=''",
     )
-    print("head_html set to clean redirect script (upsert).")
+    print("head_html cleared via Frappe DB (upsert to empty).")
+
+
+def _direct_mysql_clear_head_html():
+    """Bypass Frappe caching and clear head_html via a direct mysql subprocess call."""
+    site_name = frappe.local.site
+    bench_path = os.path.dirname(os.path.dirname(frappe.__file__))
+    site_cfg_path = os.path.join(bench_path, "sites", site_name, "site_config.json")
+    if not os.path.exists(site_cfg_path):
+        print(f"site_config.json not found at {site_cfg_path}, skipping direct MySQL cleanup")
+        return
+    try:
+        with open(site_cfg_path) as f:
+            cfg = json.load(f)
+        db_host = cfg.get("db_host", "127.0.0.1")
+        db_name = cfg.get("db_name", "")
+        db_user = cfg.get("db_user", db_name)
+        db_pass = cfg.get("db_password", "")
+        if not db_name or not db_pass:
+            print("Missing db_name/db_password in site_config.json, skipping direct MySQL cleanup")
+            return
+        sql = "INSERT INTO tabSingles (doctype, field, value) VALUES ('Website Settings', 'head_html', '') ON DUPLICATE KEY UPDATE value=''"
+        result = subprocess.run(
+            ["mysql", "-h", db_host, f"-u{db_user}", f"-p{db_pass}", db_name, "-e", sql],
+            capture_output=True, text=True, timeout=15
+        )
+        if result.returncode == 0:
+            print("head_html cleared via direct MySQL subprocess OK")
+        else:
+            print(f"Direct MySQL subprocess failed: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"Direct MySQL cleanup error: {e}")

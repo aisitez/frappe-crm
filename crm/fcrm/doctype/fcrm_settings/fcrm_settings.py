@@ -162,25 +162,11 @@ def after_migrate():
 def _clean_head_html():
 	"""Remove legacy MS OAuth injection script from Website Settings head_html.
 
-	Uses raw SQL to bypass all caching layers so the fix is always applied.
+	Unconditionally clears head_html to empty so the login page shows no MS OAuth button.
 	"""
-	result = frappe.db.sql(
-		"SELECT `value` FROM `tabSingles` WHERE `doctype`='Website Settings' AND `field`='head_html'",
-		as_dict=False,
-	)
-	current = (result[0][0] if result else "") or ""
-	legacy_markers = ("addToSignup", "ms-login-btn", "addToLogin", "ms-signup-btn", "mslogin")
-	if not any(m in current for m in legacy_markers):
-		return
-	redirect_script = (
-		"<!-- crm_signup_redirect -->\n"
-		"<script>if(location.pathname==='/login'&&location.hash==='#signup')"
-		"{location.replace('/signup');}</script>"
-	)
 	frappe.db.sql(
-		"INSERT INTO `tabSingles` (`doctype`, `field`, `value`) VALUES ('Website Settings', 'head_html', %s)"
-		" ON DUPLICATE KEY UPDATE `value`=%s",
-		(redirect_script, redirect_script),
+		"INSERT INTO `tabSingles` (`doctype`, `field`, `value`) VALUES ('Website Settings', 'head_html', '')"
+		" ON DUPLICATE KEY UPDATE `value`=''",
 	)
 	frappe.db.commit()
 	frappe.clear_cache()
