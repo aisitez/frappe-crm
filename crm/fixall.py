@@ -14,6 +14,7 @@ def execute():
     _clear_head_html()
     _set_brand_name()
     _mark_setup_complete()
+    _grant_admin_crm_roles()
     frappe.db.commit()
     frappe.clear_cache()
     _direct_mysql_clear_head_html()
@@ -75,6 +76,25 @@ def _mark_setup_complete():
         " ON DUPLICATE KEY UPDATE `value`='1'",
     )
     print("Setup wizard marked as complete.")
+
+
+def _grant_admin_crm_roles():
+    """Give Administrator the Sales Manager role so they land on /crm after login."""
+    try:
+        admin = frappe.get_doc("User", "Administrator")
+        existing_roles = [r.role for r in admin.roles]
+        added = []
+        for role in ("Sales Manager", "Sales User"):
+            if role not in existing_roles:
+                admin.append("roles", {"role": role})
+                added.append(role)
+        if added:
+            admin.save(ignore_permissions=True)
+            print(f"Admin roles added: {added}")
+        else:
+            print("Admin already has CRM roles.")
+    except Exception as e:
+        print(f"Error granting admin roles: {e}")
 
 
 def _direct_mysql_clear_head_html():
