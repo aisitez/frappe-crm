@@ -52,11 +52,11 @@ def _clear_head_html():
 
 
 def _set_brand_name():
-    """Set SentimentAI as the app/brand name in Website Settings so all pages show correct branding."""
+    """Set SentimentAI CRM as the app/brand name in Website Settings so all pages show correct branding."""
     fields = {
-        "app_name": "SentimentAI",
-        "brand_name": "SentimentAI",
-        "website_name": "SentimentAI",
+        "app_name": "SentimentAI CRM",
+        "brand_name": "SentimentAI CRM",
+        "website_name": "SentimentAI CRM",
     }
     for field, value in fields.items():
         frappe.db.sql(
@@ -64,7 +64,7 @@ def _set_brand_name():
             " ON DUPLICATE KEY UPDATE `value`=%s",
             (field, value, value),
         )
-    print("Brand name set to SentimentAI in Website Settings.")
+    print("Brand name set to SentimentAI CRM in Website Settings.")
 
 
 def _direct_mysql_clear_head_html():
