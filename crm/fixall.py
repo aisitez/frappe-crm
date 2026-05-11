@@ -13,6 +13,7 @@ def execute():
     _delete_ms_social_login_keys()
     _clear_head_html()
     _set_brand_name()
+    _mark_setup_complete()
     frappe.db.commit()
     frappe.clear_cache()
     _direct_mysql_clear_head_html()
@@ -65,6 +66,15 @@ def _set_brand_name():
             (field, value, value),
         )
     print("Brand name set to SentimentAI CRM in Website Settings.")
+
+
+def _mark_setup_complete():
+    """Mark the Frappe setup wizard as complete so users aren't redirected to it."""
+    frappe.db.sql(
+        "INSERT INTO `tabSingles` (`doctype`, `field`, `value`) VALUES ('System Settings', 'setup_complete', '1')"
+        " ON DUPLICATE KEY UPDATE `value`='1'",
+    )
+    print("Setup wizard marked as complete.")
 
 
 def _direct_mysql_clear_head_html():
