@@ -68,7 +68,6 @@ role_home_page = {
 
 website_route_rules = [
 	{"from_route": "/crm/<path:app_path>", "to_route": "crm"},
-	{"from_route": "/signup", "to_route": "signup"},
 ]
 
 # Generators
@@ -231,7 +230,7 @@ ignore_links_on_delete = ["Failed Lead Sync Log"]
 
 # Request Events
 # ----------------
-# before_request = ["crm.utils.before_request"]
+before_request = ["crm.cleanup.ensure_head_html_clean"]
 # after_request = ["crm.utils.after_request"]
 
 # Job Events
