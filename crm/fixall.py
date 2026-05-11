@@ -15,6 +15,7 @@ def execute():
     _set_brand_name()
     _mark_setup_complete()
     _grant_admin_crm_roles()
+    _patch_www_files()
     frappe.db.commit()
     frappe.clear_cache()
     _direct_mysql_clear_head_html()
@@ -95,6 +96,26 @@ def _grant_admin_crm_roles():
             print("Admin already has CRM roles.")
     except Exception as e:
         print(f"Error granting admin roles: {e}")
+
+
+def _patch_www_files():
+    """Copy crm www overrides into frappe's www directory so they take precedence."""
+    bench_path = "/home/frappe/frappe-bench"
+    files = ["login.html", "logout.html"]
+    for fname in files:
+        src = os.path.join(bench_path, "apps", "crm", "crm", "www", fname)
+        dst = os.path.join(bench_path, "apps", "frappe", "frappe", "www", fname)
+        if os.path.exists(src):
+            try:
+                result = subprocess.run(["cp", "-f", src, dst], capture_output=True, text=True)
+                if result.returncode == 0:
+                    print(f"{fname} patched into frappe/www OK")
+                else:
+                    print(f"{fname} cp failed: {result.stderr[:100]}")
+            except Exception as e:
+                print(f"{fname} patch error: {e}")
+        else:
+            print(f"{fname} not found in crm/www, skipping")
 
 
 def _direct_mysql_clear_head_html():
