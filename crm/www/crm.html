@@ -1,0 +1,68 @@
+{% extends "templates/web.html" %}
+
+{% block head_include %}
+{{ include_style('crm.bundle.css') }}
+<link rel="shortcut icon" href="/assets/crm/images/crm-icon.svg" type="image/svg+xml">
+{% endblock %}
+
+{% block page_content %}
+<div id="app"></div>
+{% endblock %}
+
+{% block script %}
+{{ include_script('crm.bundle.js') }}
+<script>
+(function () {
+	var REPLACEMENTS = [
+		["Welcome to Frappe CRM", "Welcome to SentimentAI"],
+		["Frappe CRM", "SentimentAI"],
+		["Frappe", "SentimentAI"],
+	];
+
+	function replaceInNode(node) {
+		if (node.nodeType === 3) {
+			var val = node.nodeValue;
+			var changed = false;
+			for (var i = 0; i < REPLACEMENTS.length; i++) {
+				var from = REPLACEMENTS[i][0];
+				var to = REPLACEMENTS[i][1];
+				if (val.indexOf(from) !== -1) {
+					val = val.split(from).join(to);
+					changed = true;
+				}
+			}
+			if (changed) node.nodeValue = val;
+		} else if (node.nodeType === 1 && node.childNodes) {
+			for (var j = 0; j < node.childNodes.length; j++) {
+				replaceInNode(node.childNodes[j]);
+			}
+		}
+	}
+
+	function replaceAll() {
+		replaceInNode(document.body);
+	}
+
+	// Run once after initial render
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', replaceAll);
+	} else {
+		replaceAll();
+	}
+
+	// Watch for SPA navigation / dynamic DOM updates
+	var observer = new MutationObserver(function (mutations) {
+		mutations.forEach(function (m) {
+			m.addedNodes.forEach(function (n) { replaceInNode(n); });
+		});
+	});
+	observer.observe(document.body || document.documentElement, {
+		childList: true,
+		subtree: true,
+	});
+})();
+</script>
+{% endblock %}
+
+{% block sidebar %}{% endblock %}
+{% block footer %}{% endblock %}
