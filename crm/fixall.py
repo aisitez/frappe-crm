@@ -100,22 +100,74 @@ def _grant_admin_crm_roles():
 
 def _patch_www_files():
     """Copy crm www overrides into frappe's www directory so they take precedence."""
+    import re as _re
     bench_path = "/home/frappe/frappe-bench"
-    files = ["login.html", "logout.html"]
-    for fname in files:
+    for fname in ["login.html", "logout.html"]:
         src = os.path.join(bench_path, "apps", "crm", "crm", "www", fname)
         dst = os.path.join(bench_path, "apps", "frappe", "frappe", "www", fname)
         if os.path.exists(src):
             try:
                 result = subprocess.run(["cp", "-f", src, dst], capture_output=True, text=True)
                 if result.returncode == 0:
-                    print(f"{fname} patched into frappe/www OK")
+                    with open(dst) as f:
+                        snippet = f.read(120)
+                    print(f"{fname} patched OK. dst starts: {snippet[:80]!r}")
                 else:
                     print(f"{fname} cp failed: {result.stderr[:100]}")
             except Exception as e:
                 print(f"{fname} patch error: {e}")
         else:
-            print(f"{fname} not found in crm/www, skipping")
+            print(f"src not found: {src}")
+
+    # Belt-and-suspenders: also directly patch frappe's login.html text
+    frappe_login = os.path.join(bench_path, "apps", "frappe", "frappe", "www", "login.html")
+    if os.path.exists(frappe_login):
+        try:
+            with open(frappe_login) as f:
+                content = f.read()
+            if "SentimentAI CRM" not in content:
+                content = _re.sub(
+                    r'_\(["\']Login to \{0\}["\'].*?\.format\(.*?\)',
+                    '"Login to SentimentAI CRM"',
+                    content,
+                )
+                content = _re.sub(
+                    r'_\(["\']Create a \{0\} Account["\'].*?\.format\(.*?\)',
+                    '"Create a SentimentAI CRM Account"',
+                    content,
+                )
+                content = content.replace("Login to Frappe", "Login to SentimentAI CRM")
+                content = content.replace("Create a Frappe Account", "Create a SentimentAI CRM Account")
+                with open(frappe_login, "w") as f:
+                    f.write(content)
+                print("frappe/www/login.html text patched directly OK")
+            else:
+                print("frappe/www/login.html already has SentimentAI CRM branding")
+        except Exception as e:
+            print(f"frappe/www/login.html direct patch error: {e}")
+
+    # Patch login.py to hardcode app_name
+    login_py = os.path.join(bench_path, "apps", "frappe", "frappe", "www", "login.py")
+    if os.path.exists(login_py):
+        try:
+            with open(login_py) as f:
+                py_content = f.read()
+            if "SentimentAI CRM" not in py_content:
+                patched = _re.sub(
+                    r'(context\.app_name\s*=\s*[^\n]+)',
+                    'context.app_name = "SentimentAI CRM"',
+                    py_content,
+                )
+                if patched == py_content:
+                    # Pattern not found — append an override
+                    patched = py_content + '\n\n# SentimentAI branding override\n_orig_gc = get_context\ndef get_context(context):\n    _orig_gc(context)\n    context.app_name = "SentimentAI CRM"\n'
+                with open(login_py, "w") as f:
+                    f.write(patched)
+                print("login.py app_name hardcoded to SentimentAI CRM")
+            else:
+                print("login.py already patched")
+        except Exception as e:
+            print(f"login.py patch error: {e}")
 
 
 def _direct_mysql_clear_head_html():
