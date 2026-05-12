@@ -36,7 +36,6 @@ jobs:
 
       - name: Set build variables
         run: |
-          # Point to your fork of frappe-crm
           APPS_JSON='[{"url": "https://github.com/aisitez/frappe-crm", "branch": "main"}]'
           echo "APPS_JSON_BASE64=$(echo $APPS_JSON | base64 -w 0)" >> $GITHUB_ENV
           echo "FRAPPE_BRANCH=version-15" >> $GITHUB_ENV
@@ -71,8 +70,21 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Verify image in ACR
+      - name: Deploy to Azure Container Instance
+        if: env.IMAGE_TAG == 'latest'
         run: |
-          echo "Image pushed successfully:"
-          echo "  ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
-          echo "  ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
+          az login --service-principal \
+            -u "${{ secrets.AZURE_CLIENT_ID }}" \
+            -p "${{ secrets.AZURE_CLIENT_SECRET }}" \
+            --tenant "${{ secrets.AZURE_TENANT_ID }}"
+          az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+
+          sed -e "s|__ACR_PASSWORD__|${{ secrets.ACR_REGISTRY_PASSWORD }}|g" \
+              -e "s|__STORAGE_KEY__|${{ secrets.STORAGE_ACCOUNT_KEY }}|g" \
+              -e "s|__DB_ROOT_PASSWORD__|${{ secrets.DB_ROOT_PASSWORD }}|g" \
+              .github/aci-deploy-template.yaml > /tmp/aci-deploy.yaml
+
+          az container delete --name frappe-group --resource-group sentimentaicrm --yes || true
+          sleep 20
+          az container create --resource-group sentimentaicrm --file /tmp/aci-deploy.yaml
+          echo "Deployed to: https://sentimentaicrm-app.eastus2.azurecontainer.io/"
