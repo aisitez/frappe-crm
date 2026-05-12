@@ -47,7 +47,9 @@ def _delete_ms_social_login_keys():
 
 _LOGIN_HEAD_JS = (
     "<script>(function(){"
-    "if(window.location.pathname!=='/login')return;"
+    "var p=window.location.pathname;"
+    "if(p==='/logout'){window.location.replace('/login');return;}"
+    "if(p!=='/login')return;"
     "function fx(){"
     "document.querySelectorAll('.page-card-head h4').forEach(function(h){"
     "h.textContent=h.textContent.replace(/Frappe CRM/g,'SentimentAI CRM').replace(/Frappe/g,'SentimentAI CRM');"
