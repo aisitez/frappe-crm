@@ -6,7 +6,6 @@ __pycache__
 dev-dist
 tags
 node_modules
-crm/public/frontend
 build
 frontend/coverage
 
