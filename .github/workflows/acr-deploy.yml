@@ -10,7 +10,7 @@ on:
 
 env:
   ACR_REGISTRY: sentimentaicrm.azurecr.io
-  IMAGE_NAME: frappe-crm
+  IMAGE_NAME: frappecrm
 
 jobs:
   build-and-push:
