@@ -5,6 +5,7 @@ app_description = "Kick-ass Open Source CRM"
 app_email = "shariq@frappe.io"
 app_license = "AGPLv3"
 app_icon_url = "/assets/crm/images/logo.svg"
+app_logo_url = "/assets/crm/images/logo.svg"
 app_icon_title = "CRM"
 app_icon_route = "/crm"
 
@@ -272,6 +273,7 @@ ignore_links_on_delete = ["Failed Lead Sync Log"]
 after_migrate = [
 	"crm.fcrm.doctype.fcrm_settings.fcrm_settings.after_migrate",
 	"crm.api.whatsapp.add_roles",
+	"crm.setup.set_branding",
 ]
 
 standard_dropdown_items = [
