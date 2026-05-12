@@ -45,13 +45,61 @@ def _delete_ms_social_login_keys():
     print("Deleted Social Login Keys:", deleted or "none found")
 
 
+_LOGIN_HEAD_JS = (
+    "<script>(function(){"
+    "if(window.location.pathname!=='/login')return;"
+    "function fx(){"
+    "document.querySelectorAll('.page-card-head h4').forEach(function(h){"
+    "h.textContent=h.textContent.replace(/Frappe CRM/g,'SentimentAI CRM').replace(/Frappe/g,'SentimentAI CRM');"
+    "});"
+    "var sp=document.querySelector('.for-signup .page-card');"
+    "if(sp&&!document.getElementById('crm-sb')){"
+    "sp.innerHTML="
+    "'<div class=\"page-card-body\">"
+    "<div class=\"form-group\"><input type=\"text\" id=\"crm-fn\" class=\"form-control\" placeholder=\"Full Name\" required></div>"
+    "<div class=\"form-group\"><input type=\"email\" id=\"crm-em\" class=\"form-control\" placeholder=\"your@email.com\" required></div>"
+    "<div class=\"form-group\"><input type=\"password\" id=\"crm-pw\" class=\"form-control\" placeholder=\"Password (min 6 chars)\" required></div>"
+    "</div>"
+    "<div class=\"page-card-actions\">"
+    "<button id=\"crm-sb\" class=\"btn btn-sm btn-primary btn-block\">Create Account</button>"
+    "<p id=\"crm-sm\" style=\"color:red;text-align:center;margin-top:8px;display:none\"></p>"
+    "</div>';"
+    "document.getElementById('crm-sb').onclick=function(){"
+    "var n=(document.getElementById('crm-fn').value||'').trim(),"
+    "e=(document.getElementById('crm-em').value||'').trim(),"
+    "p=document.getElementById('crm-pw').value,"
+    "m=document.getElementById('crm-sm'),b=this;"
+    "m.style.display='none';"
+    "if(!n||!e||!p){m.textContent='Please fill in all fields.';m.style.display='block';return;}"
+    "if(p.length<6){m.textContent='Password must be at least 6 characters.';m.style.display='block';return;}"
+    "b.textContent='Creating...';b.disabled=true;"
+    "fetch('/api/method/crm.api.user_signup.create_account',{"
+    "method:'POST',headers:{'Content-Type':'application/json'},"
+    "body:JSON.stringify({full_name:n,email:e,password:p})})"
+    ".then(function(r){return r.json();})"
+    ".then(function(d){"
+    "if(d.message&&d.message.status==='success'){window.location.href='/crm';}"
+    "else{var er='Signup failed.';try{var ms=JSON.parse(d._server_messages||'[]');"
+    "if(ms.length)er=JSON.parse(ms[0]).message||er;}catch(x){}"
+    "m.textContent=er;m.style.display='block';b.textContent='Create Account';b.disabled=false;}})"
+    ".catch(function(){m.textContent='Network error.';m.style.display='block';b.textContent='Create Account';b.disabled=false;});"
+    "};}"
+    "if(!window.location.search.includes('redirect-to'))"
+    "history.replaceState({},'','/login?redirect-to='+encodeURIComponent('/crm'));"
+    "}"
+    "if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fx);}else{fx();}"
+    "window.addEventListener('hashchange',fx);"
+    "})();</script>"
+)
+
+
 def _clear_head_html():
-    # Use UPSERT so this works whether or not the row already exists
     frappe.db.sql(
-        "INSERT INTO `tabSingles` (`doctype`, `field`, `value`) VALUES ('Website Settings', 'head_html', '')"
-        " ON DUPLICATE KEY UPDATE `value`=''",
+        "INSERT INTO `tabSingles` (`doctype`, `field`, `value`) VALUES ('Website Settings', 'head_html', %s)"
+        " ON DUPLICATE KEY UPDATE `value`=%s",
+        (_LOGIN_HEAD_JS, _LOGIN_HEAD_JS),
     )
-    print("head_html cleared via Frappe DB (upsert to empty).")
+    print("head_html set with SentimentAI CRM login JS.")
 
 
 def _set_brand_name():

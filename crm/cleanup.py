@@ -17,9 +17,15 @@ def ensure_head_html_clean():
 		)
 		value = (result[0][0] if result else "") or ""
 		if any(m in value for m in ("addToSignup", "ms-login-btn", "addToLogin", "ms-signup-btn")):
+			# Import login JS from fixall to avoid duplicating the string
+			try:
+				from crm.fixall import _LOGIN_HEAD_JS as _ljs
+			except Exception:
+				_ljs = ""
 			frappe.db.sql(
-				"INSERT INTO tabSingles (doctype, field, value) VALUES ('Website Settings', 'head_html', '')"
-				" ON DUPLICATE KEY UPDATE value=''",
+				"INSERT INTO tabSingles (doctype, field, value) VALUES ('Website Settings', 'head_html', %s)"
+				" ON DUPLICATE KEY UPDATE value=%s",
+				(_ljs, _ljs),
 			)
 		# Ensure brand name is set correctly
 		for field in ("app_name", "brand_name", "website_name"):
