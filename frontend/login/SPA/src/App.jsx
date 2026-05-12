@@ -10,15 +10,15 @@ const MainContent = () => {
     const activeAccount = instance.getActiveAccount();
     const [status, setStatus] = useState('Redirecting to Microsoft login...');
 
-    // Auto-redirect to Azure CIAM if not authenticated
+    // Auto-redirect to Azure CIAM disabled
     useEffect(() => {
-        if (!activeAccount) {
-            instance.loginRedirect({
-                ...loginRequest,
-                scopes: ['openid', 'profile', 'email'],
-                prompt: 'login',
-            }).catch(console.error);
-        }
+        // if (!activeAccount) {
+        //     instance.loginRedirect({
+        //         ...loginRequest,
+        //         scopes: ['openid', 'profile', 'email'],
+        //         prompt: 'login',
+        //     }).catch(console.error);
+        // }
     }, []);
 
     // After MSAL auth: create Frappe session and redirect to CRM dashboard
@@ -68,12 +68,16 @@ const MainContent = () => {
             </AuthenticatedTemplate>
             <UnauthenticatedTemplate>
                 <div style={{ textAlign: 'center' }}>
-                    <div style={{
-                        width: 40, height: 40, border: '4px solid #0078d4',
-                        borderTop: '4px solid transparent', borderRadius: '50%',
-                        animation: 'spin 1s linear infinite', margin: '0 auto 16px'
-                    }} />
-                    <p>Redirecting to Microsoft login...</p>
+                    <h2 style={{ marginBottom: '16px' }}>Welcome to SentimentAI CRM</h2>
+                    <p style={{ marginBottom: '24px' }}>Please sign in to continue.</p>
+                    <a href="/login" style={{
+                        padding: '12px 24px',
+                        background: '#0078d4',
+                        color: 'white',
+                        borderRadius: '4px',
+                        textDecoration: 'none',
+                        fontWeight: 'bold'
+                    }}>Go to Login</a>
                 </div>
             </UnauthenticatedTemplate>
             <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>

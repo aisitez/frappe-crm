@@ -1,6 +1,6 @@
 app_name = "crm"
-app_title = "Frappe CRM"
-app_publisher = "Frappe Technologies Pvt. Ltd."
+app_title = "SentimentzAI CRM"
+app_publisher = "SentimentzAI Technologies Pvt. Ltd."
 app_description = "Kick-ass Open Source CRM"
 app_email = "shariq@frappe.io"
 app_license = "AGPLv3"
@@ -230,7 +230,7 @@ ignore_links_on_delete = ["Failed Lead Sync Log"]
 
 # Request Events
 # ----------------
-before_request = ["crm.cleanup.ensure_head_html_clean"]
+# before_request = []
 # after_request = ["crm.utils.after_request"]
 
 # Job Events
@@ -292,7 +292,7 @@ standard_dropdown_items = [
 	},
 	{
 		"name1": "login_to_fc",
-		"label": "Login to Frappe Cloud",
+		"label": "Login to SentimentzAI Cloud",
 		"type": "Route",
 		"route": "#",
 		"is_standard": 1,

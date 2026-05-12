@@ -3,126 +3,1515 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SentimentAI CRM - Intelligent Customer Relationships</title>
+<title>SentimentAI CRM — AI-Powered Customer Relationships</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#0f0f1a;color:#fff;min-height:100vh}
-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 60px;position:fixed;top:0;width:100%;background:rgba(15,15,26,0.95);backdrop-filter:blur(10px);z-index:100;border-bottom:1px solid rgba(255,255,255,0.08)}
-.logo{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:700;color:#fff;text-decoration:none}
-.logo svg{width:36px;height:36px;flex-shrink:0}
-.nav-btn{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:10px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity 0.2s;display:inline-block}
-.nav-btn:hover{opacity:0.85}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 20px 80px;background:radial-gradient(ellipse at 50% 0%,rgba(99,102,241,0.15) 0%,transparent 70%)}
-.badge{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.4);color:#a5b4fc;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:500;margin-bottom:28px;display:inline-block}
-.hero h1{font-size:clamp(36px,6vw,72px);font-weight:800;line-height:1.1;margin-bottom:24px;background:linear-gradient(135deg,#fff 40%,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:18px;color:#94a3b8;max-width:600px;line-height:1.7;margin-bottom:48px}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
-.btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;padding:16px 40px;border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 24px rgba(99,102,241,0.4);display:inline-block}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,102,241,0.5)}
-.btn-secondary{background:rgba(255,255,255,0.07);color:#fff;padding:16px 40px;border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.15);transition:background 0.2s;display:inline-block}
-.btn-secondary:hover{background:rgba(255,255,255,0.12)}
-.stats{display:flex;gap:48px;justify-content:center;flex-wrap:wrap;margin-top:72px;padding-top:48px;border-top:1px solid rgba(255,255,255,0.08)}
-.stat h3{font-size:36px;font-weight:800;background:linear-gradient(135deg,#6366f1,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.stat p{color:#64748b;font-size:14px;margin-top:4px}
-.features{padding:100px 60px;max-width:1200px;margin:0 auto}
-.section-label{text-align:center;color:#6366f1;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
-.section-title{text-align:center;font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:16px}
-.section-sub{text-align:center;color:#64748b;font-size:16px;margin-bottom:64px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
-.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px;transition:border-color 0.3s,transform 0.3s}
-.card:hover{border-color:rgba(99,102,241,0.4);transform:translateY(-4px)}
-.card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px}
-.card h3{font-size:20px;font-weight:700;margin-bottom:10px}
-.card p{color:#64748b;line-height:1.6;font-size:15px}
-.cta-section{padding:100px 20px;text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(99,102,241,0.12) 0%,transparent 70%)}
-.cta-section h2{font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:20px}
-.cta-section p{color:#64748b;font-size:18px;margin-bottom:48px;max-width:500px;margin-left:auto;margin-right:auto}
-footer{padding:32px;text-align:center;color:#334155;font-size:14px;border-top:1px solid rgba(255,255,255,0.06)}
-footer a{color:#6366f1;text-decoration:none}
-@media(max-width:768px){nav{padding:16px 20px}.logo span{display:none}.features{padding:60px 20px}.stats{gap:24px}.hero{padding:100px 16px 60px}}
+/* ── Variables ──────────────────────────────────── */
+:root{
+  --primary:#7c5cfc;
+  --primary-dark:#5e3af0;
+  --primary-light:#ece8ff;
+  --secondary:#fc5c7d;
+  --dark:#14183e;
+  --text:#5d6576;
+  --light:#f8f7ff;
+  --white:#fff;
+  --border:#eaeaf5;
+  --shadow:0 10px 40px rgba(124,92,252,.12);
+  --r:12px;
+}
+/* ── Reset ──────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:#fff;color:var(--text);line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#f1f5f9}
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:3px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;height:auto;display:block}
+ul{list-style:none}
+
+/* ── Typography ─────────────────────────────────── */
+h1,h2,h3,h4,h5{font-weight:800;color:var(--dark);line-height:1.2}
+h1{font-size:clamp(36px,4.5vw,58px)}
+h2{font-size:clamp(28px,3.5vw,42px)}
+h3{font-size:22px}
+h4{font-size:18px}
+p{color:var(--text);font-size:16px}
+
+/* ── Helpers ────────────────────────────────────── */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.text-center{text-align:center}
+.sec-pad{padding:90px 0}
+.sec-label{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--primary-light);color:var(--primary);
+  font-size:13px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;padding:6px 16px;border-radius:40px;
+  margin-bottom:16px
+}
+.sec-title{font-size:clamp(28px,3.5vw,42px);font-weight:800;color:var(--dark);margin-bottom:14px}
+.sec-sub{color:var(--text);font-size:16px;max-width:580px;line-height:1.75}
+.mx-auto{margin-left:auto;margin-right:auto}
+.grad-text{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 32px;border-radius:50px;font-size:15px;
+  font-weight:700;cursor:pointer;transition:all .3s;border:none;
+  font-family:'Nunito',sans-serif
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;box-shadow:0 8px 24px rgba(124,92,252,.35)
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(124,92,252,.45)}
+.btn-outline{
+  background:transparent;color:var(--primary);
+  border:2px solid var(--primary)
+}
+.btn-outline:hover{background:var(--primary);color:#fff;transform:translateY(-3px)}
+.btn-white{
+  background:#fff;color:var(--primary);
+  box-shadow:0 8px 24px rgba(0,0,0,.1)
+}
+.btn-white:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.15)}
+.btn-ms{
+  background:#0078d4;color:#fff;
+  border:none;
+  box-shadow:0 6px 20px rgba(0,120,212,.35);
+  font-weight:600;font-size:15px
+}
+.btn-ms:hover{transform:translateY(-3px);background:#106ebe;box-shadow:0 12px 30px rgba(0,120,212,.45)}
+/* ── Reveal ─────────────────────────────────────── */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+.rl{opacity:0;transform:translateX(-40px);transition:opacity .75s ease,transform .75s ease}
+.rr{opacity:0;transform:translateX(40px);transition:opacity .75s ease,transform .75s ease}
+.rv.on,.rl.on,.rr.on{opacity:1;transform:translate(0,0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+.d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
+
+/* ══════════════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════════════ */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow .3s
+}
+.navbar.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  height:76px
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-size:19px;font-weight:800;color:var(--dark)
+}
+.nav-logo svg{width:42px;height:42px;flex-shrink:0}
+.logo-mark{position:relative;display:inline-flex}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-name{font-size:18px;font-weight:800;color:var(--dark);letter-spacing:-.3px}
+.logo-tag{font-size:10px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--text);opacity:.65;margin-top:1px}
+.logo-ai{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-menu{display:flex;gap:32px}
+.nav-menu a{
+  font-size:15px;font-weight:600;color:var(--text);
+  transition:color .25s;position:relative;padding-bottom:4px
+}
+.nav-menu a::after{
+  content:'';position:absolute;left:0;bottom:0;
+  width:0;height:2px;border-radius:2px;
+  background:var(--primary);transition:width .3s
+}
+.nav-menu a:hover{color:var(--primary)}
+.nav-menu a:hover::after{width:100%}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.nav-login{
+  font-size:14px;font-weight:700;color:var(--dark);
+  padding:9px 22px;border-radius:50px;
+  border:2px solid var(--border);transition:all .25s
+}
+.nav-login:hover{border-color:var(--primary);color:var(--primary)}
+.nav-ms{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#0078d4;color:#fff;font-size:14px;font-weight:700;
+  padding:10px 22px;border-radius:50px;
+  box-shadow:0 4px 14px rgba(0,120,212,.3);
+  transition:all .25s
+}
+.nav-ms:hover{transform:translateY(-2px);background:#106ebe;box-shadow:0 8px 22px rgba(0,120,212,.42)}
+/* Hamburger */
+.ham{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;padding:4px;background:none;border:none
+}
+.ham span{
+  display:block;width:26px;height:2px;
+  background:var(--dark);border-radius:2px;
+  transition:all .3s
+}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+/* Mobile menu */
+.mobile-menu{
+  display:none;position:fixed;top:76px;left:0;right:0;
+  background:#fff;border-bottom:1px solid var(--border);
+  padding:20px 24px;z-index:999;
+  box-shadow:0 8px 24px rgba(0,0,0,.08)
+}
+.mobile-menu.open{display:block}
+.mobile-menu a{
+  display:block;padding:12px 0;font-size:15px;font-weight:600;
+  color:var(--dark);border-bottom:1px solid var(--border)
+}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--primary)}
+
+/* ══════════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════════ */
+.hero{
+  padding:140px 0 80px;
+  background:linear-gradient(135deg,#fff 0%,#f8f7ff 100%);
+  position:relative;overflow:hidden
+}
+.hero::before{
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,92,252,.08),transparent 70%);
+  pointer-events:none
+}
+.hero::after{
+  content:'';position:absolute;bottom:-150px;left:-150px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(252,92,125,.06),transparent 70%);
+  pointer-events:none
+}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-label{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--primary-light);color:var(--primary);
+  font-size:13px;font-weight:700;padding:7px 18px;border-radius:50px;
+  margin-bottom:22px;letter-spacing:.5px
+}
+.hero-label .dot{width:7px;height:7px;border-radius:50%;background:var(--primary);animation:bk 1.8s ease infinite}
+@keyframes bk{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{margin-bottom:8px}
+.hero h1 span{color:var(--primary)}
+.type-line{
+  font-size:clamp(22px,3vw,36px);font-weight:700;
+  color:var(--primary);margin-bottom:20px;
+  min-height:44px;display:flex;align-items:center;gap:8px
+}
+.type-cursor{
+  display:inline-block;width:3px;height:1.1em;
+  background:var(--primary);animation:cursor .7s step-end infinite
+}
+@keyframes cursor{0%,100%{opacity:1}50%{opacity:0}}
+.hero-p{font-size:17px;color:var(--text);line-height:1.8;max-width:480px;margin-bottom:36px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+.hero-trust{display:flex;align-items:center;gap:14px}
+.trust-imgs{display:flex}
+.trust-img{
+  width:38px;height:38px;border-radius:50%;
+  border:3px solid #fff;overflow:hidden;margin-left:-10px;
+  box-shadow:0 2px 8px rgba(0,0,0,.15)
+}
+.trust-img:first-child{margin-left:0}
+.trust-img img{width:100%;height:100%;object-fit:cover}
+.trust-text{font-size:14px;color:var(--text);font-weight:600}
+.trust-text strong{color:var(--dark)}
+/* ─── Hero AI Robot Visual ───────────────────────────────── */
+.ai-img-scene{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  padding:48px 44px
+}
+/* Decorative pulsing rings */
+.air-ring{position:absolute;border-radius:50%;pointer-events:none}
+.air-r1{
+  width:440px;height:440px;
+  background:radial-gradient(circle,rgba(124,92,252,.11) 0%,transparent 68%);
+  animation:rPulse 4s ease-in-out infinite
+}
+.air-r2{
+  width:320px;height:320px;
+  border:1px dashed rgba(124,92,252,.2);
+  animation:ringSpin 24s linear infinite
+}
+.air-r3{
+  width:215px;height:215px;
+  border:2px solid rgba(124,92,252,.1);
+  animation:rPulse 4s ease-in-out infinite 2s
+}
+@keyframes rPulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.06);opacity:1}}
+@keyframes ringSpin{to{transform:rotate(360deg)}}
+/* Robot image */
+.ai-robot{
+  width:330px;height:330px;object-fit:contain;
+  position:relative;z-index:3;
+  filter:drop-shadow(0 28px 56px rgba(124,92,252,.28)) drop-shadow(0 8px 16px rgba(124,92,252,.15));
+  animation:robotFloat 3.2s ease-in-out infinite
+}
+@keyframes robotFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-18px) rotate(1.2deg)}
+}
+/* Typing chat bubble */
+.air-chat{
+  position:absolute;top:32px;right:28px;z-index:6;
+  background:#fff;border-radius:18px 18px 4px 18px;
+  padding:10px 15px;display:flex;align-items:center;gap:9px;
+  box-shadow:0 10px 32px rgba(0,0,0,.1);border:1px solid var(--border);
+  font-size:12px;font-weight:600;color:var(--dark);white-space:nowrap;
+  animation:flt 4s ease-in-out infinite .6s
+}
+.air-typing{display:flex;gap:4px;align-items:center}
+.air-typing span{
+  width:6px;height:6px;border-radius:50%;background:var(--primary);
+  animation:typeDot 1.4s ease-in-out infinite
+}
+.air-typing span:nth-child(2){animation-delay:.22s}
+.air-typing span:nth-child(3){animation-delay:.44s}
+@keyframes typeDot{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.45);opacity:1}}
+/* Floating particles */
+.air-pt{position:absolute;border-radius:50%;pointer-events:none;animation:airDot 5s ease-in-out infinite}
+.ap1{width:10px;height:10px;top:15%;left:10%;background:rgba(124,92,252,.45);animation-delay:0s}
+.ap2{width:7px;height:7px;top:77%;left:16%;background:rgba(252,92,125,.5);animation-delay:.9s}
+.ap3{width:12px;height:12px;top:18%;right:12%;background:rgba(167,139,250,.55);animation-delay:1.6s}
+.ap4{width:7px;height:7px;top:73%;right:14%;background:rgba(124,92,252,.45);animation-delay:.45s}
+.ap5{width:9px;height:9px;top:50%;right:7%;background:rgba(252,92,125,.38);animation-delay:1.25s}
+.ap6{width:5px;height:5px;top:35%;left:6%;background:rgba(167,139,250,.6);animation-delay:2s}
+@keyframes airDot{
+  0%,100%{transform:translate(0,0);opacity:.4}
+  33%{transform:translate(10px,-15px);opacity:1}
+  66%{transform:translate(-7px,8px);opacity:.65}
+}
+/* Floating metric badges */
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.air-badge{
+  position:absolute;background:#fff;border-radius:16px;
+  box-shadow:0 10px 36px rgba(0,0,0,.13);
+  padding:11px 15px;display:flex;align-items:center;gap:11px;
+  white-space:nowrap;z-index:5;border:1px solid var(--border)
+}
+.airb1{top:-18px;left:-14px;animation:flt 3.6s ease-in-out infinite 0s}
+.airb2{bottom:28px;right:-16px;animation:flt 3.2s ease-in-out infinite 1.3s}
+.airb3{top:44%;left:-24px;animation:flt 3.8s ease-in-out infinite .7s}
+.airb-ico{font-size:24px;flex-shrink:0}
+.airb-t{font-size:13px;font-weight:800;color:var(--dark)}
+.airb-s{font-size:11px;color:var(--text);font-weight:600;margin-top:1px}
+
+/* ══════════════════════════════════════════════════
+   CLIENTS STRIP
+══════════════════════════════════════════════════ */
+.clients-sec{
+  padding:40px 0;background:#fff;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border)
+}
+.clients-label{
+  text-align:center;font-size:13px;font-weight:700;
+  color:var(--text);letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:28px
+}
+.clients-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:48px;flex-wrap:wrap
+}
+.client-logo{
+  font-size:18px;font-weight:800;color:#bbb;
+  letter-spacing:1px;transition:color .3s;
+  display:flex;align-items:center;gap:8px
+}
+.client-logo:hover{color:var(--primary)}
+.client-logo .icon{font-size:22px}
+
+/* ══════════════════════════════════════════════════
+   SERVICES
+══════════════════════════════════════════════════ */
+.services-sec{background:var(--light);padding:90px 0}
+.services-head{text-align:center;margin-bottom:60px}
+.services-head .sec-sub{margin:0 auto}
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px
+}
+.svc-card{
+  background:#fff;border-radius:var(--r);
+  padding:36px 28px;
+  border:1px solid var(--border);
+  transition:all .4s;position:relative;overflow:hidden;
+  cursor:default
+}
+.svc-card::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  transform:scaleX(0);transition:transform .4s;transform-origin:left
+}
+.svc-card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:transparent}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-icon{
+  width:64px;height:64px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;margin-bottom:22px;transition:transform .4s
+}
+.svc-card:hover .svc-icon{transform:scale(1.1)}
+.svc-card h3{font-size:20px;margin-bottom:12px;color:var(--dark)}
+.svc-card p{font-size:15px;color:var(--text);line-height:1.7}
+.svc-link{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--primary);font-size:14px;font-weight:700;
+  margin-top:16px;transition:gap .3s
+}
+.svc-card:hover .svc-link{gap:10px}
+
+/* ══════════════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════════════ */
+.about-sec{padding:90px 0;background:#fff}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.about-img-wrap{position:relative}
+.about-img{
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.1)
+}
+.about-img img{width:100%;height:420px;object-fit:cover}
+.about-badge{
+  position:absolute;bottom:28px;left:-24px;
+  background:#fff;border-radius:14px;
+  box-shadow:0 8px 32px rgba(0,0,0,.12);
+  padding:18px 24px;
+  display:flex;align-items:center;gap:14px;
+  border:1px solid var(--border)
+}
+.ab-icon{
+  width:52px;height:52px;border-radius:12px;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0
+}
+.ab-info .v{font-size:22px;font-weight:800;color:var(--dark)}
+.ab-info .l{font-size:13px;color:var(--text);font-weight:600}
+.about-content .sec-label{margin-bottom:14px}
+.about-content h2{margin-bottom:16px}
+.about-content p{margin-bottom:24px;line-height:1.8}
+.about-checks{margin-bottom:32px}
+.check-item{
+  display:flex;align-items:flex-start;gap:12px;
+  margin-bottom:14px;font-size:15px;color:var(--dark);font-weight:600
+}
+.check-icon{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:11px;margin-top:1px
+}
+
+/* ══════════════════════════════════════════════════
+   WHY CHOOSE US
+══════════════════════════════════════════════════ */
+.why-sec{padding:90px 0;background:var(--light)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.why-content .sec-label{margin-bottom:14px}
+.why-content h2{margin-bottom:16px}
+.why-content p{margin-bottom:32px}
+.prog-item{margin-bottom:22px}
+.prog-head{
+  display:flex;justify-content:space-between;
+  font-size:14px;font-weight:700;color:var(--dark);margin-bottom:8px
+}
+.prog-bar{height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;border-radius:4px;animation:progIn 1.4s ease .5s both}
+@keyframes progIn{from{width:0}}
+.pf1{background:linear-gradient(90deg,var(--primary),#a78bfa);width:92%}
+.pf2{background:linear-gradient(90deg,#fc5c7d,#f97316);width:85%}
+.pf3{background:linear-gradient(90deg,#06d6a0,#4cc9f0);width:78%}
+.pf4{background:linear-gradient(90deg,#ffc857,var(--primary));width:88%}
+.why-img-wrap{position:relative}
+.why-img{border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.1)}
+.why-img img{width:100%;height:460px;object-fit:cover}
+.why-float{
+  position:absolute;top:28px;right:-20px;
+  background:#fff;border-radius:14px;
+  box-shadow:0 8px 32px rgba(0,0,0,.12);
+  padding:16px 20px;border:1px solid var(--border);
+  animation:flt 3.5s ease-in-out infinite
+}
+.why-float .wf-num{font-size:28px;font-weight:800;color:var(--primary)}
+.why-float .wf-lbl{font-size:12px;color:var(--text);font-weight:600;margin-top:2px}
+
+/* ══════════════════════════════════════════════════
+   HOW IT WORKS
+══════════════════════════════════════════════════ */
+.how-sec{padding:90px 0;background:#fff}
+.how-head{text-align:center;margin-bottom:60px}
+.how-head .sec-sub{margin:0 auto}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+.how-grid::before{
+  content:'';position:absolute;top:44px;left:calc(16.67% + 20px);right:calc(16.67% + 20px);
+  height:2px;background:linear-gradient(90deg,var(--primary),var(--secondary));
+  opacity:.3
+}
+.how-step{text-align:center;padding:0 20px}
+.how-num{
+  width:88px;height:88px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;font-weight:800;color:#fff;
+  margin:0 auto 24px;position:relative;z-index:1;
+  box-shadow:0 12px 32px rgba(124,92,252,.35);
+  transition:transform .4s
+}
+.how-step:hover .how-num{transform:scale(1.1)}
+.how-step h3{font-size:20px;margin-bottom:12px}
+.how-step p{font-size:15px;line-height:1.7}
+
+/* ══════════════════════════════════════════════════
+   STATS
+══════════════════════════════════════════════════ */
+.stats-sec{
+  padding:80px 0;
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+  position:relative;overflow:hidden
+}
+.stats-sec::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:400px;height:400px;border-radius:50%;
+  background:rgba(255,255,255,.06);pointer-events:none
+}
+.stats-sec::after{
+  content:'';position:absolute;bottom:-60px;left:-60px;
+  width:300px;height:300px;border-radius:50%;
+  background:rgba(255,255,255,.04);pointer-events:none
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:24px;position:relative;z-index:1
+}
+.stat-box{
+  text-align:center;padding:32px 16px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);border-radius:var(--r);
+  transition:background .3s
+}
+.stat-box:hover{background:rgba(255,255,255,.14)}
+.stat-icon{font-size:36px;margin-bottom:12px}
+.stat-num{
+  font-size:44px;font-weight:800;color:#fff;
+  line-height:1
+}
+.stat-lbl{font-size:14px;color:rgba(255,255,255,.75);font-weight:600;margin-top:8px}
+
+/* ══════════════════════════════════════════════════
+   TEAM
+══════════════════════════════════════════════════ */
+.team-sec{padding:90px 0;background:var(--light)}
+.team-head{text-align:center;margin-bottom:60px}
+.team-head .sec-sub{margin:0 auto}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.team-card{
+  background:#fff;border-radius:var(--r);
+  overflow:hidden;border:1px solid var(--border);
+  transition:all .4s;text-align:center
+}
+.team-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.team-img{
+  width:100%;height:220px;overflow:hidden;position:relative
+}
+.team-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .5s
+}
+.team-card:hover .team-img img{transform:scale(1.07)}
+.team-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(transparent 50%,rgba(124,92,252,.8));
+  opacity:0;transition:opacity .4s;
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:20px
+}
+.team-card:hover .team-overlay{opacity:1}
+.team-socials{display:flex;gap:10px}
+.team-social{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.9);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--primary);
+  font-weight:700;transition:all .2s
+}
+.team-social:hover{background:#fff;transform:scale(1.1)}
+.team-info{padding:20px 16px}
+.team-name{font-size:17px;font-weight:800;color:var(--dark);margin-bottom:4px}
+.team-role{font-size:13px;color:var(--primary);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+
+/* ══════════════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════════════ */
+.testi-sec{padding:90px 0;background:#fff}
+.testi-head{text-align:center;margin-bottom:60px}
+.testi-head .sec-sub{margin:0 auto}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testi-card{
+  background:var(--light);border-radius:var(--r);
+  padding:36px;border:1px solid var(--border);
+  transition:all .4s;position:relative
+}
+.testi-card:hover{background:#fff;box-shadow:var(--shadow);transform:translateY(-6px)}
+.testi-quote{
+  font-size:48px;line-height:1;color:var(--primary);
+  font-family:Georgia,serif;margin-bottom:12px;opacity:.3
+}
+.testi-stars{display:flex;gap:4px;margin-bottom:14px}
+.testi-stars span{color:#fbbf24;font-size:16px}
+.testi-text{
+  font-size:15px;color:var(--text);line-height:1.8;
+  margin-bottom:24px;font-style:italic
+}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{
+  width:50px;height:50px;border-radius:50%;
+  overflow:hidden;border:3px solid #fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);flex-shrink:0
+}
+.testi-avatar img{width:100%;height:100%;object-fit:cover}
+.testi-name{font-size:15px;font-weight:800;color:var(--dark)}
+.testi-role{font-size:12px;color:var(--primary);font-weight:600}
+
+/* ══════════════════════════════════════════════════
+   PRICING
+══════════════════════════════════════════════════ */
+.pricing-sec{padding:90px 0;background:var(--light)}
+.pricing-head{text-align:center;margin-bottom:60px}
+.pricing-head .sec-sub{margin:0 auto}
+.pricing-toggle{
+  display:flex;align-items:center;justify-content:center;
+  gap:14px;margin-top:20px
+}
+.ptoggle-label{font-size:15px;font-weight:600;color:var(--text)}
+.ptoggle-badge{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;font-size:11px;font-weight:700;
+  padding:3px 10px;border-radius:20px;margin-left:6px
+}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pricing-card{
+  background:#fff;border-radius:var(--r);
+  padding:40px 32px;
+  border:1px solid var(--border);
+  transition:all .4s;position:relative
+}
+.pricing-card.popular{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  border-color:transparent;
+  box-shadow:0 24px 60px rgba(124,92,252,.35);
+  transform:scale(1.04)
+}
+.popular-badge{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--secondary),#f97316);
+  color:#fff;font-size:12px;font-weight:700;
+  padding:5px 18px;border-radius:20px;white-space:nowrap
+}
+.pricing-card:not(.popular):hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.plan-name{
+  font-size:13px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:16px
+}
+.pricing-card.popular .plan-name{color:rgba(255,255,255,.8)}
+.pricing-card:not(.popular) .plan-name{color:var(--primary)}
+.plan-price{display:flex;align-items:baseline;gap:4px;margin-bottom:8px}
+.price-curr{font-size:22px;font-weight:800;color:var(--dark)}
+.price-amt{font-size:52px;font-weight:800;color:var(--dark);line-height:1}
+.price-per{font-size:15px;color:var(--text);font-weight:600}
+.pricing-card.popular .price-curr,
+.pricing-card.popular .price-amt,
+.pricing-card.popular .price-per{color:#fff}
+.plan-desc{font-size:14px;color:var(--text);margin-bottom:28px;line-height:1.6}
+.pricing-card.popular .plan-desc{color:rgba(255,255,255,.75)}
+.plan-divider{height:1px;background:var(--border);margin-bottom:24px}
+.pricing-card.popular .plan-divider{background:rgba(255,255,255,.2)}
+.plan-features{margin-bottom:32px}
+.plan-feature{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:12px;font-size:14px;font-weight:600
+}
+.pricing-card.popular .plan-feature{color:rgba(255,255,255,.9)}
+.pricing-card:not(.popular) .plan-feature{color:var(--dark)}
+.feat-check{
+  width:18px;height:18px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:10px
+}
+.pricing-card:not(.popular) .feat-check{background:var(--primary-light);color:var(--primary)}
+.pricing-card.popular .feat-check{background:rgba(255,255,255,.2);color:#fff}
+.feat-x{opacity:.4}
+
+/* ══════════════════════════════════════════════════
+   CTA SECTION
+══════════════════════════════════════════════════ */
+.cta-sec{
+  padding:90px 20px;text-align:center;
+  background:linear-gradient(135deg,#f8f7ff,#fff);
+  position:relative;overflow:hidden
+}
+.cta-sec::before{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:800px;height:400px;
+  background:radial-gradient(ellipse,rgba(124,92,252,.08),transparent 65%);
+  pointer-events:none
+}
+.cta-card{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  border-radius:24px;padding:72px 48px;
+  position:relative;overflow:hidden;
+  max-width:900px;margin:0 auto
+}
+.cta-card::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:300px;height:300px;border-radius:50%;
+  background:rgba(255,255,255,.07);pointer-events:none
+}
+.cta-card h2{color:#fff;font-size:clamp(28px,4vw,44px);margin-bottom:14px}
+.cta-card p{color:rgba(255,255,255,.8);font-size:17px;max-width:540px;margin:0 auto 36px;line-height:1.75}
+.cta-form{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+  max-width:500px;margin:0 auto
+}
+.cta-input{
+  flex:1;min-width:220px;padding:15px 22px;border-radius:50px;
+  border:none;font-size:15px;font-family:'Nunito',sans-serif;
+  outline:none;color:var(--dark)
+}
+.cta-input::placeholder{color:#94a3b8}
+
+/* ══════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════ */
+footer{background:#0f172a;color:#94a3b8}
+.footer-top{
+  padding:72px 0 48px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px
+}
+.f-logo{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px
+}
+.f-logo svg{width:40px;height:40px;flex-shrink:0}
+.f-logo .logo-name{color:#fff}
+.f-logo .logo-tag{color:#94a3b8}
+.f-desc{font-size:14px;line-height:1.8;margin-bottom:24px;color:#475569}
+.f-social{display:flex;gap:10px}
+.f-soc{
+  width:38px;height:38px;border-radius:10px;
+  border:1px solid #1e293b;background:rgba(255,255,255,.04);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:#475569;
+  transition:all .25s
+}
+.f-soc:hover{border-color:var(--primary);color:var(--primary);background:rgba(124,92,252,.1)}
+.f-col h5{
+  font-size:14px;font-weight:800;text-transform:uppercase;
+  letter-spacing:1.5px;color:#fff;
+  margin-bottom:20px;padding-bottom:12px;
+  border-bottom:1px solid #1e293b
+}
+.f-col ul li{margin-bottom:10px}
+.f-col ul li a{
+  font-size:14px;color:#475569;transition:color .2s;
+  display:flex;align-items:center;gap:6px
+}
+.f-col ul li a::before{content:'›';color:var(--primary)}
+.f-col ul li a:hover{color:var(--primary)}
+.footer-bot{
+  padding:20px 0;
+  border-top:1px solid #1e293b;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px
+}
+.f-copy{font-size:13px;color:#334155}
+.f-bot-links{display:flex;gap:24px}
+.f-bot-links a{font-size:13px;color:#334155;transition:color .2s}
+.f-bot-links a:hover{color:var(--primary)}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════ */
+
+/* ── Tablet (max 1024px) ─── */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:48px;text-align:center}
+  .hero-p{margin-left:auto;margin-right:auto}
+  .hero-btns{justify-content:center}
+  .hero-trust{justify-content:center}
+  .ai-img-scene{max-width:520px;margin:0 auto}
+  .airb1,.airb3{display:none}
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  .about-badge{left:50%;transform:translateX(-50%)}
+  .why-grid{grid-template-columns:1fr;gap:48px}
+  .why-grid .why-content{order:2}
+  .why-grid .why-img-wrap{order:1}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .testi-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr;gap:36px}
+  .pricing-grid{grid-template-columns:1fr}
+  .pricing-card.popular{transform:scale(1)}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ── Mobile (max 768px) ─── */
+@media(max-width:768px){
+  .navbar{padding:0}
+  .nav-menu,.nav-actions{display:none}
+  .ham{display:flex}
+  .hero{padding:100px 0 60px}
+  .sec-pad,.services-sec,.about-sec,.why-sec,.how-sec,.stats-sec,.team-sec,.testi-sec,.pricing-sec,.cta-sec{padding:60px 0}
+  .services-grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr;gap:36px}
+  .how-grid::before{display:none}
+  .testi-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bot{flex-direction:column;text-align:center}
+  .clients-row{gap:28px}
+  .cta-card{padding:48px 24px}
+  h2{font-size:28px}
+  .hb2,.hb3{display:none}
+  .about-badge{position:relative;left:auto;transform:none;margin-top:20px;display:inline-flex}
+}
+
+/* ── Small mobile (max 480px) ─── */
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;align-items:center}
+  .hero-btns .btn{width:100%;justify-content:center}
+  .team-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .card-metrics{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="/" class="logo">
-    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="36" height="36" rx="10" fill="url(#logoGrad)"/>
-      <path d="M10 18l6 6 10-12" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <defs>
-        <linearGradient id="logoGrad" x1="0" y1="0" x2="36" y2="36">
-          <stop stop-color="#6366f1"/>
-          <stop offset="1" stop-color="#8b5cf6"/>
-        </linearGradient>
-      </defs>
-    </svg>
-    <span>SentimentAI CRM</span>
-  </a>
-  <a href="/crm" class="nav-btn">Login</a>
+<!-- ══════ NAVBAR ══════════════════════════════════ -->
+<nav class="navbar" id="nb">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <span class="logo-mark">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="44" height="44" rx="12" fill="url(#nav-lg)"/>
+            <rect x="1.5" y="1.5" width="41" height="41" rx="10.5" stroke="white" stroke-opacity="0.1" stroke-width="1"/>
+            <path d="M11 8H31Q33 8 33 10V22Q33 24 31 24H20L14 30V24H11Q9 24 9 22V10Q9 8 11 8Z" fill="white" fill-opacity="0.18"/>
+            <polyline points="10.5,17 13.5,17 15,12 17,22 19,14 21,17 31.5,17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="37" y1="6.5" x2="37" y2="11.5" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+            <line x1="34.5" y1="9" x2="39.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+            <line x1="35.6" y1="7.1" x2="38.4" y2="10.9" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.55"/>
+            <line x1="38.4" y1="7.1" x2="35.6" y2="10.9" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.55"/>
+            <defs><linearGradient id="nav-lg" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#b197fc"/><stop offset="100%" stop-color="#4c2cbf"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text">
+          <span class="logo-name">Sentiment<span class="logo-ai">AI</span></span>
+          <span class="logo-tag">CRM Platform</span>
+        </span>
+      </a>
+      <nav class="nav-menu">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#how">How It Works</a>
+        <a href="#team">Team</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="http://localhost:8002/login" class="nav-login">Sign In</a>
+        <a href="/mslogin" class="nav-ms">
+          <svg width="15" height="15" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#f25022" d="M0 0h10v10H0z"/>
+            <path fill="#7fba00" d="M11 0h10v10H11z"/>
+            <path fill="#00a4ef" d="M0 11h10v10H0z"/>
+            <path fill="#ffb900" d="M11 11h10v10H11z"/>
+          </svg>
+          Sign up with Microsoft
+        </a>
+      </div>
+      <button class="ham" id="ham" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
 </nav>
 
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mob">
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="#how">How It Works</a>
+  <a href="#team">Team</a>
+  <a href="#pricing">Pricing</a>
+  <a href="http://localhost:8002/login">Sign In</a>
+  <a href="/mslogin" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#0078d4;color:#fff;border-radius:50px;padding:10px 20px;font-weight:700;font-size:14px;margin-top:4px">
+    <svg width="15" height="15" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"><path fill="#f25022" d="M0 0h10v10H0z"/><path fill="#7fba00" d="M11 0h10v10H11z"/><path fill="#00a4ef" d="M0 11h10v10H0z"/><path fill="#ffb900" d="M11 11h10v10H11z"/></svg>
+    Sign up with Microsoft
+  </a>
+</div>
+
+<!-- ══════ HERO ══════════════════════════════════════ -->
 <section class="hero">
-  <span class="badge">&#x2728; AI-Powered CRM Platform</span>
-  <h1>Build Stronger Customer<br>Relationships with AI</h1>
-  <p>SentimentAI CRM helps your team manage leads, track conversations, and close deals faster — powered by intelligent automation and real-time insights.</p>
-  <div class="hero-btns">
-    <a href="/crm" class="btn-primary">Get Started Free</a>
-    <a href="/crm" class="btn-secondary">Sign In &rarr;</a>
-  </div>
-  <div class="stats">
-    <div class="stat"><h3>10x</h3><p>Faster Lead Management</p></div>
-    <div class="stat"><h3>360&deg;</h3><p>Customer View</p></div>
-    <div class="stat"><h3>99.9%</h3><p>Uptime Guaranteed</p></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left rv">
+        <div class="hero-label"><span class="dot"></span> AI-Powered CRM Platform</div>
+        <h1>Grow Your Business with <span class="grad-text">Intelligent AI</span></h1>
+        <div class="type-line">
+          <span id="typed"></span><span class="type-cursor"></span>
+        </div>
+        <p class="hero-p">SentimentAI CRM empowers your sales team with smart lead management, real-time analytics, and seamless communication — all from one AI-powered workspace.</p>
+        <div class="hero-btns">
+          <a href="http://localhost:8002/login" class="btn btn-primary">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Get Started Free
+          </a>
+          <a href="/mslogin" class="btn btn-ms">
+            <svg width="18" height="18" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#f25022" d="M0 0h10v10H0z"/>
+              <path fill="#7fba00" d="M11 0h10v10H11z"/>
+              <path fill="#00a4ef" d="M0 11h10v10H0z"/>
+              <path fill="#ffb900" d="M11 11h10v10H11z"/>
+            </svg>
+            Sign up with Microsoft
+          </a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-imgs">
+            <div class="trust-img"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&q=80" alt="user"/></div>
+            <div class="trust-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&q=80" alt="user"/></div>
+            <div class="trust-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&q=80" alt="user"/></div>
+            <div class="trust-img"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&q=80" alt="user"/></div>
+          </div>
+          <div class="trust-text"><strong>500+ Teams</strong> already trust SentimentAI</div>
+        </div>
+      </div>
+
+      <div class="hero-right rr">
+        <div class="ai-img-scene">
+
+          <!-- Decorative rings -->
+          <div class="air-ring air-r1"></div>
+          <div class="air-ring air-r2"></div>
+          <div class="air-ring air-r3"></div>
+
+          <!-- Floating particles -->
+          <i class="air-pt ap1"></i>
+          <i class="air-pt ap2"></i>
+          <i class="air-pt ap3"></i>
+          <i class="air-pt ap4"></i>
+          <i class="air-pt ap5"></i>
+          <i class="air-pt ap6"></i>
+
+          <!-- AI Robot image -->
+          <img src="images/AI.png" alt="SentimentAI Robot" class="ai-robot"/>
+
+          <!-- Typing chat bubble -->
+          <div class="air-chat">
+            <div class="air-typing">
+              <span></span><span></span><span></span>
+            </div>
+            Analyzing customer sentiment...
+          </div>
+
+          <!-- Floating metric badges -->
+          <div class="air-badge airb1">
+            <span class="airb-ico">🧠</span>
+            <div>
+              <div class="airb-t">AI Sentiment</div>
+              <div class="airb-s">94% Positive ✨</div>
+            </div>
+          </div>
+
+          <div class="air-badge airb2">
+            <span class="airb-ico">🏆</span>
+            <div>
+              <div class="airb-t">Deal Closed!</div>
+              <div class="airb-s">₹6.1L · Enterprise</div>
+            </div>
+          </div>
+
+          <div class="air-badge airb3">
+            <span class="airb-ico">⚡</span>
+            <div>
+              <div class="airb-t">47 Hot Leads</div>
+              <div class="airb-s">AI Scored Today</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="features">
-  <p class="section-label">Features</p>
-  <h2 class="section-title">Everything you need to grow</h2>
-  <p class="section-sub">A complete CRM toolkit built for modern sales teams</p>
-  <div class="cards">
-    <div class="card">
-      <div class="card-icon" style="background:rgba(99,102,241,0.15)">&#128202;</div>
-      <h3>Smart Pipeline</h3>
-      <p>Visualise your entire sales pipeline at a glance. Drag-and-drop deals through stages and never miss a follow-up.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon" style="background:rgba(16,185,129,0.15)">&#129309;</div>
-      <h3>Lead Management</h3>
-      <p>Capture, qualify, and nurture leads automatically. AI scoring helps your team focus on the highest-value opportunities.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon" style="background:rgba(245,158,11,0.15)">&#128231;</div>
-      <h3>Communication Hub</h3>
-      <p>Email, calls, and WhatsApp — all in one place. Every interaction is logged automatically with full context.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon" style="background:rgba(239,68,68,0.15)">&#128200;</div>
-      <h3>Analytics &amp; Reports</h3>
-      <p>Real-time dashboards and custom reports give you the insights needed to make data-driven decisions.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon" style="background:rgba(99,102,241,0.15)">&#128276;</div>
-      <h3>Task Automation</h3>
-      <p>Automate repetitive tasks, reminders, and follow-ups so your team can focus on building relationships.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon" style="background:rgba(139,92,246,0.15)">&#128274;</div>
-      <h3>Secure &amp; Reliable</h3>
-      <p>Enterprise-grade security with role-based access control, audit logs, and 99.9% uptime SLA.</p>
+<!-- ══════ CLIENTS ══════════════════════════════════ -->
+<section class="clients-sec">
+  <div class="container">
+    <p class="clients-label">Trusted by leading companies worldwide</p>
+    <div class="clients-row">
+      <div class="client-logo"><span class="icon">🔷</span> TechVentures</div>
+      <div class="client-logo"><span class="icon">🟢</span> GrowthCo</div>
+      <div class="client-logo"><span class="icon">🔵</span> Nexus Labs</div>
+      <div class="client-logo"><span class="icon">🟣</span> DataSync</div>
+      <div class="client-logo"><span class="icon">🟠</span> InnovateCo</div>
+      <div class="client-logo"><span class="icon">🔴</span> ScaleUp</div>
     </div>
   </div>
 </section>
 
-<section class="cta-section">
-  <h2>Ready to get started?</h2>
-  <p>Join your team on SentimentAI CRM and start closing more deals today.</p>
-  <a href="/crm" class="btn-primary">Open CRM Dashboard &rarr;</a>
+<!-- ══════ SERVICES ═════════════════════════════════ -->
+<section class="services-sec" id="services">
+  <div class="container">
+    <div class="services-head rv">
+      <div class="sec-label">Our Services</div>
+      <h2 class="sec-title">Everything You Need to <span class="grad-text">Scale</span></h2>
+      <p class="sec-sub mx-auto">A complete AI-powered CRM toolkit built for modern sales teams who want to move fast and close more deals.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card rv d1">
+        <div class="svc-icon" style="background:#ece8ff">🧠</div>
+        <h3>AI Lead Scoring</h3>
+        <p>Automatically rank and prioritise leads with machine learning models trained on your historical data.</p>
+        <div class="svc-link">Learn More <span>→</span></div>
+      </div>
+      <div class="svc-card rv d2">
+        <div class="svc-icon" style="background:#fce8ef">📊</div>
+        <h3>Sales Analytics</h3>
+        <p>Real-time dashboards and predictive reports to guide your team toward smarter, faster decisions.</p>
+        <div class="svc-link">Learn More <span>→</span></div>
+      </div>
+      <div class="svc-card rv d3">
+        <div class="svc-icon" style="background:#e8f5ff">💬</div>
+        <h3>Omnichannel Hub</h3>
+        <p>Email, calls, and WhatsApp in one place — every conversation logged automatically with full context.</p>
+        <div class="svc-link">Learn More <span>→</span></div>
+      </div>
+      <div class="svc-card rv d4">
+        <div class="svc-icon" style="background:#e8fff5">⚡</div>
+        <h3>Workflow Automation</h3>
+        <p>Automate repetitive tasks, reminders, and follow-ups so your team focuses on building relationships.</p>
+        <div class="svc-link">Learn More <span>→</span></div>
+      </div>
+      <div class="svc-card rv d5">
+        <div class="svc-icon" style="background:#fff8e8">📈</div>
+        <h3>Pipeline Management</h3>
+        <p>Visualise your entire sales funnel. Drag-and-drop deals through custom stages with Kanban boards.</p>
+        <div class="svc-link">Learn More <span>→</span></div>
+      </div>
+      <div class="svc-card rv d6">
+        <div class="svc-icon" style="background:#f0e8ff">🔐</div>
+        <h3>Enterprise Security</h3>
+        <p>Role-based access control, audit logs, and 99.9% uptime SLA to protect your business-critical data.</p>
+        <div class="svc-link">Learn More <span>→</span></div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- ══════ ABOUT ═════════════════════════════════════ -->
+<section class="about-sec" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap rl">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&h=500&fit=crop&q=80" alt="Team working together"/>
+        </div>
+        <div class="about-badge">
+          <div class="ab-icon">🚀</div>
+          <div class="ab-info">
+            <div class="v">500+</div>
+            <div class="l">Projects Delivered</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-content rr">
+        <div class="sec-label">Who We Are</div>
+        <h2>Transforming Sales with <span class="grad-text">Artificial Intelligence</span></h2>
+        <p>SentimentAI CRM was built by a team of data scientists and sales engineers who were tired of CRMs that didn't learn. We combine cutting-edge machine learning with an intuitive interface that your team will actually use.</p>
+        <p>From startups to enterprise — we help teams manage leads, predict outcomes, and close more deals, faster.</p>
+        <div class="about-checks">
+          <div class="check-item"><div class="check-icon">✓</div> AI-powered lead scoring and prioritisation</div>
+          <div class="check-item"><div class="check-icon">✓</div> Real-time analytics and custom dashboards</div>
+          <div class="check-item"><div class="check-icon">✓</div> Seamless Microsoft sign-in — no IT setup needed</div>
+          <div class="check-item"><div class="check-icon">✓</div> Enterprise-grade security with 99.9% uptime</div>
+        </div>
+        <a href="http://localhost:8002/login" class="btn btn-primary">Explore the Platform</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ WHY CHOOSE US ═════════════════════════════ -->
+<section class="why-sec">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-content rl">
+        <div class="sec-label">Why Choose Us</div>
+        <h2>Built for <span class="grad-text">High-Performance</span> Sales Teams</h2>
+        <p>Our AI engine learns from every interaction, constantly improving predictions so your team always knows which leads to call next, and when.</p>
+        <div class="progress-list">
+          <div class="prog-item">
+            <div class="prog-head"><span>Lead Conversion Rate</span><span>92%</span></div>
+            <div class="prog-bar"><div class="prog-fill pf1"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-head"><span>Customer Satisfaction</span><span>85%</span></div>
+            <div class="prog-bar"><div class="prog-fill pf2"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-head"><span>Pipeline Accuracy</span><span>78%</span></div>
+            <div class="prog-bar"><div class="prog-fill pf3"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-head"><span>Team Productivity</span><span>88%</span></div>
+            <div class="prog-bar"><div class="prog-fill pf4"></div></div>
+          </div>
+        </div>
+        <a href="http://localhost:8002/login" class="btn btn-primary" style="margin-top:28px">Get Started Free</a>
+      </div>
+      <div class="why-img-wrap rr">
+        <div class="why-img">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&h=520&fit=crop&q=80" alt="Data analytics"/>
+        </div>
+        <div class="why-float">
+          <div class="wf-num">3x</div>
+          <div class="wf-lbl">Revenue Growth</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ HOW IT WORKS ═════════════════════════════ -->
+<section class="how-sec" id="how">
+  <div class="container">
+    <div class="how-head rv">
+      <div class="sec-label">Simple Process</div>
+      <h2 class="sec-title">Up &amp; Running in <span class="grad-text">Minutes</span></h2>
+      <p class="sec-sub mx-auto">No complex configuration. No IT team required. Your team starts managing customer relationships from day one.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step rv d1">
+        <div class="how-num">1</div>
+        <h3>Sign In with Microsoft</h3>
+        <p>Use your existing Microsoft or work account — no separate registration or email verification needed. Instant access.</p>
+      </div>
+      <div class="how-step rv d2">
+        <div class="how-num">2</div>
+        <h3>Import Your Data</h3>
+        <p>Bring in leads, deals, and contacts from spreadsheets or other CRM tools. Our AI immediately starts learning patterns.</p>
+      </div>
+      <div class="how-step rv d3">
+        <div class="how-num">3</div>
+        <h3>Close More Deals</h3>
+        <p>AI predictions guide your team to the hottest leads. Track, nurture, and close deals from one unified workspace.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ STATS ═════════════════════════════════════ -->
+<section class="stats-sec">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-box rv d1">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-num" data-count="500" data-suffix="+">0</div>
+        <div class="stat-lbl">Projects Completed</div>
+      </div>
+      <div class="stat-box rv d2">
+        <div class="stat-icon">😊</div>
+        <div class="stat-num" data-count="120" data-suffix="+">0</div>
+        <div class="stat-lbl">Happy Clients</div>
+      </div>
+      <div class="stat-box rv d3">
+        <div class="stat-icon">👥</div>
+        <div class="stat-num" data-count="50" data-suffix="+">0</div>
+        <div class="stat-lbl">Team Members</div>
+      </div>
+      <div class="stat-box rv d4">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-num" data-count="15" data-suffix="+">0</div>
+        <div class="stat-lbl">Years Experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ TEAM ══════════════════════════════════════ -->
+<section class="team-sec" id="team">
+  <div class="container">
+    <div class="team-head rv">
+      <div class="sec-label">Our Team</div>
+      <h2 class="sec-title">Meet the <span class="grad-text">Brilliant Minds</span> Behind SentimentAI</h2>
+      <p class="sec-sub mx-auto">Our team of AI researchers, data engineers, and sales technology experts is obsessed with building the best CRM in the world.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card rv d1">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=300&fit=crop&q=80" alt="Arjun Kumar"/>
+          <div class="team-overlay">
+            <div class="team-socials">
+              <a href="#" class="team-social">in</a>
+              <a href="#" class="team-social">tw</a>
+              <a href="#" class="team-social">gh</a>
+            </div>
+          </div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Arjun Kumar</div>
+          <div class="team-role">CEO &amp; Co-Founder</div>
+        </div>
+      </div>
+      <div class="team-card rv d2">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=300&fit=crop&q=80" alt="Sarah Rahman"/>
+          <div class="team-overlay">
+            <div class="team-socials">
+              <a href="#" class="team-social">in</a>
+              <a href="#" class="team-social">tw</a>
+              <a href="#" class="team-social">gh</a>
+            </div>
+          </div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Sarah Rahman</div>
+          <div class="team-role">Head of AI Research</div>
+        </div>
+      </div>
+      <div class="team-card rv d3">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=300&fit=crop&q=80" alt="Marcus Patel"/>
+          <div class="team-overlay">
+            <div class="team-socials">
+              <a href="#" class="team-social">in</a>
+              <a href="#" class="team-social">tw</a>
+              <a href="#" class="team-social">gh</a>
+            </div>
+          </div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Marcus Patel</div>
+          <div class="team-role">CTO &amp; Lead Engineer</div>
+        </div>
+      </div>
+      <div class="team-card rv d4">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=300&fit=crop&q=80" alt="Priya Sharma"/>
+          <div class="team-overlay">
+            <div class="team-socials">
+              <a href="#" class="team-social">in</a>
+              <a href="#" class="team-social">tw</a>
+              <a href="#" class="team-social">gh</a>
+            </div>
+          </div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Priya Sharma</div>
+          <div class="team-role">VP of Product Design</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ TESTIMONIALS ══════════════════════════════ -->
+<section class="testi-sec" id="testimonials">
+  <div class="container">
+    <div class="testi-head rv">
+      <div class="sec-label">Testimonials</div>
+      <h2 class="sec-title">What Our <span class="grad-text">Clients Say</span></h2>
+      <p class="sec-sub mx-auto">Don't just take our word for it — hear from the sales leaders who've transformed their teams with SentimentAI CRM.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card rv d1">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">SentimentAI CRM completely transformed how our sales team operates. The AI lead scoring is incredibly accurate and our close rate jumped 40% in the very first month of using it.</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80" alt="reviewer"/></div>
+          <div>
+            <div class="testi-name">Vikram Nair</div>
+            <div class="testi-role">Sales Director · TechVentures India</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rv d2">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">The Microsoft sign-in saved us weeks of onboarding time. Every team member was up and running on day one — zero IT involvement, zero friction. Absolutely brilliant.</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&q=80" alt="reviewer"/></div>
+          <div>
+            <div class="testi-name">Ananya Singh</div>
+            <div class="testi-role">Head of Operations · GrowthCo</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rv d3">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">Having emails, calls, and WhatsApp all in one place is a genuine game-changer. No more context-switching between five apps. Our team loves the unified communication view.</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80" alt="reviewer"/></div>
+          <div>
+            <div class="testi-name">Rohan Mehta</div>
+            <div class="testi-role">CEO · Nexus Solutions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PRICING ═══════════════════════════════════ -->
+<section class="pricing-sec" id="pricing">
+  <div class="container">
+    <div class="pricing-head rv">
+      <div class="sec-label">Pricing Plans</div>
+      <h2 class="sec-title">Simple, <span class="grad-text">Transparent</span> Pricing</h2>
+      <p class="sec-sub mx-auto">Choose the plan that fits your team. All plans include a 14-day free trial — no credit card required.</p>
+      <div class="pricing-toggle">
+        <span class="ptoggle-label">Monthly</span>
+        <span class="ptoggle-label">Annual <span class="ptoggle-badge">Save 30%</span></span>
+      </div>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="pricing-card rv d1">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">
+          <span class="price-curr">₹</span>
+          <span class="price-amt">999</span>
+          <span class="price-per">/mo</span>
+        </div>
+        <p class="plan-desc">Perfect for small teams getting started with AI-powered CRM.</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="feat-check">✓</span> Up to 5 team members</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> 1,000 contacts</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> Basic AI lead scoring</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> Email integration</li>
+          <li class="plan-feature"><span class="feat-check feat-x">✓</span> <span style="opacity:.4">WhatsApp integration</span></li>
+          <li class="plan-feature"><span class="feat-check feat-x">✓</span> <span style="opacity:.4">Advanced analytics</span></li>
+        </ul>
+        <a href="http://localhost:8002/login" class="btn btn-outline" style="width:100%;justify-content:center">Get Started</a>
+      </div>
+      <!-- Professional -->
+      <div class="pricing-card popular rv d2">
+        <div class="popular-badge">⭐ Most Popular</div>
+        <div class="plan-name">Professional</div>
+        <div class="plan-price">
+          <span class="price-curr">₹</span>
+          <span class="price-amt">2,499</span>
+          <span class="price-per">/mo</span>
+        </div>
+        <p class="plan-desc">For growing teams that need the full power of AI-driven sales.</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="feat-check">✓</span> Up to 25 team members</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> Unlimited contacts</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> Advanced AI lead scoring</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> All channel integrations</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> WhatsApp + Calls hub</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> Custom dashboards</li>
+        </ul>
+        <a href="http://localhost:8002/login" class="btn btn-white" style="width:100%;justify-content:center">Start Free Trial</a>
+      </div>
+      <!-- Enterprise -->
+      <div class="pricing-card rv d3">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price">
+          <span class="price-curr">₹</span>
+          <span class="price-amt">5,999</span>
+          <span class="price-per">/mo</span>
+        </div>
+        <p class="plan-desc">Full-scale AI CRM for large organisations with custom needs.</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="feat-check">✓</span> Unlimited team members</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> Unlimited contacts</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> Custom AI models</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> All integrations + API</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> Dedicated support</li>
+          <li class="plan-feature"><span class="feat-check">✓</span> SLA &amp; compliance</li>
+        </ul>
+        <a href="http://localhost:8002/login" class="btn btn-outline" style="width:100%;justify-content:center">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CTA ════════════════════════════════════════ -->
+<section class="cta-sec">
+  <div class="container">
+    <div class="cta-card rv">
+      <h2>Ready to Transform Your Sales?</h2>
+      <p>Join 500+ teams using SentimentAI CRM. Start your 14-day free trial today — no credit card required.</p>
+      <div class="cta-form">
+        <input type="email" class="cta-input" placeholder="Enter your work email..."/>
+        <a href="http://localhost:8002/login" class="btn btn-white">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Get Started
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ════════════════════════════════════ -->
 <footer>
-  &copy; 2026 SentimentAI CRM &nbsp;&middot;&nbsp; Built on Frappe CRM &nbsp;&middot;&nbsp; <a href="/crm">Login</a>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="f-logo">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="44" height="44" rx="12" fill="url(#foot-lg)"/>
+            <rect x="1.5" y="1.5" width="41" height="41" rx="10.5" stroke="white" stroke-opacity="0.1" stroke-width="1"/>
+            <path d="M11 8H31Q33 8 33 10V22Q33 24 31 24H20L14 30V24H11Q9 24 9 22V10Q9 8 11 8Z" fill="white" fill-opacity="0.18"/>
+            <polyline points="10.5,17 13.5,17 15,12 17,22 19,14 21,17 31.5,17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="37" y1="6.5" x2="37" y2="11.5" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+            <line x1="34.5" y1="9" x2="39.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+            <line x1="35.6" y1="7.1" x2="38.4" y2="10.9" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.55"/>
+            <line x1="38.4" y1="7.1" x2="35.6" y2="10.9" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.55"/>
+            <defs><linearGradient id="foot-lg" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#b197fc"/><stop offset="100%" stop-color="#4c2cbf"/></linearGradient></defs>
+          </svg>
+          <span class="logo-text">
+            <span class="logo-name">Sentiment<span class="logo-ai">AI</span></span>
+            <span class="logo-tag">CRM Platform</span>
+          </span>
+        </div>
+        <p class="f-desc">AI-powered CRM platform helping modern sales teams manage leads, track conversations, and close deals faster with intelligent automation.</p>
+        <div class="f-social">
+          <a href="#" class="f-soc">in</a>
+          <a href="#" class="f-soc">tw</a>
+          <a href="#" class="f-soc">gh</a>
+          <a href="#" class="f-soc">yt</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#services">Features</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="http://localhost:8002/login">Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">📧 hello@sentimentai.com</a></li>
+          <li><a href="#">📞 +91 98765 43210</a></li>
+          <li><a href="#">📍 Bengaluru, India</a></li>
+          <li><a href="http://localhost:8002/login">🔐 Login</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span class="f-copy">&copy; 2026 SentimentAI CRM. All rights reserved.</span>
+      <div class="f-bot-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
+<script>
+/* ── Navbar ────────────────────────────────────────── */
+addEventListener('scroll',function(){
+  document.getElementById('nb').classList.toggle('scrolled',scrollY>60);
+});
+
+/* ── Hamburger menu ─────────────────────────────────── */
+var ham=document.getElementById('ham'),mob=document.getElementById('mob');
+ham.addEventListener('click',function(){
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+});
+mob.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click',function(){
+    ham.classList.remove('open');mob.classList.remove('open');
+  });
+});
+
+/* ── Typing animation ───────────────────────────────── */
+(function(){
+  var words=['Smart Lead Management','Real-Time AI Insights','Seamless Collaboration','Predictive Analytics'],i=0,j=0,del=false;
+  var el=document.getElementById('typed');
+  if(!el)return;
+  function tick(){
+    var w=words[i];
+    if(!del){
+      el.textContent=w.slice(0,j+1);j++;
+      if(j===w.length){del=true;setTimeout(tick,1800);return;}
+    }else{
+      el.textContent=w.slice(0,j-1);j--;
+      if(j===0){del=false;i=(i+1)%words.length;}
+    }
+    setTimeout(tick,del?60:90);
+  }
+  tick();
+})();
+
+/* ── Scroll reveal ──────────────────────────────────── */
+(function(){
+  var io=new IntersectionObserver(function(e){
+    e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('on');});
+  },{threshold:.1});
+  document.querySelectorAll('.rv,.rl,.rr').forEach(function(el){io.observe(el);});
+})();
+
+/* ── Counter animation ──────────────────────────────── */
+(function(){
+  var io=new IntersectionObserver(function(e){
+    e.forEach(function(en){
+      if(!en.isIntersecting)return;
+      var el=en.target,target=+el.dataset.count,suf=el.dataset.suffix||'',t0=null;
+      requestAnimationFrame(function step(ts){
+        if(!t0)t0=ts;
+        var p=Math.min((ts-t0)/1800,1),ease=1-Math.pow(1-p,3);
+        el.textContent=Math.floor(ease*target)+suf;
+        if(p<1)requestAnimationFrame(step);
+      });
+      io.unobserve(el);
+    });
+  },{threshold:.5});
+  document.querySelectorAll('[data-count]').forEach(function(el){io.observe(el);});
+})();
+
+/* ── Smooth scroll for nav links ─────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var id=this.getAttribute('href').slice(1);
+    var el=document.getElementById(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+</script>
 </body>
 </html>

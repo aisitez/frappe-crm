@@ -15,7 +15,7 @@ def get_context():
 	from crm.api import check_app_permission
 
 	if frappe.session.user == "Guest":
-		frappe.local.flags.redirect_location = "/signup"
+		frappe.local.flags.redirect_location = "/login#signup"
 		raise frappe.Redirect
 
 	if not check_app_permission():

@@ -1,10 +1,10 @@
 <div align="center" markdown="1">
 
 <a href="https://frappe.io/products/crm">
-    <img src=".github/logo.svg" height="80" alt="Frappe CRM Logo">
+    <img src=".github/logo.svg" height="80" alt="sentimentzai CRM Logo">
 </a>
 
-<h1>Frappe CRM</h1>
+<h1>sentimentzai  CRM</h1>
 
 **Simplify Sales, Amplify Relationships**
 
@@ -13,7 +13,7 @@
 <div>
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset=".github/screenshots/FrappeCRMHeroImage.png">
-        <img width="1402" alt="Frappe CRM Hero Image" src=".github/screenshots/FrappeCRMHeroImage.png">
+        <img width="1402" alt="sentimentzai CRM Hero Image" src=".github/screenshots/FrappeCRMHeroImage.png">
     </picture>
 </div>
 
@@ -21,13 +21,13 @@
 
 </div>
 
-## Frappe CRM
+## sentimentzai CRM
 
-Frappe CRM is a simple, affordable, open-source CRM tool designed for modern sales teams with unlimited users. Frappe CRM is crafted for providing a great user experience, packed with features for core CRM activities helping you build strong customer relationships while keeping things clean and organised.
+sentimentzai CRM is a simple, affordable, open-source CRM tool designed for modern sales teams with unlimited users. sentimentzai CRM is crafted for providing a great user experience, packed with features for core CRM activities helping you build strong customer relationships while keeping things clean and organised.
 
 ### Motivation
 
-The motivation behind building Frappe CRM stems from the need for a simple, customizable, and open-source solution tailored to modern business needs. Many existing CRMs are either too complex, overly generic, or locked behind steep pricing models that hinder accessibility and flexibility. Frappe CRM was designed to bridge this gap, offering a tool that empowers businesses to manage their customer relationships seamlessly while being easy to adapt to specific workflows. Built on the Frappe framework, it prioritizes usability, extensibility, and affordability, making it an ideal choice for growing teams and organizations looking for a CRM that aligns with their unique processes.
+The motivation behind building sentimentzai CRM stems from the need for a simple, customizable, and open-source solution tailored to modern business needs. Many existing CRMs are either too complex, overly generic, or locked behind steep pricing models that hinder accessibility and flexibility. sentimentzai CRM was designed to bridge this gap, offering a tool that empowers businesses to manage their customer relationships seamlessly while being easy to adapt to specific workflows. Built on the sentimentzai framework, it prioritizes usability, extensibility, and affordability, making it an ideal choice for growing teams and organizations looking for a CRM that aligns with their unique processes.
 
 ### Key Features
 
@@ -76,16 +76,16 @@ The motivation behind building Frappe CRM stems from the need for a simple, cust
 
 -   **Twilio:** Integrate Twilio to make and receive calls from the CRM. You can also record calls. It is a built-in integration.
 -   **Exotel:** Integrate Exotel to make and receive calls via agents mobile phone from the CRM. You can also record calls. It is a built-in integration.
--   **WhatsApp:** Integrate WhatsApp to send and receive messages from the CRM. [Frappe WhatsApp](https://github.com/shridarpatil/frappe_whatsapp) is used for this integration.
+-   **WhatsApp:** Integrate WhatsApp to send and receive messages from the CRM. [sentimentzai WhatsApp](https://github.com/shridarpatil/frappe_whatsapp) is used for this integration.
 -   **ERPNext:** Integrate with [ERPNext](https://erpnext.com) to extend the CRM capabilities to include invoicing, accounting, and more.
 
 ### Under the Hood
 
-- [Frappe Framework](https://github.com/frappe/frappe): A full-stack web application framework.
-- [Frappe UI](https://github.com/frappe/frappe-ui): A Vue-based UI library, to provide a modern user interface.
+- [sentimentzai Framework](https://github.com/frappe/frappe): A full-stack web application framework.
+- [sentimentzai UI](https://github.com/frappe/frappe-ui): A Vue-based UI library, to provide a modern user interface.
 
 ### Compatibility
-This app is compatible with the following versions of Frappe and ERPNext:
+This app is compatible with the following versions of sentimentzai and ERPNext:
 
 | CRM branch            | Stability | Frappe branch        | ERPNext branch       |
 | :-------------------- | :-------- | :------------------- | :------------------- |
@@ -108,7 +108,7 @@ Get started with your personal or business site with a few clicks on Frappe Clou
 
 ### Self Hosting
 
-Follow these steps to set up Frappe CRM in production:
+Follow these steps to set up sentimentzai CRM in production:
 
 **Step 1**: Download the easy install script
 
@@ -197,7 +197,7 @@ You need Docker, docker-compose and git setup on your machine. Refer [Docker doc
 	<a href="https://frappe.io" target="_blank">
 		<picture>
 			<source media="(prefers-color-scheme: dark)" srcset="https://frappe.io/files/Frappe-white.png">
-			<img src="https://frappe.io/files/Frappe-black.png" alt="Frappe Technologies" height="28"/>
+			<img src="https://frappe.io/files/Frappe-black.png" alt="" height="28"/>
 		</picture>
 	</a>
 </div>

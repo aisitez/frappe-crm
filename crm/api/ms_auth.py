@@ -93,7 +93,7 @@ def login_with_token_redirect(**kwargs):
 	id_token = frappe.local.form_dict.get("id_token")
 	try:
 		_decode_and_login(id_token)
-		redirect_to = "/crm"
+		redirect_to = "/crm/leads/view/list"
 	except Exception as e:
 		frappe.log_error(frappe.get_traceback(), "MS Token Login Redirect Error")
 		redirect_to = "/login?redirect-to=/crm&ms_error=1"

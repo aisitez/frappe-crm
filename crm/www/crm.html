@@ -1,68 +1,62 @@
-{% extends "templates/web.html" %}
+<!doctype html>
+<html class="h-full" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover maximum-scale=1.0, user-scalable=no"
+    />
+    <title>SentimentAI CRM</title>
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="SentimentAI CRM" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
 
-{% block head_include %}
-{{ include_style('crm.bundle.css') }}
-<link rel="shortcut icon" href="/assets/crm/images/crm-icon.svg" type="image/svg+xml">
-{% endblock %}
+    <link rel="icon" type="image/x-icon" href="/assets/crm/images/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/crm/manifest/manifest-icon-192.maskable.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/crm/manifest/manifest-icon-192.maskable.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/crm/manifest/apple-icon-180.png" />
 
-{% block page_content %}
-<div id="app"></div>
-{% endblock %}
+    <script type="module" crossorigin src="/assets/crm/frontend/assets/index-BIvcCofl.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/crm/frontend/assets/index-DXseO_8-.css">
+    <link rel="manifest" href="/assets/crm/frontend/manifest.webmanifest">
+    <script id="vite-plugin-pwa:register-sw" src="/assets/crm/frontend/registerSW.js"></script>
+  </head>
+  <body class="sm:overscroll-y-none no-scrollbar h-full">
+    <div id="app" class="h-full"></div>
 
-{% block script %}
-{{ include_script('crm.bundle.js') }}
-<script>
-(function () {
-	var REPLACEMENTS = [
-		["Welcome to Frappe CRM", "Welcome to SentimentAI"],
-		["Frappe CRM", "SentimentAI"],
-		["Frappe", "SentimentAI"],
-	];
+    <script>
+      {% for key in boot %}
+      window["{{ key }}"] = {{ boot[key] | tojson }};
+      {% endfor %}
+    </script>
 
-	function replaceInNode(node) {
-		if (node.nodeType === 3) {
-			var val = node.nodeValue;
-			var changed = false;
-			for (var i = 0; i < REPLACEMENTS.length; i++) {
-				var from = REPLACEMENTS[i][0];
-				var to = REPLACEMENTS[i][1];
-				if (val.indexOf(from) !== -1) {
-					val = val.split(from).join(to);
-					changed = true;
-				}
-			}
-			if (changed) node.nodeValue = val;
-		} else if (node.nodeType === 1 && node.childNodes) {
-			for (var j = 0; j < node.childNodes.length; j++) {
-				replaceInNode(node.childNodes[j]);
-			}
-		}
-	}
-
-	function replaceAll() {
-		replaceInNode(document.body);
-	}
-
-	// Run once after initial render
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', replaceAll);
-	} else {
-		replaceAll();
-	}
-
-	// Watch for SPA navigation / dynamic DOM updates
-	var observer = new MutationObserver(function (mutations) {
-		mutations.forEach(function (m) {
-			m.addedNodes.forEach(function (n) { replaceInNode(n); });
-		});
-	});
-	observer.observe(document.body || document.documentElement, {
-		childList: true,
-		subtree: true,
-	});
-})();
-</script>
-{% endblock %}
-
-{% block sidebar %}{% endblock %}
-{% block footer %}{% endblock %}
+    <script>
+    (function () {
+      var REPLACEMENTS = [
+        ["Welcome to SentimentAI CRM", "Welcome to SentimentAI"],
+        ["Frappe CRM", "SentimentAI"],
+        ["Frappe", "SentimentAI"],
+      ];
+      function replaceInNode(node) {
+        if (node.nodeType === 3) {
+          var val = node.nodeValue, changed = false;
+          for (var i = 0; i < REPLACEMENTS.length; i++) {
+            if (val.indexOf(REPLACEMENTS[i][0]) !== -1) {
+              val = val.split(REPLACEMENTS[i][0]).join(REPLACEMENTS[i][1]);
+              changed = true;
+            }
+          }
+          if (changed) node.nodeValue = val;
+        } else if (node.nodeType === 1 && node.childNodes) {
+          for (var j = 0; j < node.childNodes.length; j++) replaceInNode(node.childNodes[j]);
+        }
+      }
+      function replaceAll() { replaceInNode(document.body); }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', replaceAll);
+      else replaceAll();
+      new MutationObserver(function(m) { m.forEach(function(mut) { mut.addedNodes.forEach(function(n) { replaceInNode(n); }); }); })
+        .observe(document.body || document.documentElement, { childList: true, subtree: true });
+    })();
+    </script>
+  </body>
+</html>
