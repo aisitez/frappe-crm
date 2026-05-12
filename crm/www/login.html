@@ -247,6 +247,14 @@
 {% endblock %}
 
 {% block script %}
+<script>
+(function () {
+	// Ensure Frappe's login.js redirects to /crm after successful login
+	if (!window.location.search.includes('redirect-to')) {
+		window.history.replaceState({}, '', window.location.pathname + '?redirect-to=' + encodeURIComponent('/crm') + window.location.hash);
+	}
+})();
+</script>
 <script>{% include "templates/includes/login/login.js" %}</script>
 <script>
 (function () {
