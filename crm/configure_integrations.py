@@ -5,6 +5,7 @@ import frappe
 def run():
 	"""Called at Container App startup to configure integrations from env vars."""
 	_configure_microsoft_sso()
+	_configure_website_settings()
 
 
 def _configure_microsoft_sso():
@@ -14,17 +15,30 @@ def _configure_microsoft_sso():
 
 	client_id = "209d2f9b-1565-4d73-afe1-dc85545a94a3"
 	tenant_id = "7f94f5fb-b4f9-4f9d-8d0c-dab7cdc1234f"
-	redirect_url = "https://frappecrm-app.orangesmoke-bde752a0.eastus.azurecontainerapps.io/api/method/frappe.integrations.oauth2_logins.custom/Microsoft"
+	site_url = "https://frappecrm-app.orangesmoke-bde752a0.eastus.azurecontainerapps.io"
+	redirect_url = site_url + "/api/method/crm.api.ms_auth.oauth_callback"
 
-	if frappe.db.exists("Social Login Key", "Microsoft"):
-		frappe.db.set_value("Social Login Key", "Microsoft", "client_secret", client_secret)
-		frappe.db.set_value("Social Login Key", "Microsoft", "enable_social_login", 1)
+	# frappe lowercases the 'name' field for Social Login Key — check both spellings
+	existing = (
+		frappe.db.get_value("Social Login Key", {"provider_name": "Microsoft"}, "name")
+		or frappe.db.get_value("Social Login Key", "microsoft", "name")
+		or frappe.db.get_value("Social Login Key", "Microsoft", "name")
+	)
+
+	if existing:
+		frappe.db.set_value("Social Login Key", existing, {
+			"client_secret": client_secret,
+			"client_id": client_id,
+			"redirect_url": redirect_url,
+			"enable_social_login": 1,
+		})
 		frappe.db.commit()
+		print("Microsoft SSO updated")
 		return
 
 	doc = frappe.get_doc({
 		"doctype": "Social Login Key",
-		"name": "Microsoft",
+		"name": "microsoft",
 		"social_login_provider": "Custom",
 		"provider_name": "Microsoft",
 		"enable_social_login": 1,
@@ -42,3 +56,15 @@ def _configure_microsoft_sso():
 	doc.insert(ignore_permissions=True)
 	frappe.db.commit()
 	print("Microsoft SSO configured")
+
+
+def _configure_website_settings():
+	try:
+		frappe.db.set_value("Website Settings", "Website Settings", {
+			"home_page": "crm",
+			"disable_signup": 0,
+		})
+		frappe.db.commit()
+		print("Website settings configured")
+	except Exception as e:
+		print(f"Website settings error: {e}")

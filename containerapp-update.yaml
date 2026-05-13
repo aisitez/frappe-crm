@@ -43,7 +43,7 @@ properties:
         fi;
         bench setup assets||true;
         ln -sfn /home/frappe/frappe-bench/assets /home/frappe/frappe-bench/sites/assets||true;
-        bench --site crm.localhost execute crm.setup.configure_integrations||true;
+        bench --site crm.localhost execute crm.configure_integrations.run||true;
         bench --site crm.localhost clear-cache||true;
         bench use crm.localhost||true;
         exec bench serve --port 8000 --noreload
@@ -53,7 +53,7 @@ properties:
       - name: MICROSOFT_CLIENT_SECRET
         secretRef: microsoft-client-secret
       - name: CACHE_BUST
-        value: ms-sso-autoconfig-0045
+        value: ms-oauth-callback-0046
       resources:
         cpu: 0.5
         memory: 1Gi

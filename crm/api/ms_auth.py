@@ -1,6 +1,10 @@
+import os
 import frappe
 import json
 import base64
+
+_TENANT_ID = '7f94f5fb-b4f9-4f9d-8d0c-dab7cdc1234f'
+_CLIENT_ID = '209d2f9b-1565-4d73-afe1-dc85545a94a3'
 
 
 def _decode_and_login(id_token):
@@ -80,6 +84,73 @@ def login_with_token(**kwargs):
 	except Exception as e:
 		frappe.log_error(frappe.get_traceback(), "MS Token Login Error")
 		frappe.throw(f"Authentication failed: {str(e)}", frappe.AuthenticationError)
+
+
+@frappe.whitelist(allow_guest=True)
+def oauth_callback(**kwargs):
+	"""OAuth2 authorization-code callback from Microsoft. Exchanges code for id_token."""
+	import requests as _req
+
+	code = frappe.local.form_dict.get('code')
+	error = frappe.local.form_dict.get('error')
+
+	if error or not code:
+		reason = frappe.utils.escape_html(error or 'no_code')
+		frappe.local.response['type'] = 'redirect'
+		frappe.local.response['location'] = '/login?ms_error=' + reason
+		return
+
+	redirect_uri = frappe.utils.get_url('/api/method/crm.api.ms_auth.oauth_callback')
+	client_secret = os.environ.get('MICROSOFT_CLIENT_SECRET', '')
+	if not client_secret:
+		# Fall back to DB (password field — get raw bytes via frappe password utils)
+		try:
+			from frappe.utils.password import get_decrypted_password
+			client_secret = get_decrypted_password('Social Login Key', 'microsoft', 'client_secret') or ''
+		except Exception:
+			pass
+
+	if not client_secret:
+		frappe.local.response['type'] = 'redirect'
+		frappe.local.response['location'] = '/login?ms_error=no_client_secret'
+		return
+
+	try:
+		resp = _req.post(
+			f'https://login.microsoftonline.com/{_TENANT_ID}/oauth2/v2.0/token',
+			data={
+				'grant_type': 'authorization_code',
+				'client_id': _CLIENT_ID,
+				'client_secret': client_secret,
+				'code': code,
+				'redirect_uri': redirect_uri,
+				'scope': 'openid profile email',
+			},
+			timeout=30,
+		)
+		token_data = resp.json()
+	except Exception as exc:
+		frappe.log_error(str(exc), 'MS OAuth Token Exchange Error')
+		frappe.local.response['type'] = 'redirect'
+		frappe.local.response['location'] = '/login?ms_error=token_exchange_failed'
+		return
+
+	id_token = token_data.get('id_token')
+	if not id_token:
+		frappe.log_error(str(token_data), 'MS OAuth No ID Token')
+		frappe.local.response['type'] = 'redirect'
+		frappe.local.response['location'] = '/login?ms_error=no_id_token'
+		return
+
+	try:
+		_decode_and_login(id_token)
+		frappe.db.commit()
+		frappe.local.response['type'] = 'redirect'
+		frappe.local.response['location'] = '/crm/leads/view/list'
+	except Exception as exc:
+		frappe.log_error(str(exc), 'MS OAuth Login Error')
+		frappe.local.response['type'] = 'redirect'
+		frappe.local.response['location'] = '/login?ms_error=login_failed'
 
 
 @frappe.whitelist(allow_guest=True)
