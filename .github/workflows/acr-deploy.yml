@@ -65,10 +65,10 @@ jobs:
             ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           build-args: |
             FRAPPE_BRANCH=${{ env.FRAPPE_BRANCH }}
+            CACHE_BUST=${{ github.sha }}
           secret-files: |
             apps_json=/tmp/apps.json
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          no-cache: true
 
       - name: Deploy to Azure Container Apps
         if: env.IMAGE_TAG == 'latest'
