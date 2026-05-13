@@ -61,7 +61,7 @@ def _configure_microsoft_sso():
 def _configure_website_settings():
 	try:
 		frappe.db.set_value("Website Settings", "Website Settings", {
-			"home_page": "crm",
+			"home_page": "login",
 			"disable_signup": 0,
 		})
 		frappe.db.commit()
