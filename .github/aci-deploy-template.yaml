@@ -196,6 +196,8 @@ properties:
       protocol: TCP
     - port: 443
       protocol: TCP
+    - port: 8000
+      protocol: TCP
     type: Public
   osType: Linux
   restartPolicy: Always
