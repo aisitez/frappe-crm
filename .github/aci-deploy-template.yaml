@@ -28,6 +28,9 @@ properties:
           memoryInGB: 1.0
   - name: nginx
     properties:
+      ports:
+      - port: 80
+      - port: 443
       command:
       - /bin/sh
       - -c
