@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SentimentAI CRM — AI-Powered Customer Relationships</title>
+<title>SentimentAI CRM â€” AI-Powered Customer Relationships</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ── Variables ──────────────────────────────────── */
+/* â”€â”€ Variables â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 :root{
   --primary:#7c5cfc;
   --primary-dark:#5e3af0;
@@ -21,7 +21,7 @@
   --shadow:0 10px 40px rgba(124,92,252,.12);
   --r:12px;
 }
-/* ── Reset ──────────────────────────────────────── */
+/* â”€â”€ Reset â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Nunito',sans-serif;background:#fff;color:var(--text);line-height:1.7;overflow-x:hidden}
@@ -32,7 +32,7 @@ a{text-decoration:none;color:inherit}
 img{max-width:100%;height:auto;display:block}
 ul{list-style:none}
 
-/* ── Typography ─────────────────────────────────── */
+/* â”€â”€ Typography â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 h1,h2,h3,h4,h5{font-weight:800;color:var(--dark);line-height:1.2}
 h1{font-size:clamp(36px,4.5vw,58px)}
 h2{font-size:clamp(28px,3.5vw,42px)}
@@ -40,7 +40,7 @@ h3{font-size:22px}
 h4{font-size:18px}
 p{color:var(--text);font-size:16px}
 
-/* ── Helpers ────────────────────────────────────── */
+/* â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .container{max-width:1200px;margin:0 auto;padding:0 24px}
 .text-center{text-align:center}
 .sec-pad{padding:90px 0}
@@ -86,7 +86,7 @@ p{color:var(--text);font-size:16px}
   font-weight:600;font-size:15px
 }
 .btn-ms:hover{transform:translateY(-3px);background:#106ebe;box-shadow:0 12px 30px rgba(0,120,212,.45)}
-/* ── Reveal ─────────────────────────────────────── */
+/* â”€â”€ Reveal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .rv{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
 .rl{opacity:0;transform:translateX(-40px);transition:opacity .75s ease,transform .75s ease}
 .rr{opacity:0;transform:translateX(40px);transition:opacity .75s ease,transform .75s ease}
@@ -94,9 +94,9 @@ p{color:var(--text);font-size:16px}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
 .d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    NAVBAR
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .navbar{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   background:rgba(255,255,255,.95);backdrop-filter:blur(16px);
@@ -173,9 +173,9 @@ p{color:var(--text);font-size:16px}
 .mobile-menu a:last-child{border-bottom:none}
 .mobile-menu a:hover{color:var(--primary)}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    HERO
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .hero{
   padding:140px 0 80px;
   background:linear-gradient(135deg,#fff 0%,#f8f7ff 100%);
@@ -227,7 +227,7 @@ p{color:var(--text);font-size:16px}
 .trust-img img{width:100%;height:100%;object-fit:cover}
 .trust-text{font-size:14px;color:var(--text);font-weight:600}
 .trust-text strong{color:var(--dark)}
-/* ─── Hero AI Robot Visual ───────────────────────────────── */
+/* â”€â”€â”€ Hero AI Robot Visual â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .ai-img-scene{
   position:relative;
   display:flex;align-items:center;justify-content:center;
@@ -308,9 +308,9 @@ p{color:var(--text);font-size:16px}
 .airb-t{font-size:13px;font-weight:800;color:var(--dark)}
 .airb-s{font-size:11px;color:var(--text);font-weight:600;margin-top:1px}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CLIENTS STRIP
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .clients-sec{
   padding:40px 0;background:#fff;
   border-top:1px solid var(--border);border-bottom:1px solid var(--border)
@@ -332,9 +332,9 @@ p{color:var(--text);font-size:16px}
 .client-logo:hover{color:var(--primary)}
 .client-logo .icon{font-size:22px}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SERVICES
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .services-sec{background:var(--light);padding:90px 0}
 .services-head{text-align:center;margin-bottom:60px}
 .services-head .sec-sub{margin:0 auto}
@@ -373,9 +373,9 @@ p{color:var(--text);font-size:16px}
 }
 .svc-card:hover .svc-link{gap:10px}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    ABOUT
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .about-sec{padding:90px 0;background:#fff}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
 .about-img-wrap{position:relative}
@@ -414,9 +414,9 @@ p{color:var(--text);font-size:16px}
   color:#fff;font-size:11px;margin-top:1px
 }
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    WHY CHOOSE US
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .why-sec{padding:90px 0;background:var(--light)}
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
 .why-content .sec-label{margin-bottom:14px}
@@ -447,9 +447,9 @@ p{color:var(--text);font-size:16px}
 .why-float .wf-num{font-size:28px;font-weight:800;color:var(--primary)}
 .why-float .wf-lbl{font-size:12px;color:var(--text);font-weight:600;margin-top:2px}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    HOW IT WORKS
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .how-sec{padding:90px 0;background:#fff}
 .how-head{text-align:center;margin-bottom:60px}
 .how-head .sec-sub{margin:0 auto}
@@ -473,9 +473,9 @@ p{color:var(--text);font-size:16px}
 .how-step h3{font-size:20px;margin-bottom:12px}
 .how-step p{font-size:15px;line-height:1.7}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    STATS
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .stats-sec{
   padding:80px 0;
   background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
@@ -509,9 +509,9 @@ p{color:var(--text);font-size:16px}
 }
 .stat-lbl{font-size:14px;color:rgba(255,255,255,.75);font-weight:600;margin-top:8px}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    TEAM
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .team-sec{padding:90px 0;background:var(--light)}
 .team-head{text-align:center;margin-bottom:60px}
 .team-head .sec-sub{margin:0 auto}
@@ -550,9 +550,9 @@ p{color:var(--text);font-size:16px}
 .team-name{font-size:17px;font-weight:800;color:var(--dark);margin-bottom:4px}
 .team-role{font-size:13px;color:var(--primary);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    TESTIMONIALS
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .testi-sec{padding:90px 0;background:#fff}
 .testi-head{text-align:center;margin-bottom:60px}
 .testi-head .sec-sub{margin:0 auto}
@@ -583,9 +583,9 @@ p{color:var(--text);font-size:16px}
 .testi-name{font-size:15px;font-weight:800;color:var(--dark)}
 .testi-role{font-size:12px;color:var(--primary);font-weight:600}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PRICING
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .pricing-sec{padding:90px 0;background:var(--light)}
 .pricing-head{text-align:center;margin-bottom:60px}
 .pricing-head .sec-sub{margin:0 auto}
@@ -651,9 +651,9 @@ p{color:var(--text);font-size:16px}
 .pricing-card.popular .feat-check{background:rgba(255,255,255,.2);color:#fff}
 .feat-x{opacity:.4}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CTA SECTION
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .cta-sec{
   padding:90px 20px;text-align:center;
   background:linear-gradient(135deg,#f8f7ff,#fff);
@@ -690,9 +690,9 @@ p{color:var(--text);font-size:16px}
 }
 .cta-input::placeholder{color:#94a3b8}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    FOOTER
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 footer{background:#0f172a;color:#94a3b8}
 .footer-top{
   padding:72px 0 48px;
@@ -726,7 +726,7 @@ footer{background:#0f172a;color:#94a3b8}
   font-size:14px;color:#475569;transition:color .2s;
   display:flex;align-items:center;gap:6px
 }
-.f-col ul li a::before{content:'›';color:var(--primary)}
+.f-col ul li a::before{content:'â€º';color:var(--primary)}
 .f-col ul li a:hover{color:var(--primary)}
 .footer-bot{
   padding:20px 0;
@@ -739,11 +739,11 @@ footer{background:#0f172a;color:#94a3b8}
 .f-bot-links a{font-size:13px;color:#334155;transition:color .2s}
 .f-bot-links a:hover{color:var(--primary)}
 
-/* ══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    RESPONSIVE
-══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-/* ── Tablet (max 1024px) ─── */
+/* â”€â”€ Tablet (max 1024px) â”€â”€â”€ */
 @media(max-width:1024px){
   .hero-grid{grid-template-columns:1fr;gap:48px;text-align:center}
   .hero-p{margin-left:auto;margin-right:auto}
@@ -765,7 +765,7 @@ footer{background:#0f172a;color:#94a3b8}
   .services-grid{grid-template-columns:repeat(2,1fr)}
 }
 
-/* ── Mobile (max 768px) ─── */
+/* â”€â”€ Mobile (max 768px) â”€â”€â”€ */
 @media(max-width:768px){
   .navbar{padding:0}
   .nav-menu,.nav-actions{display:none}
@@ -787,7 +787,7 @@ footer{background:#0f172a;color:#94a3b8}
   .about-badge{position:relative;left:auto;transform:none;margin-top:20px;display:inline-flex}
 }
 
-/* ── Small mobile (max 480px) ─── */
+/* â”€â”€ Small mobile (max 480px) â”€â”€â”€ */
 @media(max-width:480px){
   .hero-btns{flex-direction:column;align-items:center}
   .hero-btns .btn{width:100%;justify-content:center}
@@ -799,7 +799,7 @@ footer{background:#0f172a;color:#94a3b8}
 </head>
 <body>
 
-<!-- ══════ NAVBAR ══════════════════════════════════ -->
+<!-- â•â•â•â•â•â• NAVBAR â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <nav class="navbar" id="nb">
   <div class="container">
     <div class="nav-inner">
@@ -830,7 +830,7 @@ footer{background:#0f172a;color:#94a3b8}
         <a href="#pricing">Pricing</a>
       </nav>
       <div class="nav-actions">
-        <a href="http://localhost:8002/login" class="nav-login">Sign In</a>
+        <a href="/login" class="nav-login">Sign In</a>
         <a href="/mslogin" class="nav-ms">
           <svg width="15" height="15" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
             <path fill="#f25022" d="M0 0h10v10H0z"/>
@@ -855,14 +855,14 @@ footer{background:#0f172a;color:#94a3b8}
   <a href="#how">How It Works</a>
   <a href="#team">Team</a>
   <a href="#pricing">Pricing</a>
-  <a href="http://localhost:8002/login">Sign In</a>
+  <a href="/login">Sign In</a>
   <a href="/mslogin" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#0078d4;color:#fff;border-radius:50px;padding:10px 20px;font-weight:700;font-size:14px;margin-top:4px">
     <svg width="15" height="15" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"><path fill="#f25022" d="M0 0h10v10H0z"/><path fill="#7fba00" d="M11 0h10v10H11z"/><path fill="#00a4ef" d="M0 11h10v10H0z"/><path fill="#ffb900" d="M11 11h10v10H11z"/></svg>
     Sign up with Microsoft
   </a>
 </div>
 
-<!-- ══════ HERO ══════════════════════════════════════ -->
+<!-- â•â•â•â•â•â• HERO â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
@@ -872,9 +872,9 @@ footer{background:#0f172a;color:#94a3b8}
         <div class="type-line">
           <span id="typed"></span><span class="type-cursor"></span>
         </div>
-        <p class="hero-p">SentimentAI CRM empowers your sales team with smart lead management, real-time analytics, and seamless communication — all from one AI-powered workspace.</p>
+        <p class="hero-p">SentimentAI CRM empowers your sales team with smart lead management, real-time analytics, and seamless communication â€” all from one AI-powered workspace.</p>
         <div class="hero-btns">
-          <a href="http://localhost:8002/login" class="btn btn-primary">
+          <a href="/login" class="btn btn-primary">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             Get Started Free
           </a>
@@ -928,23 +928,23 @@ footer{background:#0f172a;color:#94a3b8}
 
           <!-- Floating metric badges -->
           <div class="air-badge airb1">
-            <span class="airb-ico">🧠</span>
+            <span class="airb-ico">ðŸ§ </span>
             <div>
               <div class="airb-t">AI Sentiment</div>
-              <div class="airb-s">94% Positive ✨</div>
+              <div class="airb-s">94% Positive âœ¨</div>
             </div>
           </div>
 
           <div class="air-badge airb2">
-            <span class="airb-ico">🏆</span>
+            <span class="airb-ico">ðŸ†</span>
             <div>
               <div class="airb-t">Deal Closed!</div>
-              <div class="airb-s">₹6.1L · Enterprise</div>
+              <div class="airb-s">â‚¹6.1L Â· Enterprise</div>
             </div>
           </div>
 
           <div class="air-badge airb3">
-            <span class="airb-ico">⚡</span>
+            <span class="airb-ico">âš¡</span>
             <div>
               <div class="airb-t">47 Hot Leads</div>
               <div class="airb-s">AI Scored Today</div>
@@ -957,22 +957,22 @@ footer{background:#0f172a;color:#94a3b8}
   </div>
 </section>
 
-<!-- ══════ CLIENTS ══════════════════════════════════ -->
+<!-- â•â•â•â•â•â• CLIENTS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="clients-sec">
   <div class="container">
     <p class="clients-label">Trusted by leading companies worldwide</p>
     <div class="clients-row">
-      <div class="client-logo"><span class="icon">🔷</span> TechVentures</div>
-      <div class="client-logo"><span class="icon">🟢</span> GrowthCo</div>
-      <div class="client-logo"><span class="icon">🔵</span> Nexus Labs</div>
-      <div class="client-logo"><span class="icon">🟣</span> DataSync</div>
-      <div class="client-logo"><span class="icon">🟠</span> InnovateCo</div>
-      <div class="client-logo"><span class="icon">🔴</span> ScaleUp</div>
+      <div class="client-logo"><span class="icon">ðŸ”·</span> TechVentures</div>
+      <div class="client-logo"><span class="icon">ðŸŸ¢</span> GrowthCo</div>
+      <div class="client-logo"><span class="icon">ðŸ”µ</span> Nexus Labs</div>
+      <div class="client-logo"><span class="icon">ðŸŸ£</span> DataSync</div>
+      <div class="client-logo"><span class="icon">ðŸŸ </span> InnovateCo</div>
+      <div class="client-logo"><span class="icon">ðŸ”´</span> ScaleUp</div>
     </div>
   </div>
 </section>
 
-<!-- ══════ SERVICES ═════════════════════════════════ -->
+<!-- â•â•â•â•â•â• SERVICES â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="services-sec" id="services">
   <div class="container">
     <div class="services-head rv">
@@ -982,46 +982,46 @@ footer{background:#0f172a;color:#94a3b8}
     </div>
     <div class="services-grid">
       <div class="svc-card rv d1">
-        <div class="svc-icon" style="background:#ece8ff">🧠</div>
+        <div class="svc-icon" style="background:#ece8ff">ðŸ§ </div>
         <h3>AI Lead Scoring</h3>
         <p>Automatically rank and prioritise leads with machine learning models trained on your historical data.</p>
-        <div class="svc-link">Learn More <span>→</span></div>
+        <div class="svc-link">Learn More <span>â†’</span></div>
       </div>
       <div class="svc-card rv d2">
-        <div class="svc-icon" style="background:#fce8ef">📊</div>
+        <div class="svc-icon" style="background:#fce8ef">ðŸ“Š</div>
         <h3>Sales Analytics</h3>
         <p>Real-time dashboards and predictive reports to guide your team toward smarter, faster decisions.</p>
-        <div class="svc-link">Learn More <span>→</span></div>
+        <div class="svc-link">Learn More <span>â†’</span></div>
       </div>
       <div class="svc-card rv d3">
-        <div class="svc-icon" style="background:#e8f5ff">💬</div>
+        <div class="svc-icon" style="background:#e8f5ff">ðŸ’¬</div>
         <h3>Omnichannel Hub</h3>
-        <p>Email, calls, and WhatsApp in one place — every conversation logged automatically with full context.</p>
-        <div class="svc-link">Learn More <span>→</span></div>
+        <p>Email, calls, and WhatsApp in one place â€” every conversation logged automatically with full context.</p>
+        <div class="svc-link">Learn More <span>â†’</span></div>
       </div>
       <div class="svc-card rv d4">
-        <div class="svc-icon" style="background:#e8fff5">⚡</div>
+        <div class="svc-icon" style="background:#e8fff5">âš¡</div>
         <h3>Workflow Automation</h3>
         <p>Automate repetitive tasks, reminders, and follow-ups so your team focuses on building relationships.</p>
-        <div class="svc-link">Learn More <span>→</span></div>
+        <div class="svc-link">Learn More <span>â†’</span></div>
       </div>
       <div class="svc-card rv d5">
-        <div class="svc-icon" style="background:#fff8e8">📈</div>
+        <div class="svc-icon" style="background:#fff8e8">ðŸ“ˆ</div>
         <h3>Pipeline Management</h3>
         <p>Visualise your entire sales funnel. Drag-and-drop deals through custom stages with Kanban boards.</p>
-        <div class="svc-link">Learn More <span>→</span></div>
+        <div class="svc-link">Learn More <span>â†’</span></div>
       </div>
       <div class="svc-card rv d6">
-        <div class="svc-icon" style="background:#f0e8ff">🔐</div>
+        <div class="svc-icon" style="background:#f0e8ff">ðŸ”</div>
         <h3>Enterprise Security</h3>
         <p>Role-based access control, audit logs, and 99.9% uptime SLA to protect your business-critical data.</p>
-        <div class="svc-link">Learn More <span>→</span></div>
+        <div class="svc-link">Learn More <span>â†’</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ ABOUT ═════════════════════════════════════ -->
+<!-- â•â•â•â•â•â• ABOUT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="about-sec" id="about">
   <div class="container">
     <div class="about-grid">
@@ -1030,7 +1030,7 @@ footer{background:#0f172a;color:#94a3b8}
           <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&h=500&fit=crop&q=80" alt="Team working together"/>
         </div>
         <div class="about-badge">
-          <div class="ab-icon">🚀</div>
+          <div class="ab-icon">ðŸš€</div>
           <div class="ab-info">
             <div class="v">500+</div>
             <div class="l">Projects Delivered</div>
@@ -1041,20 +1041,20 @@ footer{background:#0f172a;color:#94a3b8}
         <div class="sec-label">Who We Are</div>
         <h2>Transforming Sales with <span class="grad-text">Artificial Intelligence</span></h2>
         <p>SentimentAI CRM was built by a team of data scientists and sales engineers who were tired of CRMs that didn't learn. We combine cutting-edge machine learning with an intuitive interface that your team will actually use.</p>
-        <p>From startups to enterprise — we help teams manage leads, predict outcomes, and close more deals, faster.</p>
+        <p>From startups to enterprise â€” we help teams manage leads, predict outcomes, and close more deals, faster.</p>
         <div class="about-checks">
-          <div class="check-item"><div class="check-icon">✓</div> AI-powered lead scoring and prioritisation</div>
-          <div class="check-item"><div class="check-icon">✓</div> Real-time analytics and custom dashboards</div>
-          <div class="check-item"><div class="check-icon">✓</div> Seamless Microsoft sign-in — no IT setup needed</div>
-          <div class="check-item"><div class="check-icon">✓</div> Enterprise-grade security with 99.9% uptime</div>
+          <div class="check-item"><div class="check-icon">âœ“</div> AI-powered lead scoring and prioritisation</div>
+          <div class="check-item"><div class="check-icon">âœ“</div> Real-time analytics and custom dashboards</div>
+          <div class="check-item"><div class="check-icon">âœ“</div> Seamless Microsoft sign-in â€” no IT setup needed</div>
+          <div class="check-item"><div class="check-icon">âœ“</div> Enterprise-grade security with 99.9% uptime</div>
         </div>
-        <a href="http://localhost:8002/login" class="btn btn-primary">Explore the Platform</a>
+        <a href="/login" class="btn btn-primary">Explore the Platform</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ WHY CHOOSE US ═════════════════════════════ -->
+<!-- â•â•â•â•â•â• WHY CHOOSE US â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="why-sec">
   <div class="container">
     <div class="why-grid">
@@ -1080,7 +1080,7 @@ footer{background:#0f172a;color:#94a3b8}
             <div class="prog-bar"><div class="prog-fill pf4"></div></div>
           </div>
         </div>
-        <a href="http://localhost:8002/login" class="btn btn-primary" style="margin-top:28px">Get Started Free</a>
+        <a href="/login" class="btn btn-primary" style="margin-top:28px">Get Started Free</a>
       </div>
       <div class="why-img-wrap rr">
         <div class="why-img">
@@ -1095,7 +1095,7 @@ footer{background:#0f172a;color:#94a3b8}
   </div>
 </section>
 
-<!-- ══════ HOW IT WORKS ═════════════════════════════ -->
+<!-- â•â•â•â•â•â• HOW IT WORKS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="how-sec" id="how">
   <div class="container">
     <div class="how-head rv">
@@ -1107,7 +1107,7 @@ footer{background:#0f172a;color:#94a3b8}
       <div class="how-step rv d1">
         <div class="how-num">1</div>
         <h3>Sign In with Microsoft</h3>
-        <p>Use your existing Microsoft or work account — no separate registration or email verification needed. Instant access.</p>
+        <p>Use your existing Microsoft or work account â€” no separate registration or email verification needed. Instant access.</p>
       </div>
       <div class="how-step rv d2">
         <div class="how-num">2</div>
@@ -1123,27 +1123,27 @@ footer{background:#0f172a;color:#94a3b8}
   </div>
 </section>
 
-<!-- ══════ STATS ═════════════════════════════════════ -->
+<!-- â•â•â•â•â•â• STATS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="stats-sec">
   <div class="container">
     <div class="stats-grid">
       <div class="stat-box rv d1">
-        <div class="stat-icon">🏆</div>
+        <div class="stat-icon">ðŸ†</div>
         <div class="stat-num" data-count="500" data-suffix="+">0</div>
         <div class="stat-lbl">Projects Completed</div>
       </div>
       <div class="stat-box rv d2">
-        <div class="stat-icon">😊</div>
+        <div class="stat-icon">ðŸ˜Š</div>
         <div class="stat-num" data-count="120" data-suffix="+">0</div>
         <div class="stat-lbl">Happy Clients</div>
       </div>
       <div class="stat-box rv d3">
-        <div class="stat-icon">👥</div>
+        <div class="stat-icon">ðŸ‘¥</div>
         <div class="stat-num" data-count="50" data-suffix="+">0</div>
         <div class="stat-lbl">Team Members</div>
       </div>
       <div class="stat-box rv d4">
-        <div class="stat-icon">⭐</div>
+        <div class="stat-icon">â­</div>
         <div class="stat-num" data-count="15" data-suffix="+">0</div>
         <div class="stat-lbl">Years Experience</div>
       </div>
@@ -1151,7 +1151,7 @@ footer{background:#0f172a;color:#94a3b8}
   </div>
 </section>
 
-<!-- ══════ TEAM ══════════════════════════════════════ -->
+<!-- â•â•â•â•â•â• TEAM â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="team-sec" id="team">
   <div class="container">
     <div class="team-head rv">
@@ -1228,48 +1228,48 @@ footer{background:#0f172a;color:#94a3b8}
   </div>
 </section>
 
-<!-- ══════ TESTIMONIALS ══════════════════════════════ -->
+<!-- â•â•â•â•â•â• TESTIMONIALS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="testi-sec" id="testimonials">
   <div class="container">
     <div class="testi-head rv">
       <div class="sec-label">Testimonials</div>
       <h2 class="sec-title">What Our <span class="grad-text">Clients Say</span></h2>
-      <p class="sec-sub mx-auto">Don't just take our word for it — hear from the sales leaders who've transformed their teams with SentimentAI CRM.</p>
+      <p class="sec-sub mx-auto">Don't just take our word for it â€” hear from the sales leaders who've transformed their teams with SentimentAI CRM.</p>
     </div>
     <div class="testi-grid">
       <div class="testi-card rv d1">
         <div class="testi-quote">"</div>
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="testi-stars"><span>â˜…</span><span>â˜…</span><span>â˜…</span><span>â˜…</span><span>â˜…</span></div>
         <p class="testi-text">SentimentAI CRM completely transformed how our sales team operates. The AI lead scoring is incredibly accurate and our close rate jumped 40% in the very first month of using it.</p>
         <div class="testi-author">
           <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80" alt="reviewer"/></div>
           <div>
             <div class="testi-name">Vikram Nair</div>
-            <div class="testi-role">Sales Director · TechVentures India</div>
+            <div class="testi-role">Sales Director Â· TechVentures India</div>
           </div>
         </div>
       </div>
       <div class="testi-card rv d2">
         <div class="testi-quote">"</div>
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testi-text">The Microsoft sign-in saved us weeks of onboarding time. Every team member was up and running on day one — zero IT involvement, zero friction. Absolutely brilliant.</p>
+        <div class="testi-stars"><span>â˜…</span><span>â˜…</span><span>â˜…</span><span>â˜…</span><span>â˜…</span></div>
+        <p class="testi-text">The Microsoft sign-in saved us weeks of onboarding time. Every team member was up and running on day one â€” zero IT involvement, zero friction. Absolutely brilliant.</p>
         <div class="testi-author">
           <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&q=80" alt="reviewer"/></div>
           <div>
             <div class="testi-name">Ananya Singh</div>
-            <div class="testi-role">Head of Operations · GrowthCo</div>
+            <div class="testi-role">Head of Operations Â· GrowthCo</div>
           </div>
         </div>
       </div>
       <div class="testi-card rv d3">
         <div class="testi-quote">"</div>
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="testi-stars"><span>â˜…</span><span>â˜…</span><span>â˜…</span><span>â˜…</span><span>â˜…</span></div>
         <p class="testi-text">Having emails, calls, and WhatsApp all in one place is a genuine game-changer. No more context-switching between five apps. Our team loves the unified communication view.</p>
         <div class="testi-author">
           <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80" alt="reviewer"/></div>
           <div>
             <div class="testi-name">Rohan Mehta</div>
-            <div class="testi-role">CEO · Nexus Solutions</div>
+            <div class="testi-role">CEO Â· Nexus Solutions</div>
           </div>
         </div>
       </div>
@@ -1277,13 +1277,13 @@ footer{background:#0f172a;color:#94a3b8}
   </div>
 </section>
 
-<!-- ══════ PRICING ═══════════════════════════════════ -->
+<!-- â•â•â•â•â•â• PRICING â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="pricing-sec" id="pricing">
   <div class="container">
     <div class="pricing-head rv">
       <div class="sec-label">Pricing Plans</div>
       <h2 class="sec-title">Simple, <span class="grad-text">Transparent</span> Pricing</h2>
-      <p class="sec-sub mx-auto">Choose the plan that fits your team. All plans include a 14-day free trial — no credit card required.</p>
+      <p class="sec-sub mx-auto">Choose the plan that fits your team. All plans include a 14-day free trial â€” no credit card required.</p>
       <div class="pricing-toggle">
         <span class="ptoggle-label">Monthly</span>
         <span class="ptoggle-label">Annual <span class="ptoggle-badge">Save 30%</span></span>
@@ -1294,76 +1294,76 @@ footer{background:#0f172a;color:#94a3b8}
       <div class="pricing-card rv d1">
         <div class="plan-name">Starter</div>
         <div class="plan-price">
-          <span class="price-curr">₹</span>
+          <span class="price-curr">â‚¹</span>
           <span class="price-amt">999</span>
           <span class="price-per">/mo</span>
         </div>
         <p class="plan-desc">Perfect for small teams getting started with AI-powered CRM.</p>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li class="plan-feature"><span class="feat-check">✓</span> Up to 5 team members</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> 1,000 contacts</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> Basic AI lead scoring</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> Email integration</li>
-          <li class="plan-feature"><span class="feat-check feat-x">✓</span> <span style="opacity:.4">WhatsApp integration</span></li>
-          <li class="plan-feature"><span class="feat-check feat-x">✓</span> <span style="opacity:.4">Advanced analytics</span></li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Up to 5 team members</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> 1,000 contacts</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Basic AI lead scoring</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Email integration</li>
+          <li class="plan-feature"><span class="feat-check feat-x">âœ“</span> <span style="opacity:.4">WhatsApp integration</span></li>
+          <li class="plan-feature"><span class="feat-check feat-x">âœ“</span> <span style="opacity:.4">Advanced analytics</span></li>
         </ul>
-        <a href="http://localhost:8002/login" class="btn btn-outline" style="width:100%;justify-content:center">Get Started</a>
+        <a href="/login" class="btn btn-outline" style="width:100%;justify-content:center">Get Started</a>
       </div>
       <!-- Professional -->
       <div class="pricing-card popular rv d2">
-        <div class="popular-badge">⭐ Most Popular</div>
+        <div class="popular-badge">â­ Most Popular</div>
         <div class="plan-name">Professional</div>
         <div class="plan-price">
-          <span class="price-curr">₹</span>
+          <span class="price-curr">â‚¹</span>
           <span class="price-amt">2,499</span>
           <span class="price-per">/mo</span>
         </div>
         <p class="plan-desc">For growing teams that need the full power of AI-driven sales.</p>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li class="plan-feature"><span class="feat-check">✓</span> Up to 25 team members</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> Unlimited contacts</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> Advanced AI lead scoring</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> All channel integrations</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> WhatsApp + Calls hub</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> Custom dashboards</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Up to 25 team members</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Unlimited contacts</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Advanced AI lead scoring</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> All channel integrations</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> WhatsApp + Calls hub</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Custom dashboards</li>
         </ul>
-        <a href="http://localhost:8002/login" class="btn btn-white" style="width:100%;justify-content:center">Start Free Trial</a>
+        <a href="/login" class="btn btn-white" style="width:100%;justify-content:center">Start Free Trial</a>
       </div>
       <!-- Enterprise -->
       <div class="pricing-card rv d3">
         <div class="plan-name">Enterprise</div>
         <div class="plan-price">
-          <span class="price-curr">₹</span>
+          <span class="price-curr">â‚¹</span>
           <span class="price-amt">5,999</span>
           <span class="price-per">/mo</span>
         </div>
         <p class="plan-desc">Full-scale AI CRM for large organisations with custom needs.</p>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li class="plan-feature"><span class="feat-check">✓</span> Unlimited team members</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> Unlimited contacts</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> Custom AI models</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> All integrations + API</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> Dedicated support</li>
-          <li class="plan-feature"><span class="feat-check">✓</span> SLA &amp; compliance</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Unlimited team members</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Unlimited contacts</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Custom AI models</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> All integrations + API</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> Dedicated support</li>
+          <li class="plan-feature"><span class="feat-check">âœ“</span> SLA &amp; compliance</li>
         </ul>
-        <a href="http://localhost:8002/login" class="btn btn-outline" style="width:100%;justify-content:center">Contact Sales</a>
+        <a href="/login" class="btn btn-outline" style="width:100%;justify-content:center">Contact Sales</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ CTA ════════════════════════════════════════ -->
+<!-- â•â•â•â•â•â• CTA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="cta-sec">
   <div class="container">
     <div class="cta-card rv">
       <h2>Ready to Transform Your Sales?</h2>
-      <p>Join 500+ teams using SentimentAI CRM. Start your 14-day free trial today — no credit card required.</p>
+      <p>Join 500+ teams using SentimentAI CRM. Start your 14-day free trial today â€” no credit card required.</p>
       <div class="cta-form">
         <input type="email" class="cta-input" placeholder="Enter your work email..."/>
-        <a href="http://localhost:8002/login" class="btn btn-white">
+        <a href="/login" class="btn btn-white">
           <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           Get Started
         </a>
@@ -1372,7 +1372,7 @@ footer{background:#0f172a;color:#94a3b8}
   </div>
 </section>
 
-<!-- ══════ FOOTER ════════════════════════════════════ -->
+<!-- â•â•â•â•â•â• FOOTER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <footer>
   <div class="container">
     <div class="footer-top">
@@ -1408,7 +1408,7 @@ footer{background:#0f172a;color:#94a3b8}
           <li><a href="#services">Features</a></li>
           <li><a href="#how">How It Works</a></li>
           <li><a href="#pricing">Pricing</a></li>
-          <li><a href="http://localhost:8002/login">Dashboard</a></li>
+          <li><a href="/login">Dashboard</a></li>
         </ul>
       </div>
       <div class="f-col">
@@ -1423,10 +1423,10 @@ footer{background:#0f172a;color:#94a3b8}
       <div class="f-col">
         <h5>Contact</h5>
         <ul>
-          <li><a href="#">📧 hello@sentimentai.com</a></li>
-          <li><a href="#">📞 +91 98765 43210</a></li>
-          <li><a href="#">📍 Bengaluru, India</a></li>
-          <li><a href="http://localhost:8002/login">🔐 Login</a></li>
+          <li><a href="#">ðŸ“§ hello@sentimentai.com</a></li>
+          <li><a href="#">ðŸ“ž +91 98765 43210</a></li>
+          <li><a href="#">ðŸ“ Bengaluru, India</a></li>
+          <li><a href="/login">ðŸ” Login</a></li>
         </ul>
       </div>
     </div>
@@ -1442,12 +1442,12 @@ footer{background:#0f172a;color:#94a3b8}
 </footer>
 
 <script>
-/* ── Navbar ────────────────────────────────────────── */
+/* â”€â”€ Navbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 addEventListener('scroll',function(){
   document.getElementById('nb').classList.toggle('scrolled',scrollY>60);
 });
 
-/* ── Hamburger menu ─────────────────────────────────── */
+/* â”€â”€ Hamburger menu â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 var ham=document.getElementById('ham'),mob=document.getElementById('mob');
 ham.addEventListener('click',function(){
   ham.classList.toggle('open');
@@ -1459,7 +1459,7 @@ mob.querySelectorAll('a').forEach(function(a){
   });
 });
 
-/* ── Typing animation ───────────────────────────────── */
+/* â”€â”€ Typing animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 (function(){
   var words=['Smart Lead Management','Real-Time AI Insights','Seamless Collaboration','Predictive Analytics'],i=0,j=0,del=false;
   var el=document.getElementById('typed');
@@ -1478,7 +1478,7 @@ mob.querySelectorAll('a').forEach(function(a){
   tick();
 })();
 
-/* ── Scroll reveal ──────────────────────────────────── */
+/* â”€â”€ Scroll reveal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 (function(){
   var io=new IntersectionObserver(function(e){
     e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('on');});
@@ -1486,7 +1486,7 @@ mob.querySelectorAll('a').forEach(function(a){
   document.querySelectorAll('.rv,.rl,.rr').forEach(function(el){io.observe(el);});
 })();
 
-/* ── Counter animation ──────────────────────────────── */
+/* â”€â”€ Counter animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 (function(){
   var io=new IntersectionObserver(function(e){
     e.forEach(function(en){
@@ -1504,7 +1504,7 @@ mob.querySelectorAll('a').forEach(function(a){
   document.querySelectorAll('[data-count]').forEach(function(el){io.observe(el);});
 })();
 
-/* ── Smooth scroll for nav links ─────────────────────── */
+/* â”€â”€ Smooth scroll for nav links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
   a.addEventListener('click',function(e){
     var id=this.getAttribute('href').slice(1);
@@ -1515,3 +1515,4 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
 </script>
 </body>
 </html>
+
