@@ -1,6 +1,6 @@
 apiVersion: 2021-09-01
 location: eastus2
-name: frappe-group
+name: sentimentaicrm-group
 properties:
   containers:
   - name: redis
@@ -98,17 +98,14 @@ properties:
         exec nginx -g "daemon off;"
       environmentVariables: []
       image: nginx:alpine
-      ports:
-      - port: 80
-      - port: 443
       resources:
         requests:
           cpu: 0.5
           memoryInGB: 0.5
       volumeMounts:
       - mountPath: /sites
-        name: frappe-sites-vol
-  - name: frappe
+        name: sentimentaicrm-sites-vol
+  - name: sentimentaicrm
     properties:
       command:
       - /bin/bash
@@ -174,14 +171,14 @@ properties:
       environmentVariables:
       - name: DB_ROOT_PASSWORD
         value: __DB_ROOT_PASSWORD__
-      image: sentimentaicrm.azurecr.io/frappecrm:latest
+      image: sentimentaicrm.azurecr.io/sentimentaicrm:latest
       resources:
         requests:
           cpu: 2.0
           memoryInGB: 4.0
       volumeMounts:
       - mountPath: /home/frappe/frappe-bench/sites
-        name: frappe-sites-vol
+        name: sentimentaicrm-sites-vol
   imageRegistryCredentials:
   - password: __ACR_PASSWORD__
     server: sentimentaicrm.azurecr.io
@@ -199,8 +196,8 @@ properties:
   sku: Standard
   volumes:
   - azureFile:
-      shareName: frappe-sites
+      shareName: sentimentaicrm-sites
       storageAccountKey: __STORAGE_KEY__
       storageAccountName: sentimentaistorage2026
-    name: frappe-sites-vol
+    name: sentimentaicrm-sites-vol
 type: Microsoft.ContainerInstance/containerGroups

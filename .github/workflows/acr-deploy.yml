@@ -10,7 +10,7 @@ on:
 
 env:
   ACR_REGISTRY: sentimentaicrm.azurecr.io
-  IMAGE_NAME: frappecrm
+  IMAGE_NAME: sentimentaicrm
 
 jobs:
   build-and-push:
@@ -82,7 +82,7 @@ jobs:
           az extension add --name containerapp --upgrade -y 2>/dev/null || true
 
           # Patch image tag in the deployment YAML and deploy all 3 containers
-          sed -i "s|sentimentaicrm.azurecr.io/frappecrm:[a-f0-9]*|${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|g" containerapp-update.yaml
+          sed -i "s|sentimentaicrm.azurecr.io/[^:]*:[a-f0-9]*|${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|g" containerapp-update.yaml
           sed -i "s|value: .*|value: deploy-${{ github.sha }}|g" containerapp-update.yaml
 
           az containerapp update \

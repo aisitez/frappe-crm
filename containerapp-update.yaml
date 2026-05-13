@@ -19,8 +19,8 @@ properties:
       resources:
         cpu: 0.5
         memory: 1Gi
-    - name: frappecrm-app
-      image: sentimentaicrm.azurecr.io/frappecrm:2d04a03b3314238cbe0af502e54413b889c7a7bf
+    - name: sentimentaicrm
+      image: sentimentaicrm.azurecr.io/sentimentaicrm:2d04a03b3314238cbe0af502e54413b889c7a7bf
       command:
       - /bin/bash
       - -c
