@@ -36,8 +36,7 @@ jobs:
 
       - name: Set build variables
         run: |
-          APPS_JSON='[{"url": "https://github.com/aisitez/frappe-crm", "branch": "main"}]'
-          echo "APPS_JSON_BASE64=$(echo $APPS_JSON | base64 -w 0)" >> $GITHUB_ENV
+          echo '[{"url": "https://github.com/aisitez/frappe-crm", "branch": "main"}]' > /tmp/apps.json
           echo "FRAPPE_BRANCH=version-15" >> $GITHUB_ENV
 
       - name: Set image tag
@@ -66,7 +65,8 @@ jobs:
             ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           build-args: |
             FRAPPE_BRANCH=${{ env.FRAPPE_BRANCH }}
-            APPS_JSON_BASE64=${{ env.APPS_JSON_BASE64 }}
+          secret-files: |
+            apps_json=/tmp/apps.json
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
