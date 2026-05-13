@@ -81,10 +81,13 @@ jobs:
 
           az extension add --name containerapp --upgrade -y 2>/dev/null || true
 
+          # Patch image tag in the deployment YAML and deploy all 3 containers
+          sed -i "s|sentimentaicrm.azurecr.io/frappecrm:[a-f0-9]*|${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|g" containerapp-update.yaml
+          sed -i "s|value: .*|value: deploy-${{ github.sha }}|g" containerapp-update.yaml
+
           az containerapp update \
             --name frappecrm-app \
             --resource-group sentimentaicrm \
-            --container-name frappecrm-app \
-            --image ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            --yaml containerapp-update.yaml
 
           echo "Deployed to: https://frappecrm-app.orangesmoke-bde752a0.eastus.azurecontainerapps.io/"

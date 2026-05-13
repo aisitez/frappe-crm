@@ -1,0 +1,59 @@
+properties:
+  template:
+    containers:
+    - name: mariadb
+      image: mariadb:10.8
+      command:
+      - docker-entrypoint.sh
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      env:
+      - name: MYSQL_ROOT_PASSWORD
+        secretRef: db-root-password
+      resources:
+        cpu: 0.5
+        memory: 1Gi
+    - name: redis
+      image: redis:alpine
+      resources:
+        cpu: 0.5
+        memory: 1Gi
+    - name: frappecrm-app
+      image: sentimentaicrm.azurecr.io/frappecrm:2d04a03b3314238cbe0af502e54413b889c7a7bf
+      command:
+      - /bin/bash
+      - -c
+      args:
+      - >-
+        BENCH=/home/frappe/frappe-bench; cd $BENCH;
+        until (echo > /dev/tcp/127.0.0.1/3306) 2>/dev/null; do sleep 2; done;
+        until (echo > /dev/tcp/127.0.0.1/6379) 2>/dev/null; do sleep 1; done;
+        bench set-mariadb-host 127.0.0.1||true;
+        bench set-redis-cache-host redis://127.0.0.1:6379||true;
+        bench set-redis-queue-host redis://127.0.0.1:6379||true;
+        bench set-redis-socketio-host redis://127.0.0.1:6379||true;
+        if [ ! -f sites/crm.localhost/site_config.json ]; then
+          bench new-site crm.localhost --mariadb-root-password $DB_ROOT_PASSWORD --admin-password admin --no-mariadb-socket||true;
+          bench --site crm.localhost install-app crm||true;
+          bench --site crm.localhost set-config developer_mode 0||true;
+          bench --site crm.localhost set-config mute_emails 1||true;
+        else
+          bench --site crm.localhost migrate||true;
+        fi;
+        bench setup assets||true;
+        ln -sfn /home/frappe/frappe-bench/assets /home/frappe/frappe-bench/sites/assets||true;
+        bench --site crm.localhost execute crm.setup.configure_integrations||true;
+        bench --site crm.localhost clear-cache||true;
+        bench use crm.localhost||true;
+        exec bench serve --port 8000 --noreload
+      env:
+      - name: DB_ROOT_PASSWORD
+        secretRef: db-root-password
+      - name: MICROSOFT_CLIENT_SECRET
+        secretRef: microsoft-client-secret
+      - name: CACHE_BUST
+        value: ms-sso-autoconfig-0045
+      resources:
+        cpu: 0.5
+        memory: 1Gi
