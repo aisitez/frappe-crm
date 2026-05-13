@@ -1,7 +1,6 @@
 /* Inject "Sign in with Microsoft" button on Frappe login page and apply CRM styling. */
 (function () {
     'use strict';
-    if (location.pathname !== '/login') return;
 
     var TENANT_ID = '7f94f5fb-b4f9-4f9d-8d0c-dab7cdc1234f';
     var CLIENT_ID = '209d2f9b-1565-4d73-afe1-dc85545a94a3';
@@ -78,6 +77,7 @@
     }
 
     function applyAll() {
+        if (!document.querySelector('section.for-login')) return;
         injectStyles();
         injectMicrosoftButton();
     }
