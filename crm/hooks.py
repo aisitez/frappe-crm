@@ -297,7 +297,7 @@ standard_dropdown_items = [
 	},
 	{
 		"name1": "login_to_fc",
-		"label": "Login to SentimentzAI Cloud",
+		"label": "Login to SentimentAI Cloud",
 		"type": "Route",
 		"route": "#",
 		"is_standard": 1,
