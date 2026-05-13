@@ -58,7 +58,7 @@ export default function Header() {
           <a href="#home" className="flex items-center gap-2 group shrink-0">
             <div className="flex items-center gap-2">
               {/* Robot head SVG logo */}
-              <div className="w-9 h-9 rounded-lg bg-linear-to-br from-teal to-[#2EC5C5] flex items-center justify-center shadow-md">
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-teal to-[#2EC5C5] flex items-center justify-center shadow-md">
                 <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="currentColor">
                   <path d="M12 2a2 2 0 0 1 2 2v1h1a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h1V4a2 2 0 0 1 2-2zm0 2v1h0V4zm-3 5a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm4 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm-2 4h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2z"/>
                 </svg>

@@ -51,7 +51,7 @@ function AnalyticsIllustration() {
         transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
         className="absolute bottom-8 left-8 bg-white rounded-2xl shadow-xl p-4 z-20"
       >
-        <div className="w-12 h-12 mx-auto rounded-xl bg-linear-to-br from-primary to-[#7B2FBE] flex items-center justify-center mb-2">
+        <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary to-[#7B2FBE] flex items-center justify-center mb-2">
           <svg viewBox="0 0 32 32" className="w-7 h-7 text-white" fill="currentColor">
             <rect x="6" y="8" width="20" height="16" rx="5" />
             <circle cx="12" cy="14" r="2" fill="white" fillOpacity="0.5" />

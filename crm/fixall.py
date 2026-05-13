@@ -15,11 +15,12 @@ def execute():
     _set_brand_name()
     _mark_setup_complete()
     _grant_admin_crm_roles()
+    _enable_signup()
     _patch_www_files()
     frappe.db.commit()
     frappe.clear_cache()
     _direct_mysql_clear_head_html()
-    print("DONE: MS Social Login Keys deleted, head_html cleaned, brand set, caches cleared.")
+    print("DONE: MS Social Login Keys deleted, head_html cleaned, brand set, signup enabled, caches cleared.")
 
 
 def _delete_ms_social_login_keys():
@@ -86,6 +87,8 @@ _LOGIN_HEAD_JS = (
     "m.textContent=er;m.style.display='block';b.textContent='Create Account';b.disabled=false;}})"
     ".catch(function(){m.textContent='Network error.';m.style.display='block';b.textContent='Create Account';b.disabled=false;});"
     "};}"
+    "var sm=document.querySelector('.sign-up-message');"
+    "if(!sm){sm=document.createElement('div');sm.className='text-center sign-up-message';sm.innerHTML=\"Don't have an account? <a href='#signup'>Sign up</a>\";var lf=document.querySelector('.form-login');if(lf&&lf.parentNode){lf.parentNode.appendChild(sm);}}"
     "if(!window.location.search.includes('redirect-to'))"
     "history.replaceState({},'','/login?redirect-to='+encodeURIComponent('/crm'));"
     "}"
@@ -127,6 +130,15 @@ def _mark_setup_complete():
         " ON DUPLICATE KEY UPDATE `value`='1'",
     )
     print("Setup wizard marked as complete.")
+
+
+def _enable_signup():
+    """Enable user signup in System Settings."""
+    frappe.db.sql(
+        "INSERT INTO `tabSingles` (`doctype`, `field`, `value`) VALUES ('System Settings', 'disable_signup', '0')"
+        " ON DUPLICATE KEY UPDATE `value`='0'",
+    )
+    print("User signup enabled (disable_signup set to 0).")
 
 
 def _grant_admin_crm_roles():

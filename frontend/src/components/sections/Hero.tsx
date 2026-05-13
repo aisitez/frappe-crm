@@ -20,7 +20,7 @@ function HeroIllustration() {
       >
         {/* Robot face */}
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary to-[#7B2FBE] flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-[#7B2FBE] flex items-center justify-center shadow-lg">
             <svg viewBox="0 0 32 32" className="w-7 h-7 text-white" fill="currentColor">
               <rect x="6" y="8" width="20" height="16" rx="5" />
               <circle cx="12" cy="14" r="2" fill="#7B2FBE" />
@@ -98,7 +98,7 @@ function HeroIllustration() {
       <motion.div
         animate={{ y: [0, -8, 0], x: [0, 4, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-        className="absolute top-12 left-4 w-12 h-12 rounded-xl bg-linear-to-br from-primary to-[#7B2FBE] flex items-center justify-center shadow-lg z-20"
+        className="absolute top-12 left-4 w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-[#7B2FBE] flex items-center justify-center shadow-lg z-20"
       >
         <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
@@ -109,7 +109,7 @@ function HeroIllustration() {
       <motion.div
         animate={{ rotate: [0, 360] }}
         transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
-        className="absolute bottom-12 right-4 w-10 h-10 rounded-xl bg-linear-to-br from-teal to-[#2EC5C5] flex items-center justify-center shadow-lg z-20"
+        className="absolute bottom-12 right-4 w-10 h-10 rounded-xl bg-gradient-to-br from-teal to-[#2EC5C5] flex items-center justify-center shadow-lg z-20"
       >
         <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="12" cy="12" r="3" />

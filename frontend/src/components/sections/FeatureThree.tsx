@@ -73,7 +73,7 @@ function BuildIllustration() {
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         className="absolute top-8 right-4 z-20 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2"
       >
-        <div className="w-8 h-8 rounded-lg bg-linear-to-br from-primary to-[#7B2FBE] flex items-center justify-center">
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-[#7B2FBE] flex items-center justify-center">
           <svg viewBox="0 0 20 20" className="w-4 h-4 text-white" fill="currentColor">
             <rect x="3" y="5" width="14" height="11" rx="3.5" />
             <circle cx="7" cy="9" r="1.3" fill="white" fillOpacity="0.5" />

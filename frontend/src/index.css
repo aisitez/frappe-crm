@@ -1,6 +1,51 @@
-/* @import 'frappe-ui/style.css'; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-secondary bg-white overflow-x-hidden;
+    font-family: 'Inter', sans-serif;
+  }
+}
 
 @layer components {
+  .hero-gradient {
+    background: linear-gradient(135deg, #4361EE 0%, #7B2FBE 100%);
+  }
+
+  .btn-teal {
+    @apply bg-teal text-secondary px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-teal/20 transition-all duration-300 hover:scale-105 hover:shadow-teal/30 active:scale-95;
+  }
+
+  .btn-white-outline {
+    @apply bg-transparent text-white border-2 border-white/30 backdrop-blur-sm px-8 py-3.5 rounded-xl font-bold transition-all duration-300 hover:bg-white hover:text-secondary hover:border-white active:scale-95;
+  }
+
+  .nav-link {
+    @apply text-secondary/70 font-medium transition-all duration-200 hover:text-primary relative py-1;
+  }
+
+  .nav-link::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .section-label {
+    @apply inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-semibold mb-4 uppercase tracking-wider;
+  }
+
+  .check-item {
+    @apply flex items-center gap-3 text-[#4a4a6a] font-medium;
+  }
+
+  .btn-primary-outline {
+    @apply inline-flex items-center justify-center bg-transparent text-primary border-2 border-primary/20 px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary active:scale-95;
+  }
+
   .prose-f {
     @apply break-all
 			max-w-none

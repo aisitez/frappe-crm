@@ -37,7 +37,10 @@ require_type_annotated_api_methods = True
 
 # include js, css files in header of web template
 # web_include_css = "/assets/crm/css/crm.css"
-web_include_js = ["/assets/crm/js/ms_login_override.js"]
+web_include_js = [
+	"/assets/crm/js/login_timeout_handler.js",
+	"/assets/crm/js/ms_login_override.js"
+]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "crm/public/scss/website"

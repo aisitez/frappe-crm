@@ -93,7 +93,7 @@ export default function Footer() {
           >
             {/* Logo */}
             <a href="#home" className="inline-flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-lg bg-linear-to-br from-teal to-[#2EC5C5] flex items-center justify-center">
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-teal to-[#2EC5C5] flex items-center justify-center">
                 <Bot className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold">

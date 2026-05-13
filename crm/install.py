@@ -31,6 +31,8 @@ def after_install(force=False):
 	create_default_manager_dashboard(force)
 	create_assignment_rule_custom_fields()
 	add_assignment_rule_property_setters()
+	enable_signup()
+	optimize_authentication_db()
 	frappe.db.commit()
 
 
@@ -561,3 +563,31 @@ def create_assignment_rule_custom_fields():
 		)
 
 		frappe.clear_cache(doctype="Assignment Rule")
+
+
+def enable_signup():
+	"""Enable user signup by setting disable_signup to 0 in System Settings."""
+	try:
+		frappe.db.set_value("System Settings", "System Settings", "disable_signup", 0)
+	except Exception as e:
+		print(f"Warning: Failed to enable signup: {e}")
+
+
+def optimize_authentication_db():
+	"""Add indices to optimize authentication queries."""
+	try:
+		# Add email index for faster user lookups during login
+		frappe.db.sql("""
+			ALTER TABLE `tabUser` 
+			ADD INDEX IF NOT EXISTS idx_email (email)
+		""")
+		
+		# Add enabled status index
+		frappe.db.sql("""
+			ALTER TABLE `tabUser` 
+			ADD INDEX IF NOT EXISTS idx_enabled (enabled)
+		""")
+		
+		frappe.db.commit()
+	except Exception as e:
+		print(f"Warning: Failed to optimize auth DB: {e}")
