@@ -22,9 +22,12 @@ services:
     environment:
       - SHELL=/bin/bash
       - NODE_OPTIONS=--dns-result-order=ipv4first
+      - YARN_REGISTRY=https://registry.npmmirror.com
+      - npm_config_registry=https://registry.npmmirror.com
     working_dir: /home/frappe
     volumes:
       - .:/workspace
+      - ..:/crm-src
       - frappe-bench:/home/frappe/frappe-bench
     ports:
       - 8002:8000

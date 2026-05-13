@@ -70,7 +70,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Deploy to Azure Container Instance
+      - name: Deploy to Azure Container Apps
         if: env.IMAGE_TAG == 'latest'
         run: |
           az login --service-principal \
@@ -79,12 +79,12 @@ jobs:
             --tenant "${{ secrets.AZURE_TENANT_ID }}"
           az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
 
-          sed -e "s|__ACR_PASSWORD__|${{ secrets.ACR_REGISTRY_PASSWORD }}|g" \
-              -e "s|__STORAGE_KEY__|${{ secrets.STORAGE_ACCOUNT_KEY }}|g" \
-              -e "s|__DB_ROOT_PASSWORD__|${{ secrets.DB_ROOT_PASSWORD }}|g" \
-              .github/aci-deploy-template.yaml > /tmp/aci-deploy.yaml
+          az extension add --name containerapp --upgrade -y 2>/dev/null || true
 
-          az container delete --name frappe-group --resource-group sentimentaicrm --yes || true
-          sleep 20
-          az container create --resource-group sentimentaicrm --file /tmp/aci-deploy.yaml
-          echo "Deployed to: https://sentimentaicrm-app.eastus2.azurecontainer.io/"
+          az containerapp update \
+            --name frappecrm-app \
+            --resource-group sentimentaicrm \
+            --container-name frappecrm-app \
+            --image ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+          echo "Deployed to: https://frappecrm-app.orangesmoke-bde752a0.eastus.azurecontainerapps.io/"

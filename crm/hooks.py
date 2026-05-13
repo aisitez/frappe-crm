@@ -1,6 +1,6 @@
 app_name = "crm"
-app_title = "SentimentzAI CRM"
-app_publisher = "SentimentzAI Technologies Pvt. Ltd."
+app_title = "SentimentAI CRM"
+app_publisher = "SentimentAI Technologies Pvt. Ltd."
 app_description = "Kick-ass Open Source CRM"
 app_email = "shariq@frappe.io"
 app_license = "AGPLv3"
