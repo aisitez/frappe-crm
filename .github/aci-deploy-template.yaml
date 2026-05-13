@@ -35,44 +35,68 @@ properties:
       command:
       - /bin/sh
       - -c
-      - "apk add --no-cache openssl certbot 2>&1 | tail -2\nmkdir -p /sites/ssl /sites/acme-webroot/.well-known/acme-challenge\
-        \ /sites/letsencrypt\nif [ ! -f \"/sites/ssl/selfsigned.crt\" ]; then\n  openssl\
-        \ req -x509 -nodes -days 3650 -newkey rsa:2048 \\\n    -keyout /sites/ssl/selfsigned.key\
-        \ \\\n    -out /sites/ssl/selfsigned.crt \\\n    -subj \"/CN=sentimentaicrm-app.eastus2.azurecontainer.io\"\
-        \ 2>/dev/null\nfi\nLE_CERT=/sites/letsencrypt/live/crm.aisitez.com/fullchain.pem\n\
-        LE_KEY=/sites/letsencrypt/live/crm.aisitez.com/privkey.pem\nif [ -f \"$LE_CERT\"\
-        \ ]; then\n  SSL_CERT=$LE_CERT; SSL_KEY=$LE_KEY\n  echo \"==> Using LE cert\"\
-        \nelse\n  SSL_CERT=/sites/ssl/selfsigned.crt; SSL_KEY=/sites/ssl/selfsigned.key\n\
-        \  echo \"==> Using self-signed cert\"\nfi\ncat > /etc/nginx/conf.d/default.conf\
-        \ << NGINXEOF\nserver {\n  listen 80;\n  server_name _;\n  location /.well-known/acme-challenge/\
-        \ { root /sites/acme-webroot; }\n  location / { return 301 https://\\$host\\\
-        $request_uri; }\n}\nserver {\n  listen 443 ssl;\n  server_name _;\n  ssl_certificate\
-        \ $SSL_CERT;\n  ssl_certificate_key $SSL_KEY;\n  ssl_protocols TLSv1.2 TLSv1.3;\n\
-        \  client_max_body_size 100M;\n  location = / {\n    root /sites/landing;\n\
-        \    index index.html;\n  }\n  location / {\n    proxy_pass http://127.0.0.1:8000;\n\
-        \    proxy_set_header Host crm.localhost;\n    proxy_set_header X-Real-IP\
-        \ \\$remote_addr;\n    proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n\
-        \    proxy_set_header X-Forwarded-Proto https;\n    proxy_read_timeout 300s;\n\
-        \    proxy_connect_timeout 30s;\n  }\n}\nNGINXEOF\nnginx\nif [ ! -f \"$LE_CERT\"\
-        \ ]; then\n  echo \"==> Requesting LE cert for crm.aisitez.com...\"\n  certbot\
-        \ certonly --webroot -w /sites/acme-webroot -d crm.aisitez.com \\\n    --email\
-        \ venkateshn@aisitez.com --agree-tos --non-interactive \\\n    --config-dir\
-        \ /sites/letsencrypt --work-dir /tmp/cwork --logs-dir /tmp/clogs 2>&1 | tail\
-        \ -5\n  if [ -f \"$LE_CERT\" ]; then\n    echo \"==> LE cert obtained! Updating\
-        \ nginx...\"\n    cat > /etc/nginx/conf.d/default.conf << NGINXEOF2\nserver\
-        \ {\n  listen 80;\n  server_name _;\n  location /.well-known/acme-challenge/\
-        \ { root /sites/acme-webroot; }\n  location / { return 301 https://\\$host\\\
-        $request_uri; }\n}\nserver {\n  listen 443 ssl;\n  server_name _;\n  ssl_certificate\
-        \ $LE_CERT;\n  ssl_certificate_key $LE_KEY;\n  ssl_protocols TLSv1.2 TLSv1.3;\n\
-        \  client_max_body_size 100M;\n  location = / {\n    root /sites/landing;\n\
-        \    index index.html;\n  }\n  location / {\n    proxy_pass http://127.0.0.1:8000;\n\
-        \    proxy_set_header Host crm.localhost;\n    proxy_set_header X-Real-IP\
-        \ \\$remote_addr;\n    proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n\
-        \    proxy_set_header X-Forwarded-Proto https;\n    proxy_read_timeout 300s;\n\
-        \    proxy_connect_timeout 30s;\n  }\n}\nNGINXEOF2\n    nginx -s reload\n\
-        \    echo \"==> Trusted HTTPS live on crm.aisitez.com\"\n  else\n    echo\
-        \ \"==> DNS not ready. Add CNAME in GoDaddy then restart.\"\n  fi\nfi\nnginx\
-        \ -s quit\nsleep 1\nexec nginx -g \"daemon off;\"\n"
+      - |
+        apk add --no-cache openssl curl 2>&1 | tail -2
+        mkdir -p /sites/ssl /sites/landing
+
+        # Generate self-signed cert if not present
+        if [ ! -f "/sites/ssl/selfsigned.crt" ]; then
+          openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
+            -keyout /sites/ssl/selfsigned.key \
+            -out /sites/ssl/selfsigned.crt \
+            -subj "/CN=sentimentaicrm-app.eastus2.azurecontainer.io" 2>/dev/null
+        fi
+
+        # Download landing page from GitHub (fresh copy of latest)
+        echo "==> Downloading landing page..."
+        curl -sf "https://raw.githubusercontent.com/aisitez/frappe-crm/main/landing/index.html" \
+          -o /sites/landing/index.html 2>/dev/null || echo "==> Warning: could not download landing page"
+
+        # Write nginx config
+        cat > /etc/nginx/conf.d/default.conf << 'NGINXEOF'
+        server {
+          listen 80;
+          server_name _;
+          location / { return 301 https://$host$request_uri; }
+        }
+
+        server {
+          listen 443 ssl;
+          server_name _;
+          ssl_certificate /sites/ssl/selfsigned.crt;
+          ssl_certificate_key /sites/ssl/selfsigned.key;
+          ssl_protocols TLSv1.2 TLSv1.3;
+          client_max_body_size 100M;
+
+          # Serve landing page at root instantly (no Frappe dependency)
+          location = / {
+            root /sites/landing;
+            index index.html;
+            try_files /index.html =404;
+          }
+
+          # Serve static assets for the landing page
+          location ~* ^/(assets/landing|images/landing)/ {
+            root /sites;
+            expires 7d;
+          }
+
+          # Proxy /crm, /api, /assets, /files, /private to Frappe
+          location ~ ^/(crm|api|assets|files|private|app|login|logout|web|desk|update-password|print|favicon.ico|manifest.webmanifest|sw.js|registerSW.js|workbox-) {
+            proxy_pass http://127.0.0.1:8000;
+            proxy_set_header Host crm.localhost;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto https;
+            proxy_read_timeout 300s;
+            proxy_connect_timeout 60s;
+            proxy_send_timeout 300s;
+          }
+        }
+        NGINXEOF
+
+        echo "==> Starting nginx..."
+        exec nginx -g "daemon off;"
       environmentVariables: []
       image: nginx:alpine
       ports:
@@ -90,41 +114,64 @@ properties:
       command:
       - /bin/bash
       - -c
-      - "BENCH=/home/frappe/frappe-bench\ncd $BENCH\nuntil (echo > /dev/tcp/127.0.0.1/3306)\
-        \ 2>/dev/null; do sleep 2; done\nsleep 3\nuntil (echo > /dev/tcp/127.0.0.1/6379)\
-        \ 2>/dev/null; do sleep 1; done\nbench set-mariadb-host 127.0.0.1 || true\n\
-        bench set-redis-cache-host redis://127.0.0.1:6379 || true\nbench set-redis-queue-host\
-        \ redis://127.0.0.1:6379 || true\nbench set-redis-socketio-host redis://127.0.0.1:6379\
-        \ || true\nif ! bench list-apps 2>/dev/null | grep -q \"^crm$\"; then\n  bench\
-        \ get-app crm --branch main --skip-assets https://github.com/aisitez/frappe-crm\
-        \ || true\nfi\nif mysql -h 127.0.0.1 -uroot -pFrappe@2026 -e \"SHOW DATABASES\
-        \ LIKE 'crm_localhost';\" 2>/dev/null | grep -q \"crm_localhost\"; then\n\
-        \  bench --site crm.localhost migrate || true\nelse\n  rm -rf sites/crm.localhost\
-        \ || true\n  bench new-site crm.localhost --mariadb-root-password $DB_ROOT_PASSWORD\
-        \ --admin-password admin --mariadb-user-host-login-scope=%\n  bench --site\
-        \ crm.localhost install-app crm || true\n  bench --site crm.localhost set-config\
-        \ developer_mode 0 || true\n  bench --site crm.localhost set-config mute_emails\
-        \ 1 || true\n  bench --site crm.localhost set-config allow_signup 1 || true\n\
-        fi\nbench use crm.localhost || true\nbench --site crm.localhost set-config\
-        \ allow_signup 1 || true\nbench config set-common-config -c socketio_port\
-        \ 9000 2>/dev/null || true\nif [ ! -f \"sites/assets/assets.json\" ]; then\n\
-        \  bench build 2>&1 | tail -5 || true\nfi\nCRM_BUILT=$BENCH/apps/crm/crm/public/frontend/index.html\n\
-        if [ ! -f \"$CRM_BUILT\" ]; then\n  FDIR=$BENCH/apps/crm/frontend\n  rm -rf\
-        \ \"$FDIR/node_modules\" \"$FDIR/yarn.lock\" 2>/dev/null || true\n  yarn --cwd\
-        \ \"$FDIR\" install 2>&1 | tail -5 || true\n  env NODE_OPTIONS=--max-old-space-size=2048\
-        \ yarn --cwd \"$FDIR\" build 2>&1 | tail -20 || true\nfi\nmkdir -p sites/assets/frappe\n\
-        [ ! -d \"sites/assets/frappe/icons\" ] && cp -r apps/frappe/frappe/public/icons\
-        \ sites/assets/frappe/icons || true\n[ ! -d \"sites/assets/frappe/images\"\
-        \ ] && cp -r apps/frappe/frappe/public/images sites/assets/frappe/images ||\
-        \ true\n[ ! -d \"sites/assets/frappe/sounds\" ] && cp -r apps/frappe/frappe/public/sounds\
-        \ sites/assets/frappe/sounds || true\n[ ! -d \"sites/assets/frappe/css\" ]\
-        \ && cp -r apps/frappe/frappe/public/css sites/assets/frappe/css || true\n\
-        [ ! -d \"sites/assets/frappe/dist\" ] && cp -r apps/frappe/frappe/public/dist\
-        \ sites/assets/frappe/dist || true\n[ ! -d \"sites/assets/frappe/js\" ] &&\
-        \ cp -r apps/frappe/frappe/public/js sites/assets/frappe/js || true\n[ ! -d\
-        \ \"sites/assets/crm\" ] && cp -r apps/crm/crm/public sites/assets/crm ||\
-        \ true\nmkdir -p sites/landing\ncurl -sf https://raw.githubusercontent.com/aisitez/frappe-crm/main/landing/index.html\
-        \ -o sites/landing/index.html || true\nexec bench serve --port 8000 --noreload"
+      - |
+        BENCH=/home/frappe/frappe-bench
+        cd $BENCH
+
+        echo "==> Waiting for MariaDB..."
+        until (echo > /dev/tcp/127.0.0.1/3306) 2>/dev/null; do sleep 2; done
+        sleep 3
+
+        echo "==> Waiting for Redis..."
+        until (echo > /dev/tcp/127.0.0.1/6379) 2>/dev/null; do sleep 1; done
+
+        bench set-mariadb-host 127.0.0.1 || true
+        bench set-redis-cache-host redis://127.0.0.1:6379 || true
+        bench set-redis-queue-host redis://127.0.0.1:6379 || true
+        bench set-redis-socketio-host redis://127.0.0.1:6379 || true
+
+        # Install CRM app if not present
+        if ! bench list-apps 2>/dev/null | grep -q "^crm$"; then
+          echo "==> Installing CRM app..."
+          bench get-app crm --branch main --skip-assets https://github.com/aisitez/frappe-crm || true
+        fi
+
+        # Setup or migrate site
+        if mysql -h 127.0.0.1 -uroot -p$DB_ROOT_PASSWORD -e "SHOW DATABASES LIKE 'crm_localhost';" 2>/dev/null | grep -q "crm_localhost"; then
+          echo "==> Site exists, migrating..."
+          bench --site crm.localhost migrate || true
+        else
+          echo "==> Creating new site..."
+          rm -rf sites/crm.localhost || true
+          bench new-site crm.localhost \
+            --mariadb-root-password $DB_ROOT_PASSWORD \
+            --admin-password admin \
+            --mariadb-user-host-login-scope=%
+          bench --site crm.localhost install-app crm || true
+          bench --site crm.localhost set-config developer_mode 0 || true
+          bench --site crm.localhost set-config mute_emails 1 || true
+          bench --site crm.localhost set-config allow_signup 1 || true
+        fi
+
+        bench use crm.localhost || true
+        bench --site crm.localhost set-config allow_signup 1 || true
+
+        # Copy static assets if needed
+        mkdir -p sites/assets/frappe
+        [ ! -d "sites/assets/frappe/icons" ] && cp -r apps/frappe/frappe/public/icons sites/assets/frappe/icons || true
+        [ ! -d "sites/assets/frappe/images" ] && cp -r apps/frappe/frappe/public/images sites/assets/frappe/images || true
+        [ ! -d "sites/assets/frappe/css" ] && cp -r apps/frappe/frappe/public/css sites/assets/frappe/css || true
+        [ ! -d "sites/assets/frappe/js" ] && cp -r apps/frappe/frappe/public/js sites/assets/frappe/js || true
+        [ ! -d "sites/assets/crm" ] && cp -r apps/crm/crm/public sites/assets/crm || true
+
+        # Build assets if needed
+        if [ ! -f "sites/assets/assets.json" ]; then
+          echo "==> Building bench assets..."
+          bench build 2>&1 | tail -5 || true
+        fi
+
+        echo "==> Starting Frappe on port 8000..."
+        exec bench serve --port 8000 --noreload
       environmentVariables:
       - name: DB_ROOT_PASSWORD
         value: __DB_ROOT_PASSWORD__
@@ -148,8 +195,6 @@ properties:
     - port: 80
       protocol: TCP
     - port: 443
-      protocol: TCP
-    - port: 8000
       protocol: TCP
     type: Public
   osType: Linux
