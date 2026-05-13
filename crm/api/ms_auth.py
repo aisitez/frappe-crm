@@ -130,14 +130,14 @@ def oauth_callback(**kwargs):
 		)
 		token_data = resp.json()
 	except Exception as exc:
-		frappe.log_error(str(exc), 'MS OAuth Token Exchange Error')
+		frappe.log_error(title='MS OAuth Token Exchange Error', message=str(exc)[:2000])
 		frappe.local.response['type'] = 'redirect'
 		frappe.local.response['location'] = '/login?ms_error=token_exchange_failed'
 		return
 
 	id_token = token_data.get('id_token')
 	if not id_token:
-		frappe.log_error(str(token_data), 'MS OAuth No ID Token')
+		frappe.log_error(title='MS OAuth No ID Token', message=str(token_data)[:2000])
 		frappe.local.response['type'] = 'redirect'
 		frappe.local.response['location'] = '/login?ms_error=no_id_token'
 		return
@@ -148,7 +148,7 @@ def oauth_callback(**kwargs):
 		frappe.local.response['type'] = 'redirect'
 		frappe.local.response['location'] = '/crm/leads/view/list'
 	except Exception as exc:
-		frappe.log_error(str(exc), 'MS OAuth Login Error')
+		frappe.log_error(title='MS OAuth Login Error', message=str(exc)[:2000])
 		frappe.local.response['type'] = 'redirect'
 		frappe.local.response['location'] = '/login?ms_error=login_failed'
 
