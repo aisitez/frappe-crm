@@ -7,8 +7,6 @@ properties:
     properties:
       environmentVariables: []
       image: sentimentaicrm.azurecr.io/redis:latest
-      ports:
-      - port: 6379
       resources:
         requests:
           cpu: 0.25
@@ -24,8 +22,6 @@ properties:
       - name: MYSQL_ROOT_PASSWORD
         value: __DB_ROOT_PASSWORD__
       image: sentimentaicrm.azurecr.io/mariadb:10.8
-      ports:
-      - port: 3306
       resources:
         requests:
           cpu: 0.5
@@ -176,8 +172,6 @@ properties:
       - name: DB_ROOT_PASSWORD
         value: __DB_ROOT_PASSWORD__
       image: sentimentaicrm.azurecr.io/frappecrm:latest
-      ports:
-      - port: 8000
       resources:
         requests:
           cpu: 2.0
@@ -195,8 +189,6 @@ properties:
     - port: 80
       protocol: TCP
     - port: 443
-      protocol: TCP
-    - port: 8000
       protocol: TCP
     type: Public
   osType: Linux
