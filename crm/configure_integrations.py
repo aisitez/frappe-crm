@@ -13,8 +13,6 @@ def _configure_microsoft_sso():
 	if not client_secret:
 		return
 
-	client_id = "209d2f9b-1565-4d73-afe1-dc85545a94a3"
-	tenant_id = "7f94f5fb-b4f9-4f9d-8d0c-dab7cdc1234f"
 	site_url = "https://frappecrm-app.orangesmoke-bde752a0.eastus.azurecontainerapps.io"
 	redirect_url = site_url + "/api/method/crm.api.ms_auth.oauth_callback"
 
@@ -61,7 +59,7 @@ def _configure_microsoft_sso():
 def _configure_website_settings():
 	try:
 		frappe.db.set_value("Website Settings", "Website Settings", {
-			"home_page": "index",
+			"home_page": "crm/leads/view/list",
 			"disable_signup": 0,
 		})
 		frappe.db.commit()

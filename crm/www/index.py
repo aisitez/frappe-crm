@@ -4,6 +4,5 @@ no_cache = 1
 
 
 def get_context(context):
-	if frappe.session.user != "Guest":
-		frappe.local.flags.redirect_location = "/crm"
-		raise frappe.Redirect
+	frappe.local.flags.redirect_location = "/crm/leads/view/list"
+	raise frappe.Redirect
